@@ -1,0 +1,89 @@
+<h1 align="center">Attendance Card -- January</h1>
+<form [formGroup]="this.dateForm" #resetaddGroup="ngForm">
+    <!--Date picker, state, ot -->
+    <mat-form-field>
+        <mat-label>Date</mat-label>
+        <input matInput [matDatepicker]="dobpicker" formControlName="date">
+        <mat-datepicker-toggle matSuffix [for]="dobpicker"></mat-datepicker-toggle>
+        <mat-datepicker #dobpicker></mat-datepicker>
+      </mat-form-field><br><br>
+
+      <mat-form-field class="ot" >
+        <mat-label>OT for Day</mat-label>
+        <input matInput maxlength="2" name="ot" formControlName="ot_on_day"> 
+      </mat-form-field><br><br>
+
+    <!--Buttons to add or delete attendance-->
+    <button  mat-raised-button (click)="onPresent()" color="primary">Present</button>&nbsp;&nbsp;
+    <button  mat-raised-button (click)="onAbsent()" color="primary">Absent</button>
+     
+</form>
+
+
+<!---->
+<div class="employee-tbl">
+  <p *ngIf="AllAttendanceData.length <= 0" class="no-data">There is no employee added yet!</p>
+
+ 
+
+  <div class="mat-elevation-z8">
+    <table mat-table class="full-width-table" id="table" matSort aria-label="Elements" [dataSource]="dataSource">
+  
+ 
+      <!-- Id Column -->
+      <ng-container matColumnDef="date">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Employee Id</th>
+        <td mat-cell *matCellDef="let row"></td>
+      </ng-container>
+  
+      <ng-container matColumnDef="site">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Full Name</th>
+        <td mat-cell *matCellDef="let row"></td>
+      </ng-container>
+        
+      <ng-container matColumnDef="state">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Gender</th>
+        <td mat-cell *matCellDef="let row"></td>
+      </ng-container>
+  
+      <ng-container matColumnDef="controls">
+        <th mat-header-cell *matHeaderCellDef> Action </th>
+        <td mat-cell *matCellDef="let element; let i = index;">
+          <button mat-raised-button color="primary" (click)="onPresent(i,element)" class="push-right">Present</button>
+          <button mat-raised-button color="warn" (click)="onAbsent(i,element)">Absent</button>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="ot_on_day">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Gender</th>
+        <td mat-cell *matCellDef="let row"></td>
+      </ng-container>
+
+      <ng-container matColumnDef="action_ot-on-day">
+        <th mat-header-cell *matHeaderCellDef></th>
+        <td mat-cell *matCellDef="let element; let i = index;">
+          <!--Increase OT Buttton-->
+          <button mat-icon-button color="primary" (click)="incOTonDay(i,element)" class="push-right"><mat-icon>add_circle_outline</mat-icon></button>
+          <!--Decrease OTS Button-->
+          <button mat-icon-button color="warn" (click)="decOTonDay(i, element)"><mat-icon>remove_circle_outline</mat-icon></button>
+        </td>
+      </ng-container>     
+  
+      <ng-container matColumnDef="loading">
+        <mat-footer-cell *matFooterCellDef colspan="6">
+          Loading Data...
+        </mat-footer-cell>
+      </ng-container>
+  
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      <mat-footer-row *matFooterDef="['Loading']" [ngClass]="{'hide':data!=null}"></mat-footer-row>
+    </table>
+  
+    <mat-paginator #paginator
+        [length]="dataSource?.data.length"
+        [pageIndex]="0"
+        [pageSize]="50"
+        [pageSizeOptions]="[25, 50, 100, 250]">
+    </mat-paginator>
+  </div>

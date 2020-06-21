@@ -1,0 +1,8 @@
+.bg{
+    background-size: cover;
+    height: 75%;
+}
+
+mat-grid-tile {
+    background: lightblue;
+  }
