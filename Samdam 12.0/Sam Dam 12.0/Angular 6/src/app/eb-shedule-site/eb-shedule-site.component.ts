@@ -142,15 +142,15 @@ export class EbSheduleSiteComponent implements OnInit {
 
   ngOnInit(): void {
     this.firstFormGroup = this._formBuilder.group({
-      site_id: ['', Validators.required],
-      site_name: ['', Validators.required],
-      place: ['', Validators.required],
-      start_date: [Date, Validators.required],
-      end_date: [Date, Validators.required],
-      type_of_site:['',Validators.required],
-      est_budget:['',Validators.required],
-      no_of_sk:['',Validators.required],
-      no_of_usk:['',Validators.required]
+      site_id: [],
+      site_name: [],
+      place: [],
+      start_date: [Date],
+      end_date: [Date],
+      type_of_site:[],
+      est_budget:[],
+      no_of_sk:[],
+      no_of_usk:[]
       
     });
     this.secondFormGroup = this._formBuilder.group({
@@ -174,6 +174,7 @@ export class EbSheduleSiteComponent implements OnInit {
     this.siteService.postSite(this.firstFormGroup.value).subscribe(
       res=>{
         //Success Message
+        window.confirm("Construction Site Added Successfully..!");
         setTimeout(()=> this.showSucessMessage = false,4000)
       },
       err =>{
@@ -184,7 +185,7 @@ export class EbSheduleSiteComponent implements OnInit {
         }
       }
     );
-    window.confirm("Construction Site Added Successfully..!");
+    
   }
 
 }
