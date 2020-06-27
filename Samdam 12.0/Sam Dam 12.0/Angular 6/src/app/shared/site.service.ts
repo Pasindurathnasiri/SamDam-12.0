@@ -16,7 +16,7 @@ export class SiteService {
 
 //Add Site Details
   postSite(site: Site){
-    console.log(site);
+    console.log(site.no_of_sk);
     return this.http.post(environment.URI+'/addSite',site,this.noAuthHeader)
   }
 
