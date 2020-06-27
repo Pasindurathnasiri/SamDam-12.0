@@ -4,9 +4,9 @@ export class Site{
     place: string;
     start_date: string;
     end_date:string;
-    // type_of_site:string;
-    // est_budget:string;
-    // no_of_sk:string;
-    // no_of_usk:string;
+    type_of_site:string;
+    est_budget:string;
+    no_of_sk:number;
+    no_of_usk:number;
 
 }
