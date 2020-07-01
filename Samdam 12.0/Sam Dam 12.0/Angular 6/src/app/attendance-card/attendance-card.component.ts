@@ -6,7 +6,7 @@ import { MatTable,MatTableDataSource } from '@angular/material/table';
 import {SelectionModel} from '@angular/cdk/collections';
 import { Attendance } from '../shared/attendance.model';
 import {AttendanceService} from '../shared/attendance.service';
-import {DateM} from '../shared/date.model';
+import {DateModel} from '../shared/date.model';
 import {FormControl, FormBuilder, FormGroup ,Validators, NgForm} from '@angular/forms';
 import { Router,ActivatedRoute } from '@angular/router';
 import { MatDialog,MatDialogConfig} from '@angular/material/dialog';
@@ -14,6 +14,7 @@ import {MatBottomSheet, MatBottomSheetRef,MAT_BOTTOM_SHEET_DATA} from '@angular/
 
 import { from } from 'rxjs';
 import { Site } from '../shared/site.model';
+import { getMonth } from 'date-fns';
 
 export interface AttendanceData{
   // _id:string;
@@ -37,7 +38,7 @@ export interface AttendanceData{
   ot_pay:number; 
   site:Array<Site> 
   attendance:Array<Attendance>
-  date:Array<DateM>
+  date:Array<Date>
 }
 
 @Component({
@@ -62,17 +63,16 @@ export class AttendanceCardComponent implements OnInit {
  
 
   constructor(private attendanceApi:AttendanceService,private router: Router,private formBuilder: FormBuilder,private actRoute:ActivatedRoute,private dialog:MatDialog,private _bottomSheetRef: MatBottomSheetRef<AttendanceCardComponent>,@Optional() @Inject(MAT_BOTTOM_SHEET_DATA) public data: AttendanceData) {
-  //date data from relevant employee
- 
+  //get month from date picker
+  
+  
   //data ekata attendance eka assign wela thynne
   console.log(data);
   this.dateForm = this.formBuilder.group({
-      date:[],
-      name_in:[data.name_in],
-      site_name:[data.site[0].site_name],
-      month:[data.attendance[0].month],
-      state:[],
-      reason:[],
+      datepicker:[Date],
+      emp_id:[data.emp_id],
+      site:[data.site],
+      month:[],
       ot_on_day:[]
       
   })
@@ -122,11 +122,11 @@ export class AttendanceCardComponent implements OnInit {
   
    //filter date
    formatDate(e){
-    var convertDate = new Date(e.target).toISOString().substring(0,10);
-    this.dateForm.get('date').setValue(convertDate, {
-      onlyself:true
-    })
-    console.log(convertDate);
+    // var convertDate = new Date(e.target).toISOString().substring(0,10);
+    // this.dateForm.get('date').setValue(convertDate, {
+    //   onlyself:true
+    // })
+    // console.log(convertDate);
     }
    
 
@@ -139,66 +139,30 @@ export class AttendanceCardComponent implements OnInit {
   
   onPresent(){
     
-    //this have to add to attendance.date array
-    //Here add dates to attendance.date array
-    console.log("present")
-    this.dateForm.value.state = "Present";
-    
+   
+   // console.log("present");
+    var month = getMonth(this.dateForm.value.datepicker);
+
+    this.dateForm.value.month = month;
     console.log(this.dateForm.value);
-    //now updating the attendance
-    const new_data = this.dateForm.value;
-    
-    
-    //console.log(new_data);
-   // this.attendanceApi.IncreaseAttendance(new_data._id,new_data).subscribe()
+    this.attendanceApi.AddAttendance(this.dateForm.value).subscribe(
+      res=>{
+        
+      },
+      err=>{
+        if(err){
+          console.log("Attendance Adding Failed"+err);
+        }else{
+          console.log("Something went Wrong");
+        }
+      }
+    );
   }
 
   onAbsent(){
     console.log("absent")
   }
-  // onAddDate(){
-  //   const adddialogConfig =new MatDialogConfig();
-  // adddialogConfig.disableClose=false;
-  // adddialogConfig.autoFocus=true;
-  // adddialogConfig.width="50%";
-  // adddialogConfig.height="50%";
-  // //this.dialog.open(AddAttendanceDateComponent,adddialogConfig)
-  // }
-
-  //Increase Attendance
-  // incAttendance(index : number,e){
-  //   e.attendance[0].days = e.attendance[0].days+1;
-  //   console.log(e.attendance[0]);
-  //   const data = this.dataSource.data;
-  //   this.attendanceApi.IncreaseAttendance(e.attendance[0]._id,e.attendance[0]).subscribe()
-  //  }
-
-  //   //Decrease Attendance
-  // decAttendance(index : number,e){
-  //   if(window.confirm('Are you sure,Do you want to decrease a day from this Employee?')){
-  //   e.attendance[0].days = e.attendance[0].days-1;
-  //   console.log(e.attendance[0]);
-  //   const data = this.dataSource.data;
-  //   this.attendanceApi.IncreaseAttendance(e.attendance[0]._id,e.attendance[0]).subscribe()
-  //   }
-  // }
-
-  //  //Increase OT
-  //  incOT(index : number,e){
-  //   e.attendance[0].ots = e.attendance[0].ots+1; 
-  //   console.log(e.attendance[0]);
-  //   const data = this.dataSource.data;
-  //  this.attendanceApi.IncreaseAttendance(e.attendance[0]._id,e.attendance[0]).subscribe()
-  // }
-
-  //   //Decrease OT
-  //   decOT(index : number,e){
-  //     e.attendance[0].ots = e.attendance[0].ots-1;
-  //     console.log(e.attendance[0]);
-  //     const data = this.dataSource.data;
-  //     this.attendanceApi.IncreaseAttendance(e.attendance[0]._id,e.attendance[0]).subscribe()
-  //  }
-
+ 
 
    //on preset employee
 }
