@@ -1,10 +1,9 @@
-export class DateM {
+export class DateModel {
    
     date: Date;
-    state:string;
+    emp_id:string;
     site_name: string;
     month:string;
-    ot_on_day:number;
-    reason:string;
+    ot:number;
     
 }
