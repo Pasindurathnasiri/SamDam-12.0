@@ -1,3 +1,4 @@
+<div class="card-w">
 <h1 align="center">Attendance Card -- January</h1>
 <form [formGroup]="this.dateForm" #resetaddGroup="ngForm">
     <!--Date picker, state, ot -->
@@ -6,8 +7,28 @@
         <input matInput [matDatepicker]="dobpicker" formControlName="datepicker">
         <mat-datepicker-toggle matSuffix [for]="dobpicker"></mat-datepicker-toggle>
         <mat-datepicker #dobpicker></mat-datepicker>
-      </mat-form-field><br><br>
-
+      </mat-form-field>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<form [formGroup]=this.forSelectMonth>
+      <mat-form-field>
+        <mat-label>Select Month</mat-label>
+        <mat-select formControlName="select_month" (selectionChange)="onMonthChange()" >
+          <mat-option value="January">January</mat-option>
+          <mat-option value="February">February</mat-option>
+          <mat-option value="March">March</mat-option>
+          <mat-option value="April">April</mat-option>
+          <mat-option value="May">May</mat-option>
+          <mat-option value="June">June</mat-option>
+          <mat-option value="July">July</mat-option>
+          <mat-option value="August">August</mat-option>
+          <mat-option value="September">September</mat-option>
+          <mat-option value="October">October</mat-option>
+          <mat-option value="November">November</mat-option>
+          <mat-option value="December">December</mat-option>
+          
+        </mat-select>
+       
+      </mat-form-field> <br><br>
+    </form>
       <mat-form-field class="ot" >
         <mat-label>OT for Day</mat-label>
         <input matInput maxlength="2" name="ot" formControlName="ot_on_day"> 
@@ -22,8 +43,8 @@
 
 <!---->
 <div class="employee-tbl">
-  <p *ngIf="AllAttendanceData.length <= 0" class="no-data">There is no employee added yet!</p>
-
+ <!-- <p *ngIf="AllAttendanceData.length <= 0" class="no-data">There is no employee added yet!</p>
+-->
  
 
   <div class="mat-elevation-z8">
@@ -33,12 +54,12 @@
       <!-- Id Column -->
       <ng-container matColumnDef="date">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Date</th>
-        <td mat-cell *matCellDef="let row"></td>
+        <td mat-cell *matCellDef="let row">{{row.date}}</td>
       </ng-container>
   
       <ng-container matColumnDef="site">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Current Site</th>
-        <td mat-cell *matCellDef="let row"></td>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Site</th>
+        <td mat-cell *matCellDef="let row">{{row.site[0].site_name}}</td>
       </ng-container>
         
       <ng-container matColumnDef="state">
@@ -49,25 +70,16 @@
       <ng-container matColumnDef="controls">
         <th mat-header-cell *matHeaderCellDef> Action </th>
         <td mat-cell *matCellDef="let element; let i = index;">
-          <button mat-raised-button color="primary" (click)="onPresent(i,element)" class="push-right">Present</button>
-          <button mat-raised-button color="warn" (click)="onAbsent(i,element)">Absent</button>
-        </td>
+          <button mat-icon-button color="warn" (click)="onRemoveAttendance(i,element)" class="push-right"><mat-icon>remove_circle_outline</mat-icon></button>
+          </td>
       </ng-container>
 
       <ng-container matColumnDef="ot_on_day">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Gender</th>
-        <td mat-cell *matCellDef="let row"></td>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>OT</th>
+        <td mat-cell *matCellDef="let row">{{row.ot_on_day}}</td>
       </ng-container>
 
-      <ng-container matColumnDef="action_ot-on-day">
-        <th mat-header-cell *matHeaderCellDef></th>
-        <td mat-cell *matCellDef="let element; let i = index;">
-          <!--Increase OT Buttton-->
-          <button mat-icon-button color="primary" (click)="incOTonDay(i,element)" class="push-right"><mat-icon>add_circle_outline</mat-icon></button>
-          <!--Decrease OTS Button-->
-          <button mat-icon-button color="warn" (click)="decOTonDay(i, element)"><mat-icon>remove_circle_outline</mat-icon></button>
-        </td>
-      </ng-container>     
+          
   
       <ng-container matColumnDef="loading">
         <mat-footer-cell *matFooterCellDef colspan="6">
@@ -87,3 +99,4 @@
         [pageSizeOptions]="[25, 50, 100, 250]">
     </mat-paginator>
   </div>
+</div>

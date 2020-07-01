@@ -15,6 +15,7 @@ import {MatBottomSheet, MatBottomSheetRef,MAT_BOTTOM_SHEET_DATA} from '@angular/
 import { from } from 'rxjs';
 import { Site } from '../shared/site.model';
 import { getMonth } from 'date-fns';
+import { da } from 'date-fns/locale';
 
 export interface AttendanceData{
   // _id:string;
@@ -51,15 +52,16 @@ export class AttendanceCardComponent implements OnInit {
 
   public readonly dateForm :FormGroup; 
   attendanceForm :FormGroup;
-  AllAttendanceData: any = [];
-  dataSource: MatTableDataSource<Attendance>;
+  forSelectMonth:FormGroup;
+  AllDatesData: any = [];
+  dataSource: MatTableDataSource<DateModel>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   selection = new SelectionModel<Attendance>(true, []);
   searchKey: string; 
 
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
-  displayedColumns: string [] = ['date','site','state','controls','ot_on_day'];
+  displayedColumns: string [] = ['date','site','ot_on_day','controls'];
  
 
   constructor(private attendanceApi:AttendanceService,private router: Router,private formBuilder: FormBuilder,private actRoute:ActivatedRoute,private dialog:MatDialog,private _bottomSheetRef: MatBottomSheetRef<AttendanceCardComponent>,@Optional() @Inject(MAT_BOTTOM_SHEET_DATA) public data: AttendanceData) {
@@ -67,7 +69,7 @@ export class AttendanceCardComponent implements OnInit {
   
   
   //data ekata attendance eka assign wela thynne
-  console.log(data);
+  
   this.dateForm = this.formBuilder.group({
       datepicker:[Date],
       emp_id:[data.emp_id],
@@ -77,6 +79,9 @@ export class AttendanceCardComponent implements OnInit {
       
   })
  
+  this.forSelectMonth= this.formBuilder.group({
+    select_month:[]
+  })
  
  //  var day_length = [data.attendance[0].date[0].length]
   this.attendanceForm = this.formBuilder.group({
@@ -84,37 +89,42 @@ export class AttendanceCardComponent implements OnInit {
     emp_id:[this.data.emp_id],
     name_in:[this.data.name_in],
     site:[this.data.site],
-    month:[this.data.attendance[0].month],
-    days:[this.data.attendance[0].days],
-    ots:[this.data.attendance[0].ots],
+   // month:[this.data.attendance[0].month],
+   // days:[this.data.attendance[0].days],
+   // ots:[this.data.attendance[0].ots],
     date:[this.dateForm]
 
 
   })
+  this.attendanceApi.GetAllDates().subscribe(data=>{
+    
+    
+    this.AllDatesData=data;
+    this.dataSource=new MatTableDataSource<DateModel>(this.AllDatesData);
+    //get value from the month picker
+    
   
-  //attendance data for calender table
-    this.attendanceApi.GetAllAttendance().subscribe(data =>{
-      this.AllAttendanceData =data;    
-      
-      this.dataSource = new MatTableDataSource<Attendance>(this.AllAttendanceData);
-     //this is the array we want to filter
-      console.log(this.dataSource.filteredData)
-      
-      setTimeout(() => {
-        this.dataSource.paginator = this.paginator;
-      }, 0);
-         
-    })
-   }
+   
+    console.log(this.dataSource)
+    setTimeout(() => {
+      this.dataSource.paginator = this.paginator;
+    }, 0);
+  })
+  
+  }
 
  
+  applyFilter(){
+    return this.dataSource.filter= this.searchKey.trim().toLowerCase();
+  }
 
   ngOnInit(): void {
-    this.dataSource = new MatTableDataSource<Attendance>();
+    this.dataSource = new MatTableDataSource<DateModel>();
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
     
   }
+
 
   updateAttendanceForm(){
    
@@ -141,9 +151,40 @@ export class AttendanceCardComponent implements OnInit {
     
    
    // console.log("present");
-    var month = getMonth(this.dateForm.value.datepicker);
-
-    this.dateForm.value.month = month;
+    var intmonth = getMonth(this.dateForm.value.datepicker);
+    var strmonth='';
+    
+    switch (intmonth) {
+      case 1:strmonth="January"
+        break;
+     case 2:strmonth="February"
+        break;
+        case 3:strmonth="March"
+        break;
+        case 4:strmonth="April"
+        break;
+        case 5:strmonth="May"
+        break;
+        case 6:strmonth="June"
+        break;
+        case 7:strmonth="July"
+        break;
+        case 8:strmonth="August"
+        break;
+        case 9:strmonth="September"
+        break;
+        case 10:strmonth="October"
+        break;
+        case 11:strmonth="November"
+        break;
+        case 12:strmonth="December"
+        break;
+        
+        
+      default:
+        break;
+    }
+    this.dateForm.value.month = strmonth;
     console.log(this.dateForm.value);
     this.attendanceApi.AddAttendance(this.dateForm.value).subscribe(
       res=>{
@@ -163,6 +204,12 @@ export class AttendanceCardComponent implements OnInit {
     console.log("absent")
   }
  
+  onMonthChange(){
+    var selectedmonth = this.forSelectMonth.value.select_month;
+    console.log(this.forSelectMonth.value.select_month)
+    this.dataSource.filter=selectedmonth.trim().toString();
+    //console.log("change");
+  }
 
    //on preset employee
 }

@@ -48,10 +48,7 @@
       </ng-container>
 
       
-      <ng-container matColumnDef="month">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Month</th>
-        <td mat-cell *matCellDef="let row">{{row.attendance[0].month}}</td>
-      </ng-container>
+   
 
       <ng-container matColumnDef="calender">
         <th mat-header-cell *matHeaderCellDef></th>
@@ -65,25 +62,21 @@
 
       <ng-container matColumnDef="days">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Days</th>
-        <td mat-cell *matCellDef="let row">{{row.attendance[0].days}}</td>
+        <td mat-cell *matCellDef="let element; let i = index;">{{getTotalDays(i)}}</td>
       </ng-container>
           
-      <ng-container matColumnDef="action_days">
+      <ng-container matColumnDef="action">
         <th mat-header-cell *matHeaderCellDef></th>
         <td mat-cell *matCellDef="let element; let i = index;">
           <!--Decrease Attendance Button-->
           <button mat-icon-button color="primary" (click)="openCalendar(i,element)" class="push-right"><mat-icon>calendar_today</mat-icon></button>
          
-          <!--Increase Attendance Buttton-->
-          <button mat-icon-button color="primary" (click)="incAttendance(i,element)" class="push-right"><mat-icon>add_circle_outline</mat-icon></button>
-          <!--Decrease Attendance Button-->
-          <button mat-icon-button color="warn" (click)="decAttendance(i, element)"><mat-icon>remove_circle_outline</mat-icon></button>
-        </td>
+          </td>
       </ng-container>
 
       <ng-container matColumnDef="ots">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>OT's</th>
-        <td mat-cell *matCellDef="let row">{{row.attendance[0].ots}}</td>
+        <td mat-cell *matCellDef="let element; let i = index;">{{getTotalOT(i)}}</td>
       </ng-container>
 
             

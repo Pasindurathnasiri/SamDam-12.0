@@ -35,15 +35,19 @@ export class AttendanceSheetComponent implements OnInit {
   
 
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
- displayedColumns: string [] = ['emp_id', 'name','site','month','days','action_days','ots','action_ots'];
+ displayedColumns: string [] = ['emp_id', 'name','site','days','ots','action'];
 
  constructor(private attendanceApi:AttendanceService,private router: Router,private ngZone: NgZone,private formBuilder: FormBuilder,private dialog:MatDialog,private actRoute:ActivatedRoute,private _bottomSheet:MatBottomSheet,private _bottomSheetRef:MatBottomSheetRef){
   this.attendanceApi.GetAllAttendance().subscribe(data =>{
-    this.AllAttendanceData =data;    
+    
+    this.AllAttendanceData =data;   
+    
+    console.log(this.AllAttendanceData);
     
     this.dataSource = new MatTableDataSource<Attendance>(this.AllAttendanceData);
    //this is the array we want to filter
-    console.log(this.dataSource.filteredData[0].site[0])
+  
+   
     
     setTimeout(() => {
       this.dataSource.paginator = this.paginator;
@@ -53,6 +57,20 @@ export class AttendanceSheetComponent implements OnInit {
 
 }
 
+//get the total days
+
+getTotalDays(i){
+  return this.AllAttendanceData[i].dates.length;
+}
+
+//get the total ots
+getTotalOT(i){
+
+  var otcol=0;
+  for(var j=0;j<this.AllAttendanceData[i].dates.length;j++){
+   otcol=otcol+this.AllAttendanceData[i].dates[j].ot_on_day;
+} return otcol;
+}
  
 
   ngOnInit() {
@@ -133,8 +151,6 @@ export class AttendanceSheetComponent implements OnInit {
   openCalendar(index:number,e):void{
    // console.log(e)
     this._bottomSheet.open(AttendanceCardComponent,{data:e});
-    
-    
   }
 
   applyFilter(){

@@ -25,6 +25,11 @@ export class AttendanceService {
     return  this.http.get(`${this.endpointGetAttendance}`);
   }
 
+  GetAllDates(){
+    return this.http.get(`${this.endpoint}/getAllDates`);
+
+  }
+
 
   //IncreaseAttendance
   IncreaseAttendance(id,data):Observable<any>{

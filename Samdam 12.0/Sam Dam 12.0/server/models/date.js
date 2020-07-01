@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 var dateSchema = new mongoose.Schema({
     date: {type:Date},
     emp_id:{type:String},
-    month:{type:Number},
+    month:{type:String},
     site:{type:Array},
     ot_on_day:{type:Number}
 });

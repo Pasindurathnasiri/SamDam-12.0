@@ -73,6 +73,7 @@ export class UpdateEmployeeComponent implements OnInit {
   constructor(private formBuilder: FormBuilder,private employeeApi:EmployeeService,private router: Router,private ngZone: NgZone,private actRoute:ActivatedRoute,private siteService:SiteService) { 
     var id = this.actRoute.snapshot.paramMap.get('id');
     this.employeeApi.GetEmployee(id).subscribe(data =>{
+      var selectedSite =data.site[0].site_name;
       console.log(id);
       console.log(data.designation[0].name)
       this.updateForm= this.formBuilder.group({
@@ -107,6 +108,9 @@ export class UpdateEmployeeComponent implements OnInit {
     })
 
   }
+
+  
+  
 
   
   //Reactive Employee Form

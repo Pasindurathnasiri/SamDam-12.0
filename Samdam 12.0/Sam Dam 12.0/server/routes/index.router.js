@@ -10,10 +10,12 @@ const jwtHelper = require('../config/jwtHelper');
 let allEmployees = require('../models/employee');
 let GetAllAttendance = require('../models/attendance');
 let AllSites = require('../models/site');
+let AllDates = require('../models/date');
 
 const ctrlEmployee = require ('../controllers/employee.controller');
 const ctrlSite = require ('../controllers/site.controller');
 const ctrlDate = require ('../controllers/date.controller');
+const { result } = require('lodash');
 
 router.post('/register', ctrlUser.register);
 router.post('/authenticate', ctrlUser.authenticate);
@@ -112,8 +114,8 @@ router.route('/incAttendance/:id').put((req,res,next)=>{
 
 router.route('/GetAllAttendance').get((req,res)=>{
     allEmployees.aggregate([
-        {$lookup:{from:'attendances',localField:'emp_id',
-      foreignField:'emp_id',as:'attendance'}},
+        {$lookup:{from:'dates',localField:'emp_id',
+      foreignField:'emp_id',as:'dates'}},
     ]).exec((err,result)=>{
         if(err){
             console.log("error",err)
@@ -125,6 +127,23 @@ router.route('/GetAllAttendance').get((req,res)=>{
         }
     })  
 })
+
+//Get All Date attendance
+
+router.route('/getAllDates').get((req,res)=>{
+    AllDates.aggregate([
+        {$lookup:{from:'employees',localField:'emp_id',
+        foreignField:'emp_id',as:'dates'}},
+    ]).exec((err,result)=>{
+        if(err){
+            console.log("error",err);
+        }
+        if(result){
+            JSON.stringify(result);
+            res.json(result);
+        }
+    })
+});
 
 //Get all Site Attendance filterd
 

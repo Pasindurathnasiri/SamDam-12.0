@@ -36,7 +36,7 @@ export class AdvancePayComponent implements OnInit {
   }
 
   openBottomSheet(index:number,e): void {
-    this._bottomSheet.open(AddAdvanceSingleComponent,{data:e.attendance[0]});
+    this._bottomSheet.open(AddAdvanceSingleComponent,{panelClass:'custom-width',data:e.attendance[0]});
         
   }
 
