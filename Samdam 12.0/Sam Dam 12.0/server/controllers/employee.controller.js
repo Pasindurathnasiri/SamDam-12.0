@@ -34,6 +34,7 @@ module.exports.addEmployee = (req,res,next) =>{
    attendance.ots= 0;
    attendance.advance_req=0;
    attendance.advance_paid=0;
+   
    employee.save((err,doc)=>{
        if (!err)
        console.log(employee)&& res.send(doc);
