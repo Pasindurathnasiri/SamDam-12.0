@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Attendance } from '../shared/attendance.model';
+import {DateModel} from '../shared/date.model';
 import { HttpClient,HttpHeaders,HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { environment } from '../../environments/environment';
@@ -33,6 +34,11 @@ export class AttendanceService {
    .pipe(
      catchError(this.errorMgmt)
    )
+  }
+
+  //Add attendance in calader database
+  AddAttendance(date:DateModel){
+    return this.http.post(environment.URI+'/addAttendance',date,this.noAuthHeader)
   }
 
 //add calander attendance to attendance 
