@@ -3,7 +3,7 @@
     <!--Date picker, state, ot -->
     <mat-form-field>
         <mat-label>Date</mat-label>
-        <input matInput [matDatepicker]="dobpicker" formControlName="date">
+        <input matInput [matDatepicker]="dobpicker" formControlName="datepicker">
         <mat-datepicker-toggle matSuffix [for]="dobpicker"></mat-datepicker-toggle>
         <mat-datepicker #dobpicker></mat-datepicker>
       </mat-form-field><br><br>
@@ -32,17 +32,17 @@
  
       <!-- Id Column -->
       <ng-container matColumnDef="date">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Employee Id</th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Date</th>
         <td mat-cell *matCellDef="let row"></td>
       </ng-container>
   
       <ng-container matColumnDef="site">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Full Name</th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Current Site</th>
         <td mat-cell *matCellDef="let row"></td>
       </ng-container>
         
       <ng-container matColumnDef="state">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Gender</th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
         <td mat-cell *matCellDef="let row"></td>
       </ng-container>
   
