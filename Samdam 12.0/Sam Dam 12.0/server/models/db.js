@@ -9,3 +9,4 @@ require('./user.model');
 require('./employee');
 require('./attendance');
 require('./site');
+require('./date')
