@@ -11,4 +11,5 @@ export class Attendance {
     advance_paid:number;
     date:string;
     
+    
 }
