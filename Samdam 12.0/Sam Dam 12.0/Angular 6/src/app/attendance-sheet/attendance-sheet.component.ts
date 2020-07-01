@@ -13,6 +13,9 @@ import { AttendanceCardComponent } from '../attendance-card/attendance-card.comp
 import {MatBottomSheet, MatBottomSheetRef} from '@angular/material/bottom-sheet';
 import { from } from 'rxjs';
 import { stringify } from 'querystring';
+import { startOfDay, subDays, addDays, endOfMonth, isSameDay, isSameMonth, addWeeks, subWeeks, addMonths, subMonths} from 'date-fns';
+
+import { CalendarEvent, CalendarEventAction } from 'angular-calendar';
 
 
 @Component({
@@ -64,11 +67,22 @@ export class AttendanceSheetComponent implements OnInit {
    updateAttendanceForm(){
      this.attendanceForm = this.formBuilder.group({
        emp_id:[''],
-       name_in:[''],
        site:[''],
        month:[''],
        days:[''],
-       ots:['']
+       ots:[''],
+       1:[''],
+       2:[''],
+       3:[''],
+       4:[''],
+       5:[''],
+       6:[''],
+       7:[''],
+       8:[''],
+       9:[''],
+       10:[''],
+       11:[''],
+       12:['']
      })
    }
 
@@ -76,8 +90,11 @@ export class AttendanceSheetComponent implements OnInit {
 
   //Increase Attendance
   incAttendance(index : number,e){
+   //Get date and month
+   var today= new Date();
+   var date = today.getMonth()+1;
    e.attendance[0].days = e.attendance[0].days+1;
-   console.log(e.attendance[0]);
+   console.log(date);
    const data = this.dataSource.data;
    this.attendanceApi.IncreaseAttendance(e.attendance[0]._id,e.attendance[0]).subscribe()
   }
@@ -113,7 +130,7 @@ export class AttendanceSheetComponent implements OnInit {
     this.applyFilter();
   }
 
-  openCalander(index:number,e):void{
+  openCalendar(index:number,e):void{
    // console.log(e)
     this._bottomSheet.open(AttendanceCardComponent,{data:e});
     
