@@ -13,13 +13,14 @@ let AllSites = require('../models/site');
 
 const ctrlEmployee = require ('../controllers/employee.controller');
 const ctrlSite = require ('../controllers/site.controller');
+const ctrlDate = require ('../controllers/date.controller');
 
 router.post('/register', ctrlUser.register);
 router.post('/authenticate', ctrlUser.authenticate);
 router.get('/userProfile',jwtHelper.verifyJwtToken, ctrlUser.userProfile); 
 router.post('/addEmployee',ctrlEmployee.addEmployee);
 router.post('/addSite',ctrlSite.addSite);
-router.post('/addCalanderAttendance')
+router.post('/addAttendance',ctrlDate.addDate);
 
 //router.get('/GetAllEmployees',ctrlEmployee.GetAllEmployees);
 
