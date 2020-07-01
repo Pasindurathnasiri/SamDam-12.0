@@ -9,7 +9,8 @@ var attendanceSchema = new mongoose.Schema({
     days:{type:Number},
     ots:{type:Number},
     advance_req:{type:Number},
-    advance_paid:{type:Number}
+    advance_paid:{type:Number},
+    date_details:{type:Array}
 });
 
 var getAllAttendanceSchema = new mongoose.Schema({
@@ -20,7 +21,8 @@ var getAllAttendanceSchema = new mongoose.Schema({
     days:{type:Number},
     ots:{type:Number},
     advance_req:{type:Number},
-    advance_paid:{type:Number}
+    advance_paid:{type:Number},
+    date_details:{type:Array}
 })
 mongoose.model('attendance',attendanceSchema)
 module.exports = mongoose.model('Attendances',getAllAttendanceSchema);
