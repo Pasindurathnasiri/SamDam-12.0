@@ -76,6 +76,8 @@ import { HrSelectedSiteAdvanceComponent } from './hr-selected-site-advance/hr-se
 import { TransferEmployeeComponent } from './employee-mgmt/transfer-employee/transfer-employee.component';
 import { ViewPaysheetComponent } from './view-paysheet/view-paysheet.component';
 import { AttendanceCardComponent } from './attendance-card/attendance-card.component';
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 
 @NgModule({
   declarations: [
@@ -145,7 +147,8 @@ import { AttendanceCardComponent } from './attendance-card/attendance-card.compo
     MatStepperModule,
     MatBottomSheetModule,
     MatDividerModule,
-    MatCurrencyFormatModule
+    MatCurrencyFormatModule,
+    CalendarModule.forRoot({ provide: DateAdapter, useFactory: adapterFactory })
    
 
     
