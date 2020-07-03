@@ -3,6 +3,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTable,MatTableDataSource } from '@angular/material/table';
 import { Salarypay } from '../shared/salarypay.model';
+
 import { SalarypayService } from '../shared/salarypay.service';
 import { matDialogAnimations, MatDialogConfig, MatDialog } from '@angular/material/dialog';
 import { AddAdvanceSingleComponent } from '../advance-pay/add-advance-single/add-advance-single.component';
@@ -20,7 +21,7 @@ export class AdvancePayComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
   searchKey: string;  
  
-  displayedColumns: string[] = ['emp_id','name','designation','site','month','action_req','advance_req','advance_paid'];
+  displayedColumns: string[] = ['emp_id','name','designation','site','action_req','advance_req','advance_paid'];
  
   constructor(private advanceApi: SalarypayService,private dialog:MatDialog,private _bottomSheet:MatBottomSheet,private _bottomSheetRef:MatBottomSheetRef) {
     this.advanceApi.GetAllSalary().subscribe(data =>{
@@ -36,7 +37,7 @@ export class AdvancePayComponent implements OnInit {
   }
 
   openBottomSheet(index:number,e): void {
-    this._bottomSheet.open(AddAdvanceSingleComponent,{panelClass:'custom-width',data:e.attendance[0]});
+    this._bottomSheet.open(AddAdvanceSingleComponent,{panelClass:'custom-width',data:e});
         
   }
 

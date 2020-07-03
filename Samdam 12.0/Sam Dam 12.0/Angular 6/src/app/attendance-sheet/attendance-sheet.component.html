@@ -1,5 +1,5 @@
 <h1 align="center">Attendance Sheet</h1>
-<div class="search-container" align="center">
+<div class="search-container">
     <!--<mat-form-field class="option-search"  appearance="fill">
             <mat-label>Search By: </mat-label>
             <mat-select>
@@ -21,6 +21,28 @@
        <!--  Search button-->
         
 </div>
+<!--
+<form [formGroup]=this.forSelectMonth>
+  <mat-form-field>
+    <mat-label>Select Month</mat-label>
+    <mat-select formControlName="select_month" (selectionChange)="onMonthChange()" >
+      <mat-option value="January">January</mat-option>
+      <mat-option value="February">February</mat-option>
+      <mat-option value="March">March</mat-option>
+      <mat-option value="April">April</mat-option>
+      <mat-option value="May">May</mat-option>
+      <mat-option value="June">June</mat-option>
+      <mat-option value="July">July</mat-option>
+      <mat-option value="August">August</mat-option>
+      <mat-option value="September">September</mat-option>
+      <mat-option value="October">October</mat-option>
+      <mat-option value="November">November</mat-option>
+      <mat-option value="December">December</mat-option>
+      
+    </mat-select>
+   
+  </mat-form-field> <br><br>
+</form>-->
 
 <div class="attendance-tbl">
   <p *ngIf="AllAttendanceData.length <= 0" class="no-data">There is no employee attendance added yet!</p>

@@ -1,5 +1,26 @@
 <div class="card-w">
-<h1 align="center">Attendance Card -- January</h1>
+<h1 align="center">Attendance Card</h1>
+<form [formGroup]=this.forSelectMonth>
+  <mat-form-field>
+    <mat-label>Select Month</mat-label>
+    <mat-select formControlName="select_month" (selectionChange)="onMonthChange()" >
+      <mat-option value="January">January</mat-option>
+      <mat-option value="February">February</mat-option>
+      <mat-option value="March">March</mat-option>
+      <mat-option value="April">April</mat-option>
+      <mat-option value="May">May</mat-option>
+      <mat-option value="June">June</mat-option>
+      <mat-option value="July">July</mat-option>
+      <mat-option value="August">August</mat-option>
+      <mat-option value="September">September</mat-option>
+      <mat-option value="October">October</mat-option>
+      <mat-option value="November">November</mat-option>
+      <mat-option value="December">December</mat-option>
+      
+    </mat-select>
+   
+  </mat-form-field> <br><br>
+</form>
 <form [formGroup]="this.dateForm" #resetaddGroup="ngForm">
     <!--Date picker, state, ot -->
     <mat-form-field>
@@ -8,27 +29,7 @@
         <mat-datepicker-toggle matSuffix [for]="dobpicker"></mat-datepicker-toggle>
         <mat-datepicker #dobpicker></mat-datepicker>
       </mat-form-field>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<form [formGroup]=this.forSelectMonth>
-      <mat-form-field>
-        <mat-label>Select Month</mat-label>
-        <mat-select formControlName="select_month" (selectionChange)="onMonthChange()" >
-          <mat-option value="January">January</mat-option>
-          <mat-option value="February">February</mat-option>
-          <mat-option value="March">March</mat-option>
-          <mat-option value="April">April</mat-option>
-          <mat-option value="May">May</mat-option>
-          <mat-option value="June">June</mat-option>
-          <mat-option value="July">July</mat-option>
-          <mat-option value="August">August</mat-option>
-          <mat-option value="September">September</mat-option>
-          <mat-option value="October">October</mat-option>
-          <mat-option value="November">November</mat-option>
-          <mat-option value="December">December</mat-option>
-          
-        </mat-select>
-       
-      </mat-form-field> <br><br>
-    </form>
+
       <mat-form-field class="ot" >
         <mat-label>OT for Day</mat-label>
         <input matInput maxlength="2" name="ot" formControlName="ot_on_day"> 

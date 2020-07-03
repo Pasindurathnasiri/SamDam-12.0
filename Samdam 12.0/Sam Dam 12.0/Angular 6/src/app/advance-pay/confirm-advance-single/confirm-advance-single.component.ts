@@ -28,19 +28,21 @@ export interface AdvanceData{
 export class ConfirmAdvanceSingleComponent implements OnInit {
 
   confirmAdvanceForm: FormGroup;
+  AllDatesData: any = [];
 
   constructor(private formBuilder:FormBuilder, private ngZone: NgZone,private router: Router,private _bottomSheetRef: MatBottomSheetRef<ConfirmAdvanceSingleComponent>,@Optional() @Inject(MAT_BOTTOM_SHEET_DATA) public data: AdvanceData,private attendanceService : AttendanceService) {
 
-    console.log(data.attendance[0]._id);
-
+    this.AllDatesData=data;
+    console.log(this.AllDatesData.dates.length)
+   // console.log(this.AllDatesData[0].dates.length);
     this.confirmAdvanceForm = this.formBuilder.group({
-      _id:[data.attendance[0]._id,[Validators.required]],
-      emp_id:[data.attendance[0].emp_id,[Validators.required]],
-      name_in:[data.attendance[0].name_in,[Validators.required]],
-      month:[data.attendance[0].month,[Validators.required]],
-      advance_possible:[((data.attendance[0].days*data.day_pay)-data.attendance[0].advance_paid),[Validators.required]],
-      advance_req:[data.attendance[0].advance_req,[Validators.required]],
-      advance_paid:[data.attendance[0].advance_paid,[Validators.required]],
+      _id:[data._id,[Validators.required]],
+      emp_id:[data.emp_id,[Validators.required]],
+      name_in:[data.name_in,[Validators.required]],
+      month:[data.month,[Validators.required]],
+      advance_possible:[((this.AllDatesData.dates.length*data.day_pay)-data.advance_paid),[Validators.required]],
+      advance_req:[data.advance_req,[Validators.required]],
+      advance_paid:[data.advance_paid,[Validators.required]],
     })
 
    }
@@ -62,6 +64,10 @@ export class ConfirmAdvanceSingleComponent implements OnInit {
 
 
   ngOnInit(): void {
+  }
+
+  getTotDays(i){
+    return this.AllDatesData[i].dates.length;
   }
 
   confirmAdvanceRequest(){

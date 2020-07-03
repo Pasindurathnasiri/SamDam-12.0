@@ -124,6 +124,31 @@ router.route('/GetAllAttendance').get((req,res)=>{
             
             JSON.stringify(result);
             res.json(result);
+
+        }
+    })  
+})
+
+//Get All Attendence for month   // Futher Developement
+router.route('/GetAllAttendanceforMonth/:month').get((req,res)=>{
+    allEmployees.aggregate([
+        {$lookup:{from:'dates',localField:'emp_id',
+      foreignField:'emp_id',as:'dates'}},
+    ]).exec((err,result)=>{
+        if(err){
+            console.log("error",err)
+        }
+        if(result){
+            
+            // var hres = result.filter(function(fil){
+            //     return fil.dates.month == req.params.month;
+                
+            // });
+            // //console.log(result[0].dates);
+            // console.log(hres);
+            // JSON.stringify(hres);
+            // res.json(hres);
+            
         }
     })  
 })
@@ -141,9 +166,35 @@ router.route('/getAllDates').get((req,res)=>{
         if(result){
             JSON.stringify(result);
             res.json(result);
+            var h = result.filter(function(fil){
+                return fil.month == 'May';
+            });
+            console.log(h);
         }
     })
 });
+
+//Get All Dates according to month
+router.route('/getAllDatesforMonth/:month').get((req,res)=>{
+    AllDates.aggregate([
+        {$lookup:{from:'employees',localField:'emp_id',
+        foreignField:'emp_id',as:'dates'}},
+    ]).exec((err,result)=>{
+        if(err){
+            console.log("error",err);
+        }
+        if(result){
+           
+            var hres = result.filter(function(fil){
+                return fil.month == req.params.month;
+            });
+            console.log(hres);
+            JSON.stringify(hres);
+            res.json(hres);
+        }
+    })
+}); 
+
 
 //Get all Site Attendance filterd
 
@@ -166,9 +217,9 @@ router.route('/GetAllSiteAttendance').get((req,res)=>{
 //Get All Salary Details
 
 router.route('/GetAllSalary').get((req,res)=>{
-  allEmployees.aggregate([
-      {$lookup:{from:'attendances',localField:'emp_id',
-    foreignField:'emp_id',as:'attendance'}},
+  GetAllAttendance.aggregate([
+      {$lookup:{from:'dates',localField:'emp_id',
+    foreignField:'emp_id',as:'dates'}},
   ]).exec((err,result)=>{
       if(err){
           console.log("error",err)
@@ -181,6 +232,28 @@ router.route('/GetAllSalary').get((req,res)=>{
   })  
 }   
 )
+
+//Get salary for month
+router.route('/GetAllSalaryforMonth/:month').get((req,res)=>{
+    GetAllAttendance.aggregate([
+        {$lookup:{from:'dates',localField:'emp_id',
+      foreignField:'emp_id',as:'dates'}},
+    ]).exec((err,result)=>{
+        if(err){
+            console.log("error",err)
+        }
+        if(result){
+            console.log(result);
+            var hres = result.filter(function(fil){
+                return fil.dates[0].month == req.params.month;
+            });
+            console.log(hres);
+            JSON.stringify(hres);
+            res.json(hres);
+        }
+    })  
+  }   
+  )
 
 //GEt single salary
 

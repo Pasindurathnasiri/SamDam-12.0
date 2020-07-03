@@ -17,6 +17,9 @@ import { startOfDay, subDays, addDays, endOfMonth, isSameDay, isSameMonth, addWe
 
 import { CalendarEvent, CalendarEventAction } from 'angular-calendar';
 
+export interface Date{
+
+}
 
 @Component({
   selector: 'app-attendance-sheet',
@@ -25,6 +28,7 @@ import { CalendarEvent, CalendarEventAction } from 'angular-calendar';
 })
 export class AttendanceSheetComponent implements OnInit {
   attendanceForm :FormGroup; 
+  forSelectMonth:FormGroup;
   AllAttendanceData: any = [];
   dataSource: MatTableDataSource<Attendance>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -53,6 +57,11 @@ export class AttendanceSheetComponent implements OnInit {
       this.dataSource.paginator = this.paginator;
     }, 0);
        
+  })
+
+  
+  this.forSelectMonth= this.formBuilder.group({
+    select_month:[]
   })
 
 }
@@ -106,43 +115,7 @@ getTotalOT(i){
 
 
 
-  //Increase Attendance
-  incAttendance(index : number,e){
-   //Get date and month
-   var today= new Date();
-   var date = today.getMonth()+1;
-   e.attendance[0].days = e.attendance[0].days+1;
-   console.log(date);
-   const data = this.dataSource.data;
-   this.attendanceApi.IncreaseAttendance(e.attendance[0]._id,e.attendance[0]).subscribe()
-  }
 
-
-  //Decrease Attendance
-  decAttendance(index : number,e){
-    if(window.confirm('Are you sure,Do you want to decrease a day from this Employee?')){
-    e.attendance[0].days = e.attendance[0].days-1;
-    console.log(e.attendance[0]);
-    const data = this.dataSource.data;
-    this.attendanceApi.IncreaseAttendance(e.attendance[0]._id,e.attendance[0]).subscribe()
-    }
-  }
-
-  //Increase OT
-  incOT(index : number,e){
-    e.attendance[0].ots = e.attendance[0].ots+1; 
-    console.log(e.attendance[0]);
-    const data = this.dataSource.data;
-   this.attendanceApi.IncreaseAttendance(e.attendance[0]._id,e.attendance[0]).subscribe()
-  }
-
-  //Decrease OT
-  decOT(index : number,e){
-     e.attendance[0].ots = e.attendance[0].ots-1;
-     console.log(e.attendance[0]);
-     const data = this.dataSource.data;
-     this.attendanceApi.IncreaseAttendance(e.attendance[0]._id,e.attendance[0]).subscribe()
-  }
   onSearchClear(){
     this.searchKey ='';
     this.applyFilter();
@@ -155,5 +128,22 @@ getTotalOT(i){
 
   applyFilter(){
     return this.dataSource.filter= this.searchKey.trim().toLowerCase();
+  }
+
+  onMonthChange(){
+    var selectedmonth = this.forSelectMonth.value.select_month;
+    this.attendanceApi.GetAllDatesforMonth(selectedmonth).subscribe(data=>{
+      this.AllAttendanceData =data;   
+    
+      console.log(this.AllAttendanceData);
+    
+       this.dataSource = new MatTableDataSource<Attendance>(this.AllAttendanceData);
+    
+    setTimeout(() => {
+      this.dataSource.paginator = this.paginator;
+    }, 0);
+    })
+    console.log(this.dataSource)
+    //console.log("change");
   }
 }

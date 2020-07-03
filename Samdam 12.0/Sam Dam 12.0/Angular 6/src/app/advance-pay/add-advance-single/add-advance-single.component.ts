@@ -29,7 +29,7 @@ export class AddAdvanceSingleComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder,private ngZone: NgZone,private router: Router,private _bottomSheetRef: MatBottomSheetRef<AddAdvanceSingleComponent>,@Optional() @Inject(MAT_BOTTOM_SHEET_DATA) public data: AdvanceData,private attendanceService : AttendanceService) { 
   
-   console.log(data.emp_id);
+   console.log(data);
    
      this.addAdvanceForm = this.formBuilder.group({
       _id:[data._id,[Validators.required]],

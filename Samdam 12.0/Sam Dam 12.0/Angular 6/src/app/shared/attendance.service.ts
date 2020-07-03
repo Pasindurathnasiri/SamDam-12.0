@@ -30,6 +30,9 @@ export class AttendanceService {
 
   }
 
+  GetAllDatesforMonth(month){
+    return this.http.get(`${this.endpoint}/getAllDatesforMonth/${month}`)
+  }
 
   //IncreaseAttendance
   IncreaseAttendance(id,data):Observable<any>{

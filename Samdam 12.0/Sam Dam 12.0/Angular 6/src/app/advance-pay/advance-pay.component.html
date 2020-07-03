@@ -43,22 +43,17 @@
         <td mat-footer-cell *matFooterCellDef></td>
       </ng-container>
 
-      
-      <ng-container matColumnDef="month">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Month</th>
-        <td mat-cell *matCellDef="let row">{{row.attendance[0].month}}</td>
-        <td mat-footer-cell *matFooterCellDef></td>
-      </ng-container>
+
   
       <ng-container matColumnDef="advance_req">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Advance Requested</th>
-        <td mat-cell *matCellDef="let row">{{row.attendance[0].advance_req | currency:'Rs:'}}</td>
+        <td mat-cell *matCellDef="let row">{{row.advance_req | currency:'Rs:'}}</td>
         <td mat-footer-cell *matFooterCellDef></td>
       </ng-container>
       
       <ng-container matColumnDef="advance_paid">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Advance Paid</th>
-        <td mat-cell *matCellDef="let row">{{row.attendance[0].advance_paid | currency:'Rs:'}}</td>
+        <td mat-cell *matCellDef="let row">{{row.advance_paid | currency:'Rs:'}}</td>
         <td mat-footer-cell *matFooterCellDef></td>
       </ng-container>
 

@@ -42,6 +42,8 @@ export interface AttendanceData{
   date:Array<Date>
 }
 
+var idFilter;
+
 @Component({
   selector: 'app-attendance-card',
   templateUrl: './attendance-card.component.html',
@@ -55,6 +57,7 @@ export class AttendanceCardComponent implements OnInit {
   forSelectMonth:FormGroup;
   AllDatesData: any = [];
   dataSource: MatTableDataSource<DateModel>;
+  dataSourcenew:MatTableDataSource<DateModel>
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   selection = new SelectionModel<Attendance>(true, []);
@@ -62,12 +65,14 @@ export class AttendanceCardComponent implements OnInit {
 
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
   displayedColumns: string [] = ['date','site','ot_on_day','controls'];
- 
+
+  
 
   constructor(private attendanceApi:AttendanceService,private router: Router,private formBuilder: FormBuilder,private actRoute:ActivatedRoute,private dialog:MatDialog,private _bottomSheetRef: MatBottomSheetRef<AttendanceCardComponent>,@Optional() @Inject(MAT_BOTTOM_SHEET_DATA) public data: AttendanceData) {
   //get month from date picker
   
-  
+  var filterID = data.emp_id;
+  idFilter=filterID;
   //data ekata attendance eka assign wela thynne
   
   this.dateForm = this.formBuilder.group({
@@ -100,14 +105,18 @@ export class AttendanceCardComponent implements OnInit {
     
     
     this.AllDatesData=data;
+   // console.log(filterID);
+    
     this.dataSource=new MatTableDataSource<DateModel>(this.AllDatesData);
     //get value from the month picker
     
-  
+   this.dataSource.filter=filterID.trim().toString();
+   
    
     console.log(this.dataSource)
     setTimeout(() => {
       this.dataSource.paginator = this.paginator;
+
     }, 0);
   })
   
@@ -206,8 +215,18 @@ export class AttendanceCardComponent implements OnInit {
  
   onMonthChange(){
     var selectedmonth = this.forSelectMonth.value.select_month;
-    console.log(this.forSelectMonth.value.select_month)
-    this.dataSource.filter=selectedmonth.trim().toString();
+    this.attendanceApi.GetAllDatesforMonth(selectedmonth).subscribe(data=>{
+      this.AllDatesData =data;   
+    
+      console.log(this.AllDatesData);
+    
+       this.dataSource = new MatTableDataSource<DateModel>(this.AllDatesData);
+       this.dataSource.filter=idFilter.trim().toString();
+    setTimeout(() => {
+      this.dataSource.paginator = this.paginator;
+    }, 0);
+    })
+    console.log(this.dataSource)
     //console.log("change");
   }
 

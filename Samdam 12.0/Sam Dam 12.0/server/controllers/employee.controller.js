@@ -29,7 +29,9 @@ module.exports.addEmployee = (req,res,next) =>{
    attendance.emp_id = req.body.emp_id;
    attendance.name_in = req.body.name_in;
    attendance.site = req.body.site;
-   attendance.month = "January";
+   attendance.designation = req.body.designation;
+   attendance.day_pay = req.body.day_pay;
+   attendance.ot_pay = req.body.ot_pay;
    attendance.days = 0;
    attendance.ots= 0;
    attendance.advance_req=0;
