@@ -4,6 +4,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTable,MatTableDataSource } from '@angular/material/table';
 import { Attendance } from '../shared/attendance.model';
+import {FormControl, FormBuilder, FormGroup ,Validators, NgForm} from '@angular/forms';
 import { Salarypay } from '../shared/salarypay.model';
 import { SalarypayService } from '../shared/salarypay.service';
 import { from } from 'rxjs';
@@ -18,19 +19,20 @@ import { ViewPaysheetComponent} from '../view-paysheet/view-paysheet.component'
 })
 export class SalaryPayComponent implements OnInit {
   AllSalaryData: any = [];
+  forSelectMonth:FormGroup;
   dataSource: MatTableDataSource<Salarypay>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   searchKey: string; 
  
-  displayedColumns:string[] = ['emp_id','name_in','designation','site','month','dayrate','otrate','days','ots','daypayments','otpayments','fullpayments','action'];
+  displayedColumns:string[] = ['emp_id','name_in','designation','site','dayrate','otrate','days','ots','daypayments','otpayments','fullpayments','action'];
 
 
   constructor(private salaryapi: SalarypayService,private _bottomSheet:MatBottomSheet,private _bottomSheetRef:MatBottomSheetRef) {
     this.salaryapi.GetAllSalary().subscribe(data =>{
       this.AllSalaryData =data;    
       this.dataSource = new MatTableDataSource<Salarypay>(this.AllSalaryData);
-      console.log(data);
+      console.log(this.AllSalaryData.dates);
       
       setTimeout(() => {
         this.dataSource.paginator = this.paginator;
@@ -38,6 +40,12 @@ export class SalaryPayComponent implements OnInit {
       
     })
   }
+
+     /** Gets the total Days. */
+     getTotalDaysRow() {
+      return this.AllSalaryData.map(t => t.attendance[0].days).reduce((acc, value) => acc + value, 0);
+    }
+  
    
      /** Gets the total Days. */
      getTotalDays() {
