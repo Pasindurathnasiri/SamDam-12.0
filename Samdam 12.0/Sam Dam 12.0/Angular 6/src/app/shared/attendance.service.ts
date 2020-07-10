@@ -31,7 +31,11 @@ export class AttendanceService {
   }
 
   GetAllDatesforMonth(month){
-    return this.http.get(`${this.endpoint}/getAllDatesforMonth/${month}`)
+    return this.http.get(`${this.endpoint}/getAllDatesforMonth/${month}`);
+  }
+
+  GetAllSalaryforMonth(month){
+    return this.http.get(`${this.endpoint}/GetAllSalaryforMonth/${month}`);
   }
 
   //IncreaseAttendance

@@ -243,13 +243,15 @@ router.route('/GetAllSalaryforMonth/:month').get((req,res)=>{
             console.log("error",err)
         }
         if(result){
-            console.log(result);
-            var hres = result.filter(function(fil){
-                return fil.dates[0].month == req.params.month;
+            //console.log(result[0].dates);
+            var hres = result[0].dates.filter(function(fil){
+                return fil.month == req.params.month;
             });
-            console.log(hres);
-            JSON.stringify(hres);
-            res.json(hres);
+          //  console.log(hres);
+            result[0].dates = hres;
+            JSON.stringify(result);
+            
+            res.json(result);
         }
     })  
   }   

@@ -164,29 +164,29 @@ export class AttendanceCardComponent implements OnInit {
     var strmonth='';
     
     switch (intmonth) {
-      case 1:strmonth="January"
+      case 0:strmonth="January"
         break;
-     case 2:strmonth="February"
+     case 1:strmonth="February"
         break;
-        case 3:strmonth="March"
+        case 2:strmonth="March"
         break;
-        case 4:strmonth="April"
+        case 3:strmonth="April"
         break;
-        case 5:strmonth="May"
+        case 4:strmonth="May"
         break;
-        case 6:strmonth="June"
+        case 5:strmonth="June"
         break;
-        case 7:strmonth="July"
+        case 6:strmonth="July"
         break;
-        case 8:strmonth="August"
+        case 7:strmonth="August"
         break;
-        case 9:strmonth="September"
+        case 8:strmonth="September"
         break;
-        case 10:strmonth="October"
+        case 9:strmonth="October"
         break;
-        case 11:strmonth="November"
+        case 10:strmonth="November"
         break;
-        case 12:strmonth="December"
+        case 11:strmonth="December"
         break;
         
         
