@@ -83,14 +83,14 @@
       
       <ng-container matColumnDef="days">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Days</th>
-        <td mat-cell *matCellDef="let row">{{row.attendance[0].days}}</td>
+        <td mat-cell *matCellDef="let element; let i = index;">{{getTotalDaysRow(i)}}</td>
         <td mat-footer-cell *matFooterCellDef>{{getTotalDays()}}</td>
       </ng-container>
   
       
       <ng-container matColumnDef="ots">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>OT</th>
-        <td mat-cell *matCellDef="let row">{{row.attendance[0].ots}}</td>
+        <td mat-cell *matCellDef="let element; let i = index;">{{getTotalOTsRow(i)}}</td>
         <td mat-footer-cell *matFooterCellDef>{{getTotalOTs()}}</td>
       </ng-container>
   
