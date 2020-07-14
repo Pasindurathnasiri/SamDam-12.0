@@ -7,6 +7,7 @@ import {MatBottomSheet, MatBottomSheetRef,MAT_BOTTOM_SHEET_DATA} from '@angular/
 import { from } from 'rxjs';
 import * as jspdf from 'jspdf';
 import html2canvas from 'html2canvas';
+import {DateModel} from '../shared/date.model'
 
 export interface AdvanceData{
   _id:string;
@@ -20,6 +21,7 @@ export interface AdvanceData{
   day_pay:number;
   ot_pay:number;
   attendance:Array<Attendance>;  
+  dates:Array<DateModel>
 }
 
 @Component({
@@ -32,25 +34,25 @@ export class ViewPaysheetComponent implements OnInit {
   addAdvanceForm: FormGroup;
 
   constructor(private formBuilder: FormBuilder,private ngZone: NgZone,private router: Router,private _bottomSheetRef: MatBottomSheetRef<ViewPaysheetComponent>,@Optional() @Inject(MAT_BOTTOM_SHEET_DATA) public data: AdvanceData,private attendanceService : AttendanceService) {
-    console.log(data.attendance[0]._id);
+    console.log(data._id);
     
     this.addAdvanceForm = this.formBuilder.group({
-      _id:[data.attendance[0]._id,[Validators.required]],
-      emp_id:[data.attendance[0].emp_id,[Validators.required]],
-      name_in:[data.attendance[0].name_in,[Validators.required]],
-      month:[data.attendance[0].month,[Validators.required]],
-      days:[data.attendance[0].days,[Validators.required]],
-      day_pay:[(data.attendance[0].days*data.day_pay),[Validators.required]],
-      ots:[data.attendance[0].ots,[Validators.required]],
-      ot_pay:[(data.attendance[0].ots*data.ot_pay),[Validators.required]],
-      gross_pay:[(data.attendance[0].ots*data.ot_pay)+(data.attendance[0].days*data.day_pay),[Validators.required]],
-      epf:[(data.attendance[0].days*data.day_pay)*3/100,[Validators.required]],
-      etf:[(data.attendance[0].days*data.day_pay)*0.8/100,[Validators.required]],
-      total_deduct:[data.attendance[0].advance_paid+((data.attendance[0].days*data.day_pay)*0.8/100)+((data.attendance[0].days*data.day_pay)*3/100),[Validators.required]],
-      net_pay:[((data.attendance[0].ots*data.ot_pay)+(data.attendance[0].days*data.day_pay))-(data.attendance[0].advance_paid+((data.attendance[0].days*data.day_pay)*0.8/100)+((data.attendance[0].days*data.day_pay)*3/100)),[Validators.required]],
-      advance_possible:[((data.attendance[0].days*data.day_pay)-data.attendance[0].advance_paid),[Validators.required]],
-      advance_req:[data.attendance[0].advance_req,[Validators.required]],
-      advance_paid:[data.attendance[0].advance_paid,[Validators.required]],
+      _id:[data._id,[Validators.required]],
+      emp_id:[data.emp_id,[Validators.required]],
+      name_in:[data.name_in,[Validators.required]],
+      month:[data.month,[Validators.required]],
+      days:[data.dates.length,[Validators.required]],
+      day_pay:[(data.dates.length*data.day_pay),[Validators.required]],
+      ots:[data.ots,[Validators.required]],
+      ot_pay:[(data.ots*data.ot_pay),[Validators.required]],
+      gross_pay:[(data.ots*data.ot_pay)+(data.dates.length*data.day_pay),[Validators.required]],
+      epf:[(data.dates.length*data.day_pay)*3/100,[Validators.required]],
+      etf:[(data.dates.length*data.day_pay)*0.8/100,[Validators.required]],
+      total_deduct:[data.advance_paid+((data.dates.length*data.day_pay)*0.8/100)+((data.dates.length*data.day_pay)*3/100),[Validators.required]],
+      net_pay:[((data.ots*data.ot_pay)+(data.dates.length*data.day_pay))-(data.advance_paid+((data.dates.length*data.day_pay)*0.8/100)+((data.dates.length*data.day_pay)*3/100)),[Validators.required]],
+      advance_possible:[((data.dates.length*data.day_pay)-data.advance_paid),[Validators.required]],
+      advance_req:[data.advance_req,[Validators.required]],
+      advance_paid:[data.advance_paid,[Validators.required]],
    
     })
    }

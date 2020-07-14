@@ -22,8 +22,11 @@ import { EbHomeComponent} from './eb-home/eb-home.component';
 import { EbSheduleSiteComponent} from './eb-shedule-site/eb-shedule-site.component';
 import {HrSiteHomeComponent} from './hr-site-home/hr-site-home.component';
 import {HrSelectedSiteHomeComponent} from './hr-selected-site-home/hr-selected-site-home.component';
-import {HrSelectedSiteAttendanceComponent} from './hr-selected-site-attendance/hr-selected-site-attendance.component'
-import {HrSelectedSiteAdvanceComponent} from './hr-selected-site-advance/hr-selected-site-advance.component'
+import {HrSelectedSiteAttendanceComponent} from './hr-selected-site-attendance/hr-selected-site-attendance.component';
+import {HrSelectedSiteAdvanceComponent} from './hr-selected-site-advance/hr-selected-site-advance.component';
+import {WhHomeComponent} from './wh-home/wh-home.component';
+import {WhHqPageComponent} from './wh-hq-page/wh-hq-page.component';
+import {WhSitePageComponent} from './wh-site-page/wh-site-page.component'
 import { from } from 'rxjs';
 
 export const appRoutes: Routes = [
@@ -94,6 +97,15 @@ export const appRoutes: Routes = [
     },
     {
         path: 'update-single-advance/:id',component:AddAdvanceSingleComponent,canActivate:[AuthGuard]
+    },
+    {
+        path: 'WH-Home',component:WhHomeComponent,canActivate:[AuthGuard]
+    },
+    {
+        path: 'WH-HQPage',component:WhHqPageComponent,canActivate:[AuthGuard]
+    },
+    {
+        path: 'WH-SiteHome',component:WhSitePageComponent,canActivate:[AuthGuard]
     },
     {
         path: '', redirectTo: '/login', pathMatch: 'full'

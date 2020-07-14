@@ -78,6 +78,10 @@ import { ViewPaysheetComponent } from './view-paysheet/view-paysheet.component';
 import { AttendanceCardComponent } from './attendance-card/attendance-card.component';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+import { WhHomeComponent } from './wh-home/wh-home.component';
+import { WhHqPageComponent } from './wh-hq-page/wh-hq-page.component';
+import { WhSitePageComponent } from './wh-site-page/wh-site-page.component';
+import {MatExpansionModule} from '@angular/material/expansion';
 
 @NgModule({
   declarations: [
@@ -113,6 +117,9 @@ import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
     TransferEmployeeComponent,
     ViewPaysheetComponent,
     AttendanceCardComponent,
+    WhHomeComponent,
+    WhHqPageComponent,
+    WhSitePageComponent,
 
     
     
@@ -147,6 +154,7 @@ import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
     MatStepperModule,
     MatBottomSheetModule,
     MatDividerModule,
+    MatExpansionModule,
     MatCurrencyFormatModule,
     CalendarModule.forRoot({ provide: DateAdapter, useFactory: adapterFactory })
    

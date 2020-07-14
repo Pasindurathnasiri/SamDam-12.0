@@ -84,32 +84,32 @@
       <ng-container matColumnDef="days">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Days</th>
         <td mat-cell *matCellDef="let element; let i = index;">{{getTotalDaysRow(i)}}</td>
-        <td mat-footer-cell *matFooterCellDef>{{getTotalDays()}}</td>
+        <td mat-footer-cell *matFooterCellDef></td>
       </ng-container>
   
       
       <ng-container matColumnDef="ots">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>OT</th>
         <td mat-cell *matCellDef="let element; let i = index;">{{getTotalOTsRow(i)}}</td>
-        <td mat-footer-cell *matFooterCellDef>{{getTotalOTs()}}</td>
+        <td mat-footer-cell *matFooterCellDef></td>
       </ng-container>
   
       <ng-container matColumnDef="daypayments">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Days Payments</th>
         <td mat-cell *matCellDef="let element; let i = index;">{{getDaypayments(i,element) | currency:'Rs.'}}</td>
-        <td mat-footer-cell *matFooterCellDef>{{getTotalDayPayments() | currency:'Rs.'}}</td>
+        <td mat-footer-cell *matFooterCellDef></td>
       </ng-container>
   
       <ng-container matColumnDef="otpayments">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>OT Payments</th>
         <td mat-cell *matCellDef="let element; let i = index;">{{getOTPayments(i,element) | currency:'Rs.'}}</td>
-        <td mat-footer-cell *matFooterCellDef>{{getTotalOTPayments() | currency:'Rs.'}}</td>
+        <td mat-footer-cell *matFooterCellDef></td>
       </ng-container>
 
       <ng-container matColumnDef="fullpayments">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Full Payments</th>
         <td mat-cell *matCellDef="let element; let i = index;">{{getFullPayment(i,element) | currency:'Rs.'}}</td>
-        <td mat-footer-cell *matFooterCellDef>{{getTotalFullPayments() | currency:'Rs.'}}</td>
+        <td mat-footer-cell *matFooterCellDef></td>
       </ng-container>
 
       <ng-container matColumnDef="action">

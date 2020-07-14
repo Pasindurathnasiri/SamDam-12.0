@@ -13,7 +13,6 @@ import { ViewPaysheetComponent} from '../view-paysheet/view-paysheet.component';
 import {AttendanceService} from '../shared/attendance.service';
 
 
-
 @Component({
   selector: 'app-salary-pay',
   templateUrl: './salary-pay.component.html',
@@ -34,7 +33,7 @@ export class SalaryPayComponent implements OnInit {
     this.attendanceApi.GetAllAttendance().subscribe(data=>{
       this.AllSalaryData =data;   
     
-      console.log(this.AllSalaryData);
+      console.log(this.AllSalaryData[0]);
     
        this.dataSource = new MatTableDataSource<Salarypay>(this.AllSalaryData);
      //  this.dataSource2.filter=idFilter.trim().toString();
@@ -58,24 +57,25 @@ export class SalaryPayComponent implements OnInit {
        getTotalOTsRow(i) {
       
         var otcol=0;
-  for(var j=0;j<this.AllSalaryData[i].dates.length;j++){
-   otcol=otcol+this.AllSalaryData[i].dates[j].ot_on_day;
-} return otcol;
+        for(var j=0;j<this.AllSalaryData[i].dates.length;j++){
+              otcol=otcol+this.AllSalaryData[i].dates[j].ot_on_day;
+       } return otcol;
       }
    
      /** Gets the total Days. */
      getTotalDays() {
+      return this.AllSalaryData.map(t => t.dates.length).reduce((acc, value) => acc + value, 0);
       
-      for(var i=0;i<this.AllSalaryData.length;i++){
-        console.log(this.AllSalaryData[i].dates.length)
-         var totdays=totdays+this.AllSalaryData[i].dates.length;
-      }return totdays;
     }
   
         /** Gets the total OTs */
      getTotalOTs() {
-     // return this.AllSalaryData.map(t => t.attendance[0].ots).reduce((acc, value) => acc + value, 0);
-    return 0;
+      //return this.AllSalaryData.map(t => t.attendance[0].ots).reduce((acc, value) => acc + value, 0);
+      var TotOT=0;
+      for(var i=0;i<this.AllSalaryData.dates.length;i++){
+        TotOT = TotOT+this.AllSalaryData.map(t=> t.dates[i].ot_on_day).reduce((acc,values)=>acc + values,0)
+      }
+       return TotOT;
     } 
 
     //Calculate Day payment
@@ -96,7 +96,7 @@ export class SalaryPayComponent implements OnInit {
     getOTPayments(index:number,e){
       const data = this.dataSource.data;
       var otcol=0;
-  for(var j=0;j<this.AllSalaryData[index].dates.length;j++){
+      for(var j=0;j<this.AllSalaryData[index].dates.length;j++){
    otcol=otcol+this.AllSalaryData[index].dates[j].ot_on_day;
 } 
       return e.ot_pay*otcol;
