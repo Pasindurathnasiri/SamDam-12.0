@@ -31,7 +31,7 @@ export class EmployeeMgmtComponent implements OnInit {
   filterSelectObj = [];
   filterValues = {};
  /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
- displayedColumns: string [] = ['emp_id', 'name','gender','nic','address_1','epf','etf','designation','site','action'];
+  displayedColumns: string [] = ['emp_id', 'name','gender','nic','address_1','epf','etf','designation','site','action'];
  
 
   /** Whether the number of selected elements matches the total number of rows. */

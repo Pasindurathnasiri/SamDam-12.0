@@ -18,6 +18,109 @@
                 </mat-panel-description>
               </mat-expansion-panel-header>
               <p>Add Balance Table here.</p>
+              <!-- Material type add and delete and update table -->
+              <!--Search Text-->
+<mat-form-field class="input-name" appearance="fill">
+    <mat-label>Search Here</mat-label>  
+    <input matInput [(ngModel)]="searchKey" placeholder="Search" (keyup)="applyFilter()">
+    <button mat-button matSuffix mat-icon-button aria-label="clear"*ngIf="searchKey" (click)="onSearchClear()"></button>
+    </mat-form-field>
+    <!--  Search button-->
+    
+    <button mat-mini-fab color="primary"  aria-label="Example icon-button with a icon">
+    <mat-icon >search</mat-icon>
+    </button><br>
+    
+    <div class="crud-btn">
+        <button  mat-raised-button (click)="onAdd()" color="primary"><mat-icon>library_add</mat-icon>&nbsp;Add</button>&nbsp;&nbsp;&nbsp;
+        <button class="remove-btn" (click)="onTransfer()" mat-raised-button color="primary"><mat-icon>transfer_within_a_station</mat-icon>&nbsp;Transit to site</button>&nbsp;&nbsp;&nbsp;
+        <button class="remove-btn" (click)="printTable()" mat-raised-button color="primary"><mat-icon>local_printshop</mat-icon>&nbsp;Print</button>
+    
+    </div><br><br>
+    <!--Employee Table-->
+    <mat-card id="print_table">
+      
+    <div class="employee-tbl">
+      <p *ngIf="AllMaterialData.length <= 0" class="no-data">There is no Material added yet!</p>
+    
+    
+    </div>
+    <!--Filter Options
+    <mat-form-field *ngFor="let filter of filterSelectObj" style="margin-left: 15px;">
+      <mat-label>Filter {{filter.name}}</mat-label>
+      <select matNativeControl name="{{filter.columnProp}}" [(ngModel)]="filter.modelValue"
+        (change)="filterChange(filter,$event)">
+        <option value="">-- Select {{filter.name}} --</option>
+        <option [value]="item" *ngFor="let item of filter.options">{{item.site_name}}</option>
+      </select>
+    </mat-form-field>
+    &nbsp;
+    <button mat-raised-button color="warn" (click)="resetFilters()">Reset</button>-->
+      <div class="mat-elevation-z8">
+        <table mat-table class="full-width-table" id="table" matSort aria-label="Elements" [dataSource]="dataSourceMatTypes">
+      
+     
+          <!-- Id Column -->
+          <ng-container matColumnDef="mat_id">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Material ID</th>
+            <td mat-cell *matCellDef="let row">{{row.mat_id}}</td>
+          </ng-container>
+      
+       
+            
+  
+          <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
+            <td mat-cell *matCellDef="let row">{{row.mat_name}}</td>
+          </ng-container>
+      
+          
+          <ng-container matColumnDef="unit">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Unit</th>
+            <td mat-cell *matCellDef="let row">{{row.unit_material[0].mat_unit}}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="price">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Price per Unit</th>
+            <td mat-cell *matCellDef="let row">{{row.price_unit}}</td>
+          </ng-container>
+      
+          <ng-container matColumnDef="site">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Allocated Warehouse</th>
+            <td mat-cell *matCellDef="let row">{{row.site[0].site_name}}</td>
+          </ng-container>
+    
+          <ng-container matColumnDef="action">
+            <th mat-header-cell *matHeaderCellDef> Action </th>
+            <td mat-cell *matCellDef="let element; let i = index;">
+              <!--Edit Employee Buttton-->
+              <button mat-icon-button color="primary" [routerLink]="['/update-employee',element._id]" class="push-right"><mat-icon>launch</mat-icon></button>
+              <!--Remove Employee Button-->
+              <button mat-icon-button color="warn" (click)="deleteMaterialType(i,element)"><mat-icon>delete_outline</mat-icon></button>
+            </td>
+          </ng-container>
+      
+          <ng-container matColumnDef="loading">
+            <mat-footer-cell *matFooterCellDef colspan="6">
+              Loading Data...
+            </mat-footer-cell>
+          </ng-container>
+      
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          <mat-footer-row *matFooterDef="['Loading']" [ngClass]="{'hide':data!=null}"></mat-footer-row>
+        </table>
+      
+        <mat-paginator #paginator
+            [length]="dataSource?.data.length"
+            [pageIndex]="0"
+            [pageSize]="50"
+            [pageSizeOptions]="[25, 50, 100, 250]">
+        </mat-paginator>
+      
+      
+    
+    </div></mat-card>
             </mat-expansion-panel><br><br> <br>
             
        
@@ -30,7 +133,8 @@
                   Expand to Manage Material Balance
                 </mat-panel-description>
               </mat-expansion-panel-header>
-             
+             <!-- from here table -->
+
             </mat-expansion-panel>
         </mat-accordion>
     </mat-tab>

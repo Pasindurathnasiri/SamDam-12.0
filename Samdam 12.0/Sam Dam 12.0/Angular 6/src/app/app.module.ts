@@ -82,6 +82,7 @@ import { WhHomeComponent } from './wh-home/wh-home.component';
 import { WhHqPageComponent } from './wh-hq-page/wh-hq-page.component';
 import { WhSitePageComponent } from './wh-site-page/wh-site-page.component';
 import {MatExpansionModule} from '@angular/material/expansion';
+import { AddMaterialComponent } from './add-material/add-material.component';
 
 @NgModule({
   declarations: [
@@ -120,6 +121,7 @@ import {MatExpansionModule} from '@angular/material/expansion';
     WhHomeComponent,
     WhHqPageComponent,
     WhSitePageComponent,
+    AddMaterialComponent,
 
     
     

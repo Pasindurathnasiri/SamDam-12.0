@@ -11,10 +11,13 @@ let allEmployees = require('../models/employee');
 let GetAllAttendance = require('../models/attendance');
 let AllSites = require('../models/site');
 let AllDates = require('../models/date');
+let AllMaterialTypes = require('../models/material');
 
 const ctrlEmployee = require ('../controllers/employee.controller');
 const ctrlSite = require ('../controllers/site.controller');
 const ctrlDate = require ('../controllers/date.controller');
+const ctrlMaterial = require('../controllers/material.controller');
+
 const { result } = require('lodash');
 
 router.post('/register', ctrlUser.register);
@@ -23,6 +26,7 @@ router.get('/userProfile',jwtHelper.verifyJwtToken, ctrlUser.userProfile);
 router.post('/addEmployee',ctrlEmployee.addEmployee);
 router.post('/addSite',ctrlSite.addSite);
 router.post('/addAttendance',ctrlDate.addDate);
+router.post('/addMaterial',ctrlMaterial.addMaterial);
 
 //router.get('/GetAllEmployees',ctrlEmployee.GetAllEmployees);
 
@@ -37,10 +41,38 @@ router.route('/GetAllEmployees').get((req,res)=>{
         }
     })
 })
+//Get all Material types
+router.route('/GetAllMaterialTypes').get((req,res)=>{
+    AllMaterialTypes.find((error,data)=>{
+        if (error){
+            return next(error)
+        }else {
+            JSON.stringify(data);
+            res.json(data);
+            
+        }
+    })
+})
 
 //Delete Empployee
 router.route('/delete-employee/:emp_id').delete((req,res,next)=>{
     allEmployees.findOneAndDelete(req.params.emp_id, (error,data)=>{
+        if(error){
+            return next(error);
+            
+            
+        }else{
+            res.status(200).json({
+                msg: data
+            })
+            
+        }
+    })
+})
+
+//Delete material type
+router.route('/delete-material-type/:mat_id').delete((req,res,next)=>{
+    AllMaterialTypes.findOneAndDelete(req.params.mat_id, (error,data)=>{
         if(error){
             return next(error);
             
