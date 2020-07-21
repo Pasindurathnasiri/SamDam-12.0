@@ -11,3 +11,4 @@ require('./attendance');
 require('./site');
 require('./date');
 require('./material');
+require('./materialdate');

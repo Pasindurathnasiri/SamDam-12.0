@@ -11,10 +11,10 @@
             <mat-expansion-panel hideToggle>
               <mat-expansion-panel-header>
                 <mat-panel-title>
-                  Current Material Balance
+                  Availabale Material types
                 </mat-panel-title>
                 <mat-panel-description>
-                  Expand to View The Current Balance
+                  Expand to View The Availabale Material Types
                 </mat-panel-description>
               </mat-expansion-panel-header>
               <p>Add Balance Table here.</p>
@@ -91,11 +91,9 @@
           </ng-container>
     
           <ng-container matColumnDef="action">
-            <th mat-header-cell *matHeaderCellDef> Action </th>
+            <th mat-header-cell *matHeaderCellDef> Delete Material Type </th>
             <td mat-cell *matCellDef="let element; let i = index;">
-              <!--Edit Employee Buttton-->
-              <button mat-icon-button color="primary" [routerLink]="['/update-employee',element._id]" class="push-right"><mat-icon>launch</mat-icon></button>
-              <!--Remove Employee Button-->
+             <!--Remove material Button-->
               <button mat-icon-button color="warn" (click)="deleteMaterialType(i,element)"><mat-icon>delete_outline</mat-icon></button>
             </td>
           </ng-container>
@@ -134,7 +132,17 @@
                 </mat-panel-description>
               </mat-expansion-panel-header>
              <!-- from here table -->
+             <button mat-button (click)="openDialog('Add',{})" mat-flat-button color="primary">Add</button>
 
+             <table mat-table [dataSource]="dataSource2" class="mat-elevation-z8">
+              <ng-container [matColumnDef]="column" *ngFor="let column of displayedColumnsMat">
+                <th mat-header-cell *matHeaderCellDef> {{column}} </th>
+                <td mat-cell *matCellDef="let element"> {{element[column]}} </td>
+              </ng-container>
+            
+              <tr mat-header-row *matHeaderRowDef="displayedColumnsMat"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumnsMat;"></tr>
+            </table>
             </mat-expansion-panel>
         </mat-accordion>
     </mat-tab>

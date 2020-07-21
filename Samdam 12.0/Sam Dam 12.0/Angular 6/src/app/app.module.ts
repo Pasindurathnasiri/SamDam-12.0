@@ -83,7 +83,8 @@ import { WhHqPageComponent } from './wh-hq-page/wh-hq-page.component';
 import { WhSitePageComponent } from './wh-site-page/wh-site-page.component';
 import {MatExpansionModule} from '@angular/material/expansion';
 import { AddMaterialComponent } from './add-material/add-material.component';
-
+import { UpdateMaterialTypeComponent } from './wh-hq-page/update-material-type/update-material-type.component';
+import {DialogBoxComponent} from './dialog-box/dialog-box.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -122,7 +123,8 @@ import { AddMaterialComponent } from './add-material/add-material.component';
     WhHqPageComponent,
     WhSitePageComponent,
     AddMaterialComponent,
-
+    UpdateMaterialTypeComponent,
+    DialogBoxComponent
     
     
   
@@ -168,7 +170,7 @@ import { AddMaterialComponent } from './add-material/add-material.component';
     MatDialogModule,
     MatBottomSheetModule
   ],
-  entryComponents:[AddEmployeeComponent],
+  entryComponents:[AddEmployeeComponent,DialogBoxComponent],
   providers: [{
     provide: HTTP_INTERCEPTORS,
     useClass: AuthInterceptor,

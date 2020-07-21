@@ -17,6 +17,7 @@ const ctrlEmployee = require ('../controllers/employee.controller');
 const ctrlSite = require ('../controllers/site.controller');
 const ctrlDate = require ('../controllers/date.controller');
 const ctrlMaterial = require('../controllers/material.controller');
+const ctrlMaterialDate = require('../controllers/materialdates.controller');
 
 const { result } = require('lodash');
 
@@ -27,6 +28,7 @@ router.post('/addEmployee',ctrlEmployee.addEmployee);
 router.post('/addSite',ctrlSite.addSite);
 router.post('/addAttendance',ctrlDate.addDate);
 router.post('/addMaterial',ctrlMaterial.addMaterial);
+router.post('/addMaterialDates',ctrlMaterialDate.addMaterialDates)
 
 //router.get('/GetAllEmployees',ctrlEmployee.GetAllEmployees);
 
