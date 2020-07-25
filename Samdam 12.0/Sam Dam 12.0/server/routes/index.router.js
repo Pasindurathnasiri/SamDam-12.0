@@ -12,6 +12,7 @@ let GetAllAttendance = require('../models/attendance');
 let AllSites = require('../models/site');
 let AllDates = require('../models/date');
 let AllMaterialTypes = require('../models/material');
+let AllMaterialDates = require('../models/materialdate');
 
 const ctrlEmployee = require ('../controllers/employee.controller');
 const ctrlSite = require ('../controllers/site.controller');
@@ -20,6 +21,7 @@ const ctrlMaterial = require('../controllers/material.controller');
 const ctrlMaterialDate = require('../controllers/materialdates.controller');
 
 const { result } = require('lodash');
+const date = require('../models/date');
 
 router.post('/register', ctrlUser.register);
 router.post('/authenticate', ctrlUser.authenticate);
@@ -55,6 +57,19 @@ router.route('/GetAllMaterialTypes').get((req,res)=>{
         }
     })
 })
+
+//Get all Material Dates
+router.route('/GetAllMaterialDates').get((req,res)=>{
+    AllMaterialDates.find((error,data)=>{
+        if(error){
+            return next(error)
+        }else{
+            JSON.stringify(data);
+            res.json(data);
+        }
+    })
+})
+
 
 //Delete Empployee
 router.route('/delete-employee/:emp_id').delete((req,res,next)=>{

@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 var MaterialDateSchema = new mongoose.Schema({
-    dor:{type:String},
+    Date:{type:String},
     T_10:{type:Number},
     T_32:{type:Number},
     sand:{type:Number},
@@ -19,7 +19,7 @@ var MaterialDateSchema = new mongoose.Schema({
 })
 
 var getAllMaterialDatesSchema = new mongoose.Schema({
-    dor:{type:String},
+    Date:{type:String},
     T_10:{type:Number},
     T_32:{type:Number},
     sand:{type:Number},

@@ -15,8 +15,10 @@ import {DialogBoxComponent} from '../dialog-box/dialog-box.component'
 })
 export class WhHqPageComponent implements OnInit {
   AllMaterialData: any =[];
+  AllMaterialDatesData: any =[];
   @ViewChild(MatPaginator) paginator: MatPaginator;
   public dataSourceMatTypes: MatTableDataSource<Material>;
+  public dataSourceMatDates: MatTableDataSource<Material>;
 
   displayedColumns: string [] = ['mat_id', 'name','unit','price','action'];
   displayedColumnsMat: string[]=[];
@@ -31,11 +33,22 @@ export class WhHqPageComponent implements OnInit {
      for(var i=1;i<this.AllMaterialData.length+1;i++){
       this.displayedColumnsMat[0]="Date";
       this.displayedColumnsMat[i]=this.AllMaterialData[i-1].mat_name;  
+     // this.displayedColumnsMat[this.AllMaterialData.length+1]="action";
     }
     
      setTimeout(() => {
        this.dataSourceMatTypes.paginator = this.paginator;
      }, 0);
+    })
+
+    //Get all Material Dates
+    materialService.getAllMaterialDates().subscribe(data=>{
+      this.AllMaterialDatesData=data;
+      console.log(this.AllMaterialDatesData);
+      this.dataSourceMatDates = new MatTableDataSource<Material>(this.AllMaterialDatesData);
+      setTimeout(() => {
+        this.dataSourceMatDates.paginator = this.paginator;
+      }, 0);
     })
 
     
