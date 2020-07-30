@@ -85,6 +85,7 @@ import {MatExpansionModule} from '@angular/material/expansion';
 import { AddMaterialComponent } from './add-material/add-material.component';
 import { UpdateMaterialTypeComponent } from './wh-hq-page/update-material-type/update-material-type.component';
 import {DialogBoxComponent} from './dialog-box/dialog-box.component';
+import { MatInfoDateDialogComponent } from './wh-hq-page/mat-info-date-dialog/mat-info-date-dialog.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -124,7 +125,8 @@ import {DialogBoxComponent} from './dialog-box/dialog-box.component';
     WhSitePageComponent,
     AddMaterialComponent,
     UpdateMaterialTypeComponent,
-    DialogBoxComponent
+    DialogBoxComponent,
+    MatInfoDateDialogComponent
     
     
   

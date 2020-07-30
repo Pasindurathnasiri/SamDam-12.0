@@ -137,15 +137,16 @@
              <table mat-table [dataSource]="dataSourceMatDates" class="mat-elevation-z8">
               <ng-container [matColumnDef]="column" *ngFor="let column of displayedColumnsMat">
                 <th mat-header-cell *matHeaderCellDef> {{column}} </th>
-                <td mat-cell *matCellDef="let element"> {{element[column]}} </td>
+                <td mat-cell *matCellDef="let element" (click)="infoDateDialog(element)"> {{element[column]}} </td>
               </ng-container>
 
               <ng-container matColumnDef="action">
-                <td mat-cell *matCellDef="let element; let i = index;">
-                 <!--Remove material Button-->
-                  <button mat-icon-button color="warn" (click)="deleteMaterialType(i,element)"><mat-icon>delete_outline</mat-icon></button>
-                </td>
-              </ng-container>
+            <th mat-header-cell *matHeaderCellDef> Delete Material Type </th>
+            <td mat-cell *matCellDef="let element; let i = index;">
+             <!--Remove material Button-->
+              <button mat-icon-button color="warn" (click)="deleteMaterialType(i,element)"><mat-icon>delete_outline</mat-icon></button>
+            </td>
+          </ng-container>
             
               <tr mat-header-row *matHeaderRowDef="displayedColumnsMat"></tr>
               <tr mat-row *matRowDef="let row; columns: displayedColumnsMat;"></tr>

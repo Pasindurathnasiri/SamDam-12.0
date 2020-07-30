@@ -1,0 +1,22 @@
+<h1>Material Info at Date</h1>
+
+
+<form [formGroup]="this.materialForm">
+    <mat-form-field>
+        <mat-label>Date</mat-label>
+        <input matInput [matDatepicker]="dorpicker" formControlName="dor">
+        <mat-datepicker-toggle matSuffix [for]="dorpicker"></mat-datepicker-toggle>
+        <mat-datepicker #dorpicker></mat-datepicker>
+      </mat-form-field><br><br>
+    <!-- Material Types -->
+    <section *ngFor="let material of materials; let i=index;">
+    <mat-form-field class="input-nic" >
+        <mat-label>{{material}}</mat-label>
+        <input matInput name="material_{{i}}" formControlName="{{material}}" > 
+    </mat-form-field><br><br>
+    </section>
+    <button (click)="onUpdateRecord()"  mat-raised-button color="primary">Update</button>&nbsp;&nbsp;
+    <button (click)="onDelete()" mat-raised-button color="warn">Delete Record</button>&nbsp;&nbsp;
+    <button (click)="onCancel()" mat-raised-button color="warn">Cancel</button>
+       
+</form>

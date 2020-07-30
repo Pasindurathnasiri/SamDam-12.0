@@ -7,7 +7,9 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Material} from '../shared/material.model';
 import {MatBottomSheet, MatBottomSheetRef} from '@angular/material/bottom-sheet';
 import {UpdateMaterialTypeComponent} from '../wh-hq-page/update-material-type/update-material-type.component'
-import {DialogBoxComponent} from '../dialog-box/dialog-box.component'
+import {DialogBoxComponent} from '../dialog-box/dialog-box.component';
+import { MatInfoDateDialogComponent } from '../wh-hq-page/mat-info-date-dialog/mat-info-date-dialog.component';
+
 @Component({
   selector: 'app-wh-hq-page',
   templateUrl: './wh-hq-page.component.html',
@@ -76,6 +78,10 @@ deleteMaterialType(index:number,e){
    }
 }
 
+infoDateDialog(e){
+  //console.log(e.Date)
+ this._bottomSheet.open(MatInfoDateDialogComponent,{panelClass:'custom-width',data:e})
+}
 updateMaterialType(index:number,e){
 this._bottomSheet.open(UpdateMaterialTypeComponent,{panelClass:'custom-width',data:e})
 }
