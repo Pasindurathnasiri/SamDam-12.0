@@ -103,6 +103,38 @@ router.route('/delete-material-type/:mat_id').delete((req,res,next)=>{
     })
 })
 
+//Delete material record
+router.route('/delete-material-record/:id').delete((req,res,next)=>{
+    AllMaterialDates.findOneAndDelete(req.params.id, (error,data)=>{
+        if(error){
+            return next(error);
+            
+            
+        }else{
+            res.status(200).json({
+                msg: data
+            })
+            
+        }
+    })
+})
+
+//Update material records
+
+router.route('/update-meterial-record/:id').put((req,res,next)=>{
+    AllMaterialDates.findByIdAndUpdate(req.params.id, {
+        $set:req.body
+    },(error,data) =>{
+        if(error){
+            return next(error) && console.log(error)
+        }else{
+            res.json(data)
+            console.log('Material Record successfully Updated..!')
+        }
+    }
+    )
+})
+
 //Get Single Employee
 router.route('/read-employee/:id').get((req,res,next)=>{   
     allEmployees.findById(req.params.id, (error,data)=>{

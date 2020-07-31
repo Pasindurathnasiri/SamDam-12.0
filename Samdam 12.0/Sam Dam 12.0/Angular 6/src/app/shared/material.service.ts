@@ -42,6 +42,24 @@ export class MaterialService {
     return this.http.get(`${this.endpoint}`);
   }
 
+  //update Meterial daily record
+  updateMaterialRecord(id,data):Observable<any>{
+    console.log(data);
+    let API_URL = `${this.endpoint_2}/update-meterial-record/${id}`;
+    return this.http.put(API_URL,data,{headers:this.headers})
+    .pipe(
+      catchError(this.errorMgmt)
+    )
+  }
+
+  //Delete Material Daily record
+  DeleteRecord(id):Observable<any>{
+    var API_URL = `${this.endpoint_2}/delete-material-record/${id}`;
+    return this.http.delete(API_URL)
+    .pipe(
+      catchError(this.errorMgmt)
+    )
+  }
   //Delete Material Type
   DeleteMaterial(mat_id):Observable<any>{
     var API_URL = `${this.endpoint_2}/delete-material-type/${mat_id}`;

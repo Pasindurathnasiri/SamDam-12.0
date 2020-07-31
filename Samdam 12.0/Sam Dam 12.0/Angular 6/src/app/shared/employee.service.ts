@@ -84,7 +84,6 @@ UpdateEmployee(id,data):Observable<any>{
   .pipe(
     catchError(this.errorMgmt)
   )
-
 }
 
 //Read All Employee data by site

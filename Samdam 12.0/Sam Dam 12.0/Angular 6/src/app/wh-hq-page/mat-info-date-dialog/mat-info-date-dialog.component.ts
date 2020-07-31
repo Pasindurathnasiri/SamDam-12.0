@@ -100,11 +100,27 @@ export class MatInfoDateDialogComponent implements OnInit {
   }
 
   onDelete(){
-    console.log("delete");
+    //console.log("delete");
+    if(window.confirm("Are you sure do you want to delete this record?")){
+
+      this.materialService.DeleteRecord(this.materialForm.value._id).subscribe();
+      this._bottomSheetRef.dismiss();
+      location.reload();
+    }
+
+   
   }
 
   onUpdateRecord(){
-    console.log("Update")
+    //console.log("Update");
+    console.log(this.materialForm.value)
+    var id = this.materialForm.value._id;
+    if(window.confirm('Are you Sure you want to update this Record.?')){
+      this.materialService.updateMaterialRecord(id,this.materialForm.value).subscribe(res=>{
+        this.onCancel();
+      })
+     // location.reload();
+    }
   }
 
   ngOnInit(): void {
