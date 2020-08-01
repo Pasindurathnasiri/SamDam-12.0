@@ -14,7 +14,19 @@ var MaterialDateSchema = new mongoose.Schema({
     metal_3q:{type:Number},
     T_16:{type:Number},
     HBlock_4:{type:Number},
-    HBlock_6:{type:Number}
+    HBlock_6:{type:Number},
+    T_10_R:{type:Number},
+    T_32_R:{type:Number},
+    sand_R:{type:Number},
+    cement_R:{type:Number},
+    ABC_R:{type:Number},
+    binding_R:{type:Number},
+    metal_1_R:{type:Number},
+    metal_1h_R:{type:Number},
+    metal_3q_R:{type:Number},
+    T_16_R:{type:Number},
+    HBlock_4_R:{type:Number},
+    HBlock_6_R:{type:Number}
 
 })
 
@@ -31,7 +43,20 @@ var getAllMaterialDatesSchema = new mongoose.Schema({
     metal_3q:{type:Number},
     T_16:{type:Number},
     HBlock_4:{type:Number},
-    HBlock_6:{type:Number}
+    HBlock_6:{type:Number},
+    T_10_R:{type:Number},
+    T_32_R:{type:Number},
+    sand_R:{type:Number},
+    cement_R:{type:Number},
+    ABC_R:{type:Number},
+    binding_R:{type:Number},
+    metal_1_R:{type:Number},
+    metal_1h_R:{type:Number},
+    metal_3q_R:{type:Number},
+    T_16_R:{type:Number},
+    HBlock_4_R:{type:Number},
+    HBlock_6_R:{type:Number}
+
 
 })
 

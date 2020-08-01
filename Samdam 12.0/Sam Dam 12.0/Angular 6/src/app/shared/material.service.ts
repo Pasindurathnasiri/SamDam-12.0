@@ -44,7 +44,7 @@ export class MaterialService {
 
   //update Meterial daily record
   updateMaterialRecord(id,data):Observable<any>{
-    console.log(data);
+  //  console.log(data);
     let API_URL = `${this.endpoint_2}/update-meterial-record/${id}`;
     return this.http.put(API_URL,data,{headers:this.headers})
     .pipe(

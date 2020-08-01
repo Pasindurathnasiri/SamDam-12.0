@@ -116,7 +116,7 @@ export class SalaryPayComponent implements OnInit {
      }
      var dayrow=this.AllSalaryData[index].dates.length;;
      
-      //const data = this.dataSource.data;
+      
       return (e.ot_pay*otrow)+(e.day_pay*dayrow);
     }
 

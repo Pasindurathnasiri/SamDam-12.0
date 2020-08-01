@@ -53,10 +53,13 @@ export class WhHqPageComponent implements OnInit {
       }, 0);
     })
 
+    // var bal =this.AllMaterialDatesData.map(t=>(t.HBlock_4).reduce((acc,value)=>acc+value,0);
+    // console.log(bal)
     
    }
 
   ngOnInit(): void {
+
   }
 
   
@@ -67,6 +70,36 @@ onAdd(){
   adddialogConfig.width="75%";
   adddialogConfig.height="100%";
   this.dialog.open(AddMaterialComponent,adddialogConfig)
+}
+
+getMaterialBalance(column){
+
+switch(column){
+  case 'Date' :return 'Current Balance' ; break;
+  case 'HBlock_4':return  (this.AllMaterialDatesData.map(t=>t.HBlock_4_R).reduce((acc,value)=>acc+value,0))-(this.AllMaterialDatesData.map(t=>t.HBlock_4).reduce((acc,value)=>acc+value,0)); break;
+  case 'T_10':return (this.AllMaterialDatesData.map(t=>t.T_10_R).reduce((acc,value)=>acc+value,0))-(this.AllMaterialDatesData.map(t=>t.T_10).reduce((acc,value)=>acc+value,0));break;
+  case 'sand':return (this.AllMaterialDatesData.map(t=>t.sand_R).reduce((acc,value)=>acc+value,0))-(this.AllMaterialDatesData.map(t=>t.sand).reduce((acc,value)=>acc+value,0));break;
+  case 'metal_1':return (this.AllMaterialDatesData.map(t=>t.metal_1_R).reduce((acc,value)=>acc+value,0))-(this.AllMaterialDatesData.map(t=>t.metal_1).reduce((acc,value)=>acc+value,0));break;
+  case 'T_32':return (this.AllMaterialDatesData.map(t=>t.T_32_R).reduce((acc,value)=>acc+value,0))-(this.AllMaterialDatesData.map(t=>t.T_32).reduce((acc,value)=>acc+value,0));break;
+  case 'ABC':return (this.AllMaterialDatesData.map(t=>t.ABC_R).reduce((acc,value)=>acc+value,0))-(this.AllMaterialDatesData.map(t=>t.ABC).reduce((acc,value)=>acc+value,0));break;
+  case 'binding':return (this.AllMaterialDatesData.map(t=>t.binding_R).reduce((acc,value)=>acc+value,0))-(this.AllMaterialDatesData.map(t=>t.binding).reduce((acc,value)=>acc+value,0));break;
+  case 'metal_1h':return (this.AllMaterialDatesData.map(t=>t.metal_1h_R).reduce((acc,value)=>acc+value,0))-(this.AllMaterialDatesData.map(t=>t.metal_1h).reduce((acc,value)=>acc+value,0));break;  case 'cement':return (this.AllMaterialDatesData.map(t=>t.cement_R).reduce((acc,value)=>acc+value,0))-(this.AllMaterialDatesData.map(t=>t.cement).reduce((acc,value)=>acc+value,0));break;
+  case 'cement':return (this.AllMaterialDatesData.map(t=>t.cement_R).reduce((acc,value)=>acc+value,0))-(this.AllMaterialDatesData.map(t=>t.cement).reduce((acc,value)=>acc+value,0));break;
+  case 'metal_3q':return (this.AllMaterialDatesData.map(t=>t.metal_3q_R).reduce((acc,value)=>acc+value,0))-(this.AllMaterialDatesData.map(t=>t.metal_3q).reduce((acc,value)=>acc+value,0));break;
+  case 'T_16':return (this.AllMaterialDatesData.map(t=>t.T_16_R).reduce((acc,value)=>acc+value,0))-(this.AllMaterialDatesData.map(t=>t.T_16).reduce((acc,value)=>acc+value,0));break;
+  case 'HBlock_6':return (this.AllMaterialDatesData.map(t=>t.HBlock_6_R).reduce((acc,value)=>acc+value,0))-(this.AllMaterialDatesData.map(t=>t.HBlock_6).reduce((acc,value)=>acc+value,0));break;
+ 
+  default : return 0;
+
+}
+/**
+
+ 
+  
+   */
+//  this.AllMaterialDatesData.map(t=>t.(column)).reduce((acc,value)=>acc+value,0);
+//return bal;
+// console.log(bal);
 }
 
 deleteMaterialType(index:number,e){
@@ -80,6 +113,7 @@ deleteMaterialType(index:number,e){
 
 infoDateDialog(e){
   //console.log(e.Date)
+  
  this._bottomSheet.open(MatInfoDateDialogComponent,{panelClass:'custom-width',data:e})
 }
 updateMaterialType(index:number,e){

@@ -19,6 +19,30 @@ export interface MaterialData{
   metal_1h: number;
   metal_3q: number;
   sand: number;
+  ABC_R: number;
+  HBlock_4_R: number;
+  HBlock_6_R: number;
+  T_10_R: number;
+  T_16_R: number;
+  T_32_R: number;
+  binding_R: number;
+  cement_R: number;
+  metal_1_R: number;
+  metal_1h_R: number;
+  metal_3q_R: number;
+  sand_R: number;
+  ABC_B: number;
+  HBlock_4_B: number;
+  HBlock_6_B: number;
+  T_10_B: number;
+  T_16_B: number;
+  T_32_B: number;
+  binding_B: number;
+  cement_B: number;
+  metal_1_B: number;
+  metal_1h_B: number;
+  metal_3q_B: number;
+  sand_B: number;
 }
 
  
@@ -31,10 +55,15 @@ export interface MaterialData{
 export class MatInfoDateDialogComponent implements OnInit {
   AllMaterialData: any =[];
   materialForm : FormGroup;
+  materialForm_R : FormGroup;
+  materialForm_B : FormGroup;
   public materials: any[]=[{material:''}];
+  public materials_R: any[]=[{material_R:''}];
+  public materials_B: any[]=[{material_R:''}];
+  
 
   constructor(private formBuilder: FormBuilder,private _bottomSheetRef: MatBottomSheetRef<MatInfoDateDialogComponent>,@Optional() @Inject(MAT_BOTTOM_SHEET_DATA) public data: MaterialData,private materialService:MaterialService) {
-    console.log(data);
+    //console.log(data);
     this.materialForm = formBuilder.group({
       _id:[data._id,[Validators.required]],
       ABC:[data.ABC,[Validators.required]],
@@ -53,6 +82,41 @@ export class MatInfoDateDialogComponent implements OnInit {
 
     });
 
+    this.materialForm_R =formBuilder.group({
+      _id:[data._id,[Validators.required]],
+      ABC_R:[data.ABC_R,[Validators.required]],
+      HBlock_4_R: [data.HBlock_4_R,[Validators.required]],
+      HBlock_6_R: [data.HBlock_6_R,[Validators.required]],
+      T_10_R: [data.T_10_R,[Validators.required]],
+      T_16_R: [data.T_16_R,[Validators.required]],
+      T_32_R: [data.T_32_R,[Validators.required]],
+      binding_R: [data.binding_R,[Validators.required]],
+      cement_R: [data.cement_R,[Validators.required]],
+      dor: [data.Date,[Validators.required]],
+      metal_1_R: [data.metal_1_R,[Validators.required]],
+      metal_1h_R: [data.metal_1h_R,[Validators.required]],
+      metal_3q_R: [data.metal_3q_R,[Validators.required]],
+      sand_R: [data.sand_R,[Validators.required]],
+    });
+
+    //Material Balance form
+    this.materialForm_B =formBuilder.group({
+      _id:[data._id,[Validators.required]],
+      ABC_B:[data.ABC_B,[Validators.required]],
+      HBlock_4_B: [data.HBlock_4_B,[Validators.required]],
+      HBlock_6_B: [data.HBlock_6_B,[Validators.required]],
+      T_10_B: [data.T_10_B,[Validators.required]],
+      T_16_B: [data.T_16_B,[Validators.required]],
+      T_32_B: [data.T_32_B,[Validators.required]],
+      binding_B: [data.binding_B,[Validators.required]],
+      cement_B: [data.cement_B,[Validators.required]],
+      dor: [data.Date,[Validators.required]],
+      metal_1_B: [data.metal_1_B,[Validators.required]],
+      metal_1h_B: [data.metal_1h_B,[Validators.required]],
+      metal_3q_B: [data.metal_3q_B,[Validators.required]],
+      sand_B: [data.sand_B,[Validators.required]],
+    });
+
       //Gettng Material types
 
     materialService.getAllMaterialTypes().subscribe(datamat=>{
@@ -61,15 +125,19 @@ export class MatInfoDateDialogComponent implements OnInit {
 
       for(var i=0;i<this.AllMaterialData.length;i++){
         
-        this.materials[i]=this.AllMaterialData[i].mat_name;  
+        this.materials[i]=this.AllMaterialData[i].mat_name;
+        this.materials_R[i]=this.AllMaterialData[i].mat_name+"_R";  
       }
     })
-
+ 
   
 
    
    }
    
+  //  getMaterialBalance(){
+  //    return 
+  //  }
    
    openLink(event: MouseEvent): void {
     this._bottomSheetRef.dismiss();
@@ -92,6 +160,18 @@ export class MatInfoDateDialogComponent implements OnInit {
       metal_1h: [''],
       metal_3q: [''],
       sand: [''],
+      ABC_R:[''],
+      HBlock_4_R: [''],
+      HBlock_6_R: [''],
+      T_10_R: [''],
+      T_16_R: [''],
+      T_32_R: [''],
+      binding_R: [''],
+      cement_R: [''],
+      metal_1_R: [''],
+      metal_1h_R: [''],
+      metal_3q_R: [''],
+      sand_R: [''],
     })
   }
 
@@ -114,13 +194,26 @@ export class MatInfoDateDialogComponent implements OnInit {
   onUpdateRecord(){
     //console.log("Update");
     console.log(this.materialForm.value)
+    
     var id = this.materialForm.value._id;
     if(window.confirm('Are you Sure you want to update this Record.?')){
       this.materialService.updateMaterialRecord(id,this.materialForm.value).subscribe(res=>{
         this.onCancel();
       })
-     // location.reload();
+    
     }
+     location.reload();
+  }
+
+  onUpdateRecordRec(){
+    var id = this.materialForm.value._id;
+    if(window.confirm('Are you Sure you want to update this Record.?')){
+      this.materialService.updateMaterialRecord(id,this.materialForm_R.value).subscribe(res=>{
+        this.onCancel();
+      })
+     
+    }
+    location.reload();
   }
 
   ngOnInit(): void {

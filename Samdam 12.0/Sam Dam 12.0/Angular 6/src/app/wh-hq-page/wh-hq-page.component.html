@@ -17,10 +17,10 @@
                   Expand to View The Availabale Material Types
                 </mat-panel-description>
               </mat-expansion-panel-header>
-              <p>Add Balance Table here.</p>
+             
               <!-- Material type add and delete and update table -->
               <!--Search Text-->
-<mat-form-field class="input-name" appearance="fill">
+    <mat-form-field class="input-name" appearance="fill">
     <mat-label>Search Here</mat-label>  
     <input matInput [(ngModel)]="searchKey" placeholder="Search" (keyup)="applyFilter()">
     <button mat-button matSuffix mat-icon-button aria-label="clear"*ngIf="searchKey" (click)="onSearchClear()"></button>
@@ -132,12 +132,13 @@
                 </mat-panel-description>
               </mat-expansion-panel-header>
              <!-- from here table -->
-             <button mat-button (click)="openDialog('Add',{})" mat-flat-button color="primary">Add</button>
+             <button mat-button (click)="openDialog('Add',{})" mat-flat-button color="primary">Add</button><br><br>
 
              <table mat-table [dataSource]="dataSourceMatDates" class="mat-elevation-z8">
               <ng-container [matColumnDef]="column" *ngFor="let column of displayedColumnsMat">
                 <th mat-header-cell *matHeaderCellDef> {{column}} </th>
                 <td mat-cell *matCellDef="let element" (click)="infoDateDialog(element)"> {{element[column]}} </td>
+                <td mat-footer-cell *matFooterCellDef><strong>{{getMaterialBalance(column)}}</strong></td>
               </ng-container>
 
               <ng-container matColumnDef="action">
@@ -150,8 +151,11 @@
             
               <tr mat-header-row *matHeaderRowDef="displayedColumnsMat"></tr>
               <tr mat-row *matRowDef="let row; columns: displayedColumnsMat;"></tr>
+              <tr mat-footer-row *matFooterRowDef="displayedColumnsMat; sticky: true"></tr>
+      
             </table>
             </mat-expansion-panel>
+
         </mat-accordion>
     </mat-tab>
     <mat-tab label="Equipment">

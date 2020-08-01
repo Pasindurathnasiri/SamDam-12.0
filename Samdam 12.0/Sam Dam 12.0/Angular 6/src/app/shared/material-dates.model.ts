@@ -11,4 +11,15 @@ export class MaterialDates {
     metal_3q:number;
     T_16:number;
     HBlock_4:number;
+    T_10_R:number;
+    T_32_R:number;
+    sand_R:number
+    cement_R:number;
+    ABC_R:number;
+    binding_R:number;
+    metal_1_R:number;
+    metal_1h_R:number;
+    metal_3q_R:number;
+    T_16_R:number;
+    HBlock_4_R:number;
 }

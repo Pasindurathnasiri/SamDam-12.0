@@ -26,6 +26,8 @@ export class DialogBoxComponent implements OnInit {
   local_data:any;
   public materialtypes:any[]=[];
   public materials: any[]=[{material:''}];
+  public materials_R: any[]=[{material_R:''}];
+ 
 
   constructor(private formBuilder:FormBuilder,public dialogRef: MatDialogRef<DialogBoxComponent>,@Optional() @Inject(MAT_DIALOG_DATA) public data: UsersData,private materialService:MaterialService) {
     
@@ -39,6 +41,8 @@ export class DialogBoxComponent implements OnInit {
       for(var i=0;i<this.AllMaterialData.length;i++){
         
         this.materials[i]=this.AllMaterialData[i].mat_name;  
+        this.materials_R[i]=this.AllMaterialData[i].mat_name+"_R";  
+
       }
 
        //console.log(this.materials); --> correct
@@ -65,7 +69,19 @@ export class DialogBoxComponent implements OnInit {
       metal_3q:[],
       T_16:[],
       HBlock_4:[],
-      HBlock_6:[]
+      HBlock_6:[],
+      ABC_R:[],
+      HBlock_4_R: [],
+      HBlock_6_R: [],
+      T_10_R: [],
+      T_16_R: [],
+      T_32_R: [],
+      binding_R: [],
+      cement_R: [],
+      metal_1_R: [],
+      metal_1h_R: [],
+      metal_3q_R: [],
+      sand_R: [],
     })
 
    }
