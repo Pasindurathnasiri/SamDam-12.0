@@ -15,6 +15,7 @@ export class MaterialService {
   endpoint: string = 'http://localhost:3000/api/GetAllMaterialTypes';
   endpoint_1: string= 'http://localhost:3000/api/GetAllMaterialDates';
   endpoint_2: string = 'http://localhost:3000/api';
+  endpoint_3: string= 'http://localhost:3000/api/GetAllMaterialDatesmonth'; 
  
   noAuthHeader = { headers:new HttpHeaders({'NoAuth':'True'})};
 
@@ -50,6 +51,11 @@ export class MaterialService {
     .pipe(
       catchError(this.errorMgmt)
     )
+  }
+
+  //Get Allmaterial dates by month
+  getAllMaterialDatesmonth(month){
+    return this.http.get(`${this.endpoint_3}/${month}`)
   }
 
   //Delete Material Daily record

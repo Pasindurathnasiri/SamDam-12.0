@@ -2,6 +2,7 @@ import { Component, OnInit,Inject,Optional } from '@angular/core';
 import { MatDialogRef,MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { MaterialService} from '../shared/material.service'
 import { FormGroup,FormBuilder,FormArray} from '@angular/forms';
+import { getMonth } from 'date-fns';
 
 
 
@@ -58,6 +59,8 @@ export class DialogBoxComponent implements OnInit {
 
     this.addMaterialDataForm= this.formBuilder.group({
       dor:[Date],
+      site:['HQ'],
+      month:[],
       T_10:[],
       T_32:[],
       sand:[],
@@ -88,6 +91,41 @@ export class DialogBoxComponent implements OnInit {
 
 
    addMaterialData(){
+     //get month
+     var intmonth = getMonth(this.addMaterialDataForm.value.dor);
+     var strmonth='';
+    
+    switch (intmonth) {
+      case 0:strmonth="January"
+        break;
+     case 1:strmonth="February"
+        break;
+        case 2:strmonth="March"
+        break;
+        case 3:strmonth="April"
+        break;
+        case 4:strmonth="May"
+        break;
+        case 5:strmonth="June"
+        break;
+        case 6:strmonth="July"
+        break;
+        case 7:strmonth="August"
+        break;
+        case 8:strmonth="September"
+        break;
+        case 9:strmonth="October"
+        break;
+        case 10:strmonth="November"
+        break;
+        case 11:strmonth="December"
+        break;
+        
+        
+      default:
+        break;
+    }
+     this.addMaterialDataForm.value.month = strmonth;
      console.log(this.addMaterialDataForm.value);
      //add material dates
      this.materialService.postMaterialDates(this.addMaterialDataForm.value).subscribe(

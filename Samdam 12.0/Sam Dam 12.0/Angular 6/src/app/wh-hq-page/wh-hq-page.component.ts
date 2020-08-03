@@ -1,6 +1,7 @@
 import { Component, OnInit,ViewChild } from '@angular/core';
 import { MatDialog,MatDialogConfig} from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
+import {FormControl, FormBuilder, FormGroup ,Validators, NgForm} from '@angular/forms';
 import { AddMaterialComponent} from '../add-material/add-material.component';
 import { MaterialService} from '../shared/material.service';
 import { MatTableDataSource } from '@angular/material/table';
@@ -9,7 +10,8 @@ import {MatBottomSheet, MatBottomSheetRef} from '@angular/material/bottom-sheet'
 import {UpdateMaterialTypeComponent} from '../wh-hq-page/update-material-type/update-material-type.component'
 import {DialogBoxComponent} from '../dialog-box/dialog-box.component';
 import { MatInfoDateDialogComponent } from '../wh-hq-page/mat-info-date-dialog/mat-info-date-dialog.component';
-
+import { TransferMaterialComponent} from '../wh-hq-page/transfer-material/transfer-material.component'
+import { from } from 'rxjs';
 @Component({
   selector: 'app-wh-hq-page',
   templateUrl: './wh-hq-page.component.html',
@@ -18,6 +20,7 @@ import { MatInfoDateDialogComponent } from '../wh-hq-page/mat-info-date-dialog/m
 export class WhHqPageComponent implements OnInit {
   AllMaterialData: any =[];
   AllMaterialDatesData: any =[];
+  forSelectMonth:FormGroup;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   public dataSourceMatTypes: MatTableDataSource<Material>;
   public dataSourceMatDates: MatTableDataSource<Material>;
@@ -26,7 +29,7 @@ export class WhHqPageComponent implements OnInit {
   displayedColumnsMat: string[]=[];
   
  
-  constructor(private dialog:MatDialog,private materialService:MaterialService,private _bottomSheet:MatBottomSheet,private _bottomSheetRef:MatBottomSheetRef) {
+  constructor(private dialog:MatDialog,private formBuilder: FormBuilder,private materialService:MaterialService,private _bottomSheet:MatBottomSheet,private _bottomSheetRef:MatBottomSheetRef) {
     materialService.getAllMaterialTypes().subscribe(data=>{
      this.AllMaterialData = data;
      this.dataSourceMatTypes = new MatTableDataSource<Material>(this.AllMaterialData);
@@ -52,10 +55,16 @@ export class WhHqPageComponent implements OnInit {
         this.dataSourceMatDates.paginator = this.paginator;
       }, 0);
     })
+    this.forSelectMonth= this.formBuilder.group({
+      
+      select_month:[]
+    })
+    // var selectedmonth = this.forSelectMonth.value.select_month; 
+    // materialService.getAllMaterialDatesmonth(selectedmonth).subscribe(data=>{
+    //   this.AllMaterialDatesData =data;
 
-    // var bal =this.AllMaterialDatesData.map(t=>(t.HBlock_4).reduce((acc,value)=>acc+value,0);
-    // console.log(bal)
-    
+    // })    
+
    }
 
   ngOnInit(): void {
@@ -71,6 +80,7 @@ onAdd(){
   adddialogConfig.height="100%";
   this.dialog.open(AddMaterialComponent,adddialogConfig)
 }
+
 
 getMaterialBalance(column){
 
@@ -102,6 +112,23 @@ switch(column){
 // console.log(bal);
 }
 
+onMonthChange(){
+  var selectedmonth = this.forSelectMonth.value.select_month;
+  this.materialService.getAllMaterialDatesmonth(selectedmonth).subscribe(data=>{
+    this.AllMaterialDatesData =data;   
+  
+    console.log(this.AllMaterialDatesData);
+  
+     this.dataSourceMatDates = new MatTableDataSource<Material>(this.AllMaterialDatesData);
+   
+  setTimeout(() => {
+   // this.dataSource.paginator = this.paginator;
+  }, 0);
+  })
+ 
+}
+
+
 deleteMaterialType(index:number,e){
    if(window.confirm('Are you Sure Do you want to remove this Material type?')){
      const data = this.dataSourceMatTypes.data;
@@ -122,7 +149,7 @@ this._bottomSheet.open(UpdateMaterialTypeComponent,{panelClass:'custom-width',da
 
 openDialog(action,obj) {
   obj.action = action;
-  console.log(action)
+  // console.log(action)
   const dialogRef = this.dialog.open(DialogBoxComponent, {
     width: '600px',
     data:obj
@@ -137,6 +164,15 @@ openDialog(action,obj) {
     //   this.deleteRowData(result.data);
     // }
   });
+}
+
+onTransfer(){
+  const adddialogConfig =new MatDialogConfig();
+  adddialogConfig.disableClose=false;
+  adddialogConfig.autoFocus=true;
+  adddialogConfig.width="75%";
+  adddialogConfig.height="100%";
+  this.dialog.open(TransferMaterialComponent,adddialogConfig)
 }
 
 

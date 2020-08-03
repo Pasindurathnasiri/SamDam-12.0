@@ -70,6 +70,24 @@ router.route('/GetAllMaterialDates').get((req,res)=>{
     })
 })
 
+//Get all material dates for month
+router.route('/GetAllMaterialDatesmonth/:month').get((req,res)=>{
+    AllMaterialDates.find((error,data)=>{
+        if(error){
+            return next(error)
+        }if(data){
+           console.log(data);
+           var fres = data.filter(function(fil){
+              return fil.month == req.params.month;
+           }) ;
+            console.log(fres);
+            JSON.stringify(fres);
+            res.json(fres);
+        }
+    })
+})
+
+
 
 //Delete Empployee
 router.route('/delete-employee/:emp_id').delete((req,res,next)=>{
@@ -220,15 +238,6 @@ router.route('/GetAllAttendanceforMonth/:month').get((req,res)=>{
             console.log("error",err)
         }
         if(result){
-            
-            // var hres = result.filter(function(fil){
-            //     return fil.dates.month == req.params.month;
-                
-            // });
-            // //console.log(result[0].dates);
-            // console.log(hres);
-            // JSON.stringify(hres);
-            // res.json(hres);
             
         }
     })  

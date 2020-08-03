@@ -4,6 +4,8 @@ const MaterialDates = mongoose.model('materialdates');
 module.exports.addMaterialDates = (req,res,next)=>{
     var mat_dates = new MaterialDates();
     mat_dates.Date = req.body.dor;
+    mat_dates.site = req.body.site;
+    mat_dates.month = req.body.month;
     mat_dates.T_10 = req.body.T_10;
     mat_dates.T_32 = req.body.T_32;
     mat_dates.sand = req.body.sand;

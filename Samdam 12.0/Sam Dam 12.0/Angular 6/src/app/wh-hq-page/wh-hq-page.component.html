@@ -33,7 +33,6 @@
     
     <div class="crud-btn">
         <button  mat-raised-button (click)="onAdd()" color="primary"><mat-icon>library_add</mat-icon>&nbsp;Add</button>&nbsp;&nbsp;&nbsp;
-        <button class="remove-btn" (click)="onTransfer()" mat-raised-button color="primary"><mat-icon>transfer_within_a_station</mat-icon>&nbsp;Transit to site</button>&nbsp;&nbsp;&nbsp;
         <button class="remove-btn" (click)="printTable()" mat-raised-button color="primary"><mat-icon>local_printshop</mat-icon>&nbsp;Print</button>
     
     </div><br><br>
@@ -125,15 +124,39 @@
             <mat-expansion-panel hideToggle>
               <mat-expansion-panel-header>
                 <mat-panel-title>
-                  Manage Material Balance
+                  Manage HQ Warehouse Material
                 </mat-panel-title>
                 <mat-panel-description>
                   Expand to Manage Material Balance
                 </mat-panel-description>
               </mat-expansion-panel-header>
              <!-- from here table -->
-             <button mat-button (click)="openDialog('Add',{})" mat-flat-button color="primary">Add</button><br><br>
-
+             <button mat-button (click)="openDialog('Add',{})" mat-flat-button color="primary">Add</button>&nbsp;&nbsp;
+             <button class="remove-btn" (click)="onTransfer()" mat-raised-button color="primary"><mat-icon>transfer_within_a_station</mat-icon>&nbsp;Transit Material</button>&nbsp;&nbsp;&nbsp;
+             <button class="remove-btn" (click)="printTable()" mat-raised-button color="primary"><mat-icon>local_printshop</mat-icon>&nbsp;Print</button>
+             <!-- Select Month -->
+            <form [formGroup]=this.forSelectMonth>
+              <mat-form-field>
+                <mat-label>Select Month</mat-label>
+                <mat-select [(value)]="selected" formControlName="select_month" (selectionChange)="onMonthChange()" >
+                  <mat-option value="January">January</mat-option>
+                  <mat-option value="February">February</mat-option>
+                  <mat-option value="March">March</mat-option>
+                  <mat-option value="April">April</mat-option>
+                  <mat-option value="May">May</mat-option>
+                  <mat-option value="June">June</mat-option>
+                  <mat-option value="July">July</mat-option>
+                  <mat-option value="August">August</mat-option>
+                  <mat-option value="September">September</mat-option>
+                  <mat-option value="October">October</mat-option>
+                  <mat-option value="November">November</mat-option>
+                  <mat-option value="December">December</mat-option>
+                  
+                </mat-select>
+               
+              </mat-form-field> <br><br>
+            </form>
+            
              <table mat-table [dataSource]="dataSourceMatDates" class="mat-elevation-z8">
               <ng-container [matColumnDef]="column" *ngFor="let column of displayedColumnsMat">
                 <th mat-header-cell *matHeaderCellDef> {{column}} </th>
