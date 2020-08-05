@@ -5,6 +5,7 @@ import { environment } from '../../environments/environment';
 import { catchError, map } from 'rxjs/operators';
 
 import { Material} from '../shared/material.model';
+import {Eqipment} from '../shared/equipment.model'
 import {MaterialDates} from '../shared/material-dates.model'
 
 @Injectable({
@@ -15,7 +16,8 @@ export class MaterialService {
   endpoint: string = 'http://localhost:3000/api/GetAllMaterialTypes';
   endpoint_1: string= 'http://localhost:3000/api/GetAllMaterialDates';
   endpoint_2: string = 'http://localhost:3000/api';
-  endpoint_3: string= 'http://localhost:3000/api/GetAllMaterialDatesmonth'; 
+  endpoint_3: string= 'http://localhost:3000/api/GetAllMaterialDatesmonth';
+  endpoint_eq: string='http://localhost:3000/api/GetAllEquipments'; 
  
   noAuthHeader = { headers:new HttpHeaders({'NoAuth':'True'})};
 
@@ -27,6 +29,10 @@ export class MaterialService {
    return this.http.post(environment.URI+'/addMaterial',material,this.noAuthHeader);
   }
 
+  //post equipments
+  postEquipment(equipment:Eqipment){
+   return this.http.post(environment.URI+'/addEquipment',equipment,this.noAuthHeader);
+  }
   //add material dates
   postMaterialDates(mat_date:MaterialDates){
    // console.log(mat_date);
@@ -36,6 +42,11 @@ export class MaterialService {
 // get all mat dates
    getAllMaterialDates(){
      return this.http.get(`${this.endpoint_1}`);
+   }
+
+//get all Equipments
+   getAllEquipment(){
+     return this.http.get(`${this.endpoint_eq}`);
    }
 
   //GetAll Material types
@@ -53,9 +64,27 @@ export class MaterialService {
     )
   }
 
+  //update equipment 
+  updateEquipment(id,data):Observable<any>{
+    let API_URL = `${this.endpoint_2}/update-equipment/${id}`;
+    return this.http.put(API_URL,data,{headers:this.headers})
+    .pipe(
+      catchError(this.errorMgmt)
+    )
+  }
+
   //Get Allmaterial dates by month
   getAllMaterialDatesmonth(month){
     return this.http.get(`${this.endpoint_3}/${month}`)
+  }
+
+  //Delete Equipment
+  DeleteEquipment(id):Observable<any>{
+    var API_URL=`${this.endpoint_2}/delete-equipment/${id}`;
+    return this.http.delete(API_URL)
+    .pipe(
+      catchError(this.errorMgmt)
+    )
   }
 
   //Delete Material Daily record

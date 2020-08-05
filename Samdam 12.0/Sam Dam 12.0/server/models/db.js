@@ -12,3 +12,4 @@ require('./site');
 require('./date');
 require('./material');
 require('./materialdate');
+require('./equipment');

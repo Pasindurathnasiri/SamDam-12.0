@@ -6,12 +6,15 @@ import { AddMaterialComponent} from '../add-material/add-material.component';
 import { MaterialService} from '../shared/material.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { Material} from '../shared/material.model';
+import { Eqipment } from '../shared/equipment.model'
 import {MatBottomSheet, MatBottomSheetRef} from '@angular/material/bottom-sheet';
 import {UpdateMaterialTypeComponent} from '../wh-hq-page/update-material-type/update-material-type.component'
 import {DialogBoxComponent} from '../dialog-box/dialog-box.component';
 import { MatInfoDateDialogComponent } from '../wh-hq-page/mat-info-date-dialog/mat-info-date-dialog.component';
-import { TransferMaterialComponent} from '../wh-hq-page/transfer-material/transfer-material.component'
+import { TransferMaterialComponent} from '../wh-hq-page/transfer-material/transfer-material.component';
+import { AddEqHqComponent} from '../wh-hq-page/add-eq-hq/add-eq-hq.component';
 import { from } from 'rxjs';
+import { UpdateEquipmentComponent } from '../wh-hq-page/update-equipment/update-equipment.component'
 @Component({
   selector: 'app-wh-hq-page',
   templateUrl: './wh-hq-page.component.html',
@@ -19,13 +22,17 @@ import { from } from 'rxjs';
 })
 export class WhHqPageComponent implements OnInit {
   AllMaterialData: any =[];
+  AllEquipmentData: any =[];
   AllMaterialDatesData: any =[];
   forSelectMonth:FormGroup;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   public dataSourceMatTypes: MatTableDataSource<Material>;
   public dataSourceMatDates: MatTableDataSource<Material>;
+  public dataSourceEQ: MatTableDataSource<Eqipment>;
+  
 
   displayedColumns: string [] = ['mat_id', 'name','unit','price','action'];
+  displayerColomnsEQ: string [] = ['eq_id', 'eq_type','brand_name','price_unit','buyer','dom','amount','action'];
   displayedColumnsMat: string[]=[];
   
  
@@ -59,11 +66,16 @@ export class WhHqPageComponent implements OnInit {
       
       select_month:[]
     })
-    // var selectedmonth = this.forSelectMonth.value.select_month; 
-    // materialService.getAllMaterialDatesmonth(selectedmonth).subscribe(data=>{
-    //   this.AllMaterialDatesData =data;
-
-    // })    
+   
+    //Equipment Data Table 
+    materialService.getAllEquipment().subscribe(data=>{
+      this.AllEquipmentData=data;
+      console.log(this.AllEquipmentData);
+      this.dataSourceEQ = new MatTableDataSource<Eqipment>(this.AllEquipmentData);
+      setTimeout(()=>{
+        this.dataSourceEQ.paginator = this.paginator;
+      },0)
+    });
 
    }
 
@@ -79,6 +91,15 @@ onAdd(){
   adddialogConfig.width="75%";
   adddialogConfig.height="100%";
   this.dialog.open(AddMaterialComponent,adddialogConfig)
+}
+
+onAddEQ(){
+  const adddialogConfig =new MatDialogConfig();
+  adddialogConfig.disableClose=false;
+  adddialogConfig.autoFocus=true;
+  adddialogConfig.width="75%";
+  adddialogConfig.height="100%";
+  this.dialog.open(AddEqHqComponent,adddialogConfig)
 }
 
 
@@ -164,6 +185,22 @@ openDialog(action,obj) {
     //   this.deleteRowData(result.data);
     // }
   });
+}
+
+//delete equipment
+deleteEquipment(index: number,e){
+if(window.confirm('Are you sure you want to Delete the Equipment?')){
+  const data = this.dataSourceEQ.data;
+  data.splice((this.paginator.pageIndex * this.paginator.pageSize)+index,1)
+  this.dataSourceEQ.data=data;
+  this.materialService.DeleteEquipment(e._id).subscribe()
+}
+}
+
+//update equipment details
+updateEquipment(index :number,e){
+  this._bottomSheet.open(UpdateEquipmentComponent,{panelClass:'custom-width',data:e})
+
 }
 
 onTransfer(){

@@ -13,12 +13,14 @@ let AllSites = require('../models/site');
 let AllDates = require('../models/date');
 let AllMaterialTypes = require('../models/material');
 let AllMaterialDates = require('../models/materialdate');
+let AllEquipments = require('../models/equipment');
 
 const ctrlEmployee = require ('../controllers/employee.controller');
 const ctrlSite = require ('../controllers/site.controller');
 const ctrlDate = require ('../controllers/date.controller');
 const ctrlMaterial = require('../controllers/material.controller');
 const ctrlMaterialDate = require('../controllers/materialdates.controller');
+const ctrlEquipments = require('../controllers/equipment.controller');
 
 const { result } = require('lodash');
 const date = require('../models/date');
@@ -30,7 +32,8 @@ router.post('/addEmployee',ctrlEmployee.addEmployee);
 router.post('/addSite',ctrlSite.addSite);
 router.post('/addAttendance',ctrlDate.addDate);
 router.post('/addMaterial',ctrlMaterial.addMaterial);
-router.post('/addMaterialDates',ctrlMaterialDate.addMaterialDates)
+router.post('/addMaterialDates',ctrlMaterialDate.addMaterialDates);
+router.post('/addEquipment',ctrlEquipments.addEquipment);
 
 //router.get('/GetAllEmployees',ctrlEmployee.GetAllEmployees);
 
@@ -70,6 +73,18 @@ router.route('/GetAllMaterialDates').get((req,res)=>{
     })
 })
 
+//Get All Equipments
+router.route('/GetAllEquipments').get((req,res)=>{
+    AllEquipments.find((error,data)=>{
+        if(error){
+            return next(error)
+        }else{
+            JSON.stringify(data);
+            res.json(data);
+        }
+    })
+})
+
 //Get all material dates for month
 router.route('/GetAllMaterialDatesmonth/:month').get((req,res)=>{
     AllMaterialDates.find((error,data)=>{
@@ -90,6 +105,19 @@ router.route('/GetAllMaterialDatesmonth/:month').get((req,res)=>{
 
 
 //Delete Empployee
+router.route('/delete-equipment/:emp_id').delete((req,res,next)=>{
+    AllEquipments.findOneAndDelete(req.params.emp_id, (error,data)=>{
+        if(error){
+            return next(error);
+        }else{
+            res.status(200).json({
+                msg: data
+            })
+         }
+    })
+})
+
+//Delete Equipment
 router.route('/delete-employee/:emp_id').delete((req,res,next)=>{
     allEmployees.findOneAndDelete(req.params.emp_id, (error,data)=>{
         if(error){
@@ -136,6 +164,22 @@ router.route('/delete-material-record/:id').delete((req,res,next)=>{
         }
     })
 })
+
+//update equipments
+router.route('/update-equipment/:id').put((req,res,next)=>{
+    AllEquipments.findByIdAndUpdate(req.params.id, {
+        $set:req.body
+    },(error,data) =>{
+        if(error){
+            return next(error) && console.log(error)
+        }else{
+            res.json(data)
+            console.log('Equipment Details successfully Updated..!')
+        }
+    }
+    )
+})
+
 
 //Update material records
 

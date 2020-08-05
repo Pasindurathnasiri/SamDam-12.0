@@ -87,6 +87,8 @@ import { UpdateMaterialTypeComponent } from './wh-hq-page/update-material-type/u
 import {DialogBoxComponent} from './dialog-box/dialog-box.component';
 import { MatInfoDateDialogComponent } from './wh-hq-page/mat-info-date-dialog/mat-info-date-dialog.component';
 import { TransferMaterialComponent } from './wh-hq-page/transfer-material/transfer-material.component';
+import { AddEqHqComponent } from './wh-hq-page/add-eq-hq/add-eq-hq.component';
+import { UpdateEquipmentComponent } from './wh-hq-page/update-equipment/update-equipment.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -128,7 +130,9 @@ import { TransferMaterialComponent } from './wh-hq-page/transfer-material/transf
     UpdateMaterialTypeComponent,
     DialogBoxComponent,
     MatInfoDateDialogComponent,
-    TransferMaterialComponent
+    TransferMaterialComponent,
+    AddEqHqComponent,
+    UpdateEquipmentComponent
     
     
   

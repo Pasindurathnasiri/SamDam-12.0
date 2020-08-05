@@ -134,7 +134,7 @@
              <button mat-button (click)="openDialog('Add',{})" mat-flat-button color="primary">Add</button>&nbsp;&nbsp;
              <button class="remove-btn" (click)="onTransfer()" mat-raised-button color="primary"><mat-icon>transfer_within_a_station</mat-icon>&nbsp;Transit Material</button>&nbsp;&nbsp;&nbsp;
              <button class="remove-btn" (click)="printTable()" mat-raised-button color="primary"><mat-icon>local_printshop</mat-icon>&nbsp;Print</button>
-             <!-- Select Month -->
+             <!-- Select site -->
             <form [formGroup]=this.forSelectMonth>
               <mat-form-field>
                 <mat-label>Select Month</mat-label>
@@ -182,7 +182,115 @@
         </mat-accordion>
     </mat-tab>
     <mat-tab label="Equipment">
+      <mat-accordion>
+        <mat-form-field class="input-name" appearance="fill">
+          <mat-label>Search Here</mat-label>  
+          <input matInput [(ngModel)]="searchKey" placeholder="Search" (keyup)="applyFilter()">
+          <button mat-button matSuffix mat-icon-button aria-label="clear"*ngIf="searchKey" (click)="onSearchClear()"></button>
+          </mat-form-field>
+          <!--  Search button-->
+          
+          <button mat-mini-fab color="primary"  aria-label="Example icon-button with a icon">
+          <mat-icon >search</mat-icon>
+          </button><br>
+          
+          <div class="crud-btn">
+              <button  mat-raised-button (click)="onAddEQ()" color="primary"><mat-icon>library_add</mat-icon>&nbsp;Add</button>&nbsp;&nbsp;&nbsp;
+              <button class="remove-btn" (click)="printTableEQ()" mat-raised-button color="primary"><mat-icon>local_printshop</mat-icon>&nbsp;Print</button>
+          
+          </div><br><br>
+          <!--Employee Table-->
+          <mat-card id="print_table">
+            
+          <div class="employee-tbl">
+            <!-- <p *ngIf="AllEQData.length <= 0" class="no-data">There is no Material added yet!</p> -->
+          
+          
+          </div>
+          <!--Filter Options
+          <mat-form-field *ngFor="let filter of filterSelectObj" style="margin-left: 15px;">
+            <mat-label>Filter {{filter.name}}</mat-label>
+            <select matNativeControl name="{{filter.columnProp}}" [(ngModel)]="filter.modelValue"
+              (change)="filterChange(filter,$event)">
+              <option value="">-- Select {{filter.name}} --</option>
+              <option [value]="item" *ngFor="let item of filter.options">{{item.site_name}}</option>
+            </select>
+          </mat-form-field>
+          &nbsp;
+          <button mat-raised-button color="warn" (click)="resetFilters()">Reset</button>-->
+            <div class="mat-elevation-z8">
+              <table mat-table class="full-width-table" id="table" matSort aria-label="Elements" [dataSource]="dataSourceEQ">
+            
+           
+                <!-- Id Column -->
+                <ng-container matColumnDef="eq_id">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header>Equipment ID</th>
+                  <td mat-cell *matCellDef="let row">{{row.eq_id}}</td>
+                </ng-container>
+            
+                <ng-container matColumnDef="eq_type">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header>Type of Equipment</th>
+                  <td mat-cell *matCellDef="let row">{{row.eq_type[0].eq_type}}</td>
+                </ng-container>
+            
+                
+                <ng-container matColumnDef="brand_name">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header>Unit</th>
+                  <td mat-cell *matCellDef="let row">{{row.brand_name}}</td>
+                </ng-container>
       
+                <ng-container matColumnDef="price_unit">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header>Price per Unit</th>
+                  <td mat-cell *matCellDef="let row">{{row.price_unit}}</td>
+                </ng-container>
+            
+                <ng-container matColumnDef="amount">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header>Amount</th>
+                  <td mat-cell *matCellDef="let row">{{row.amount}}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="buyer">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header>Buyer's Name</th>
+                  <td mat-cell *matCellDef="let row">{{row.buyer}}</td>
+                </ng-container>
+          
+                <ng-container matColumnDef="dom">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header>Date of Bought</th>
+                  <td mat-cell *matCellDef="let row">{{row.dom}}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="action">
+                  <th mat-header-cell *matHeaderCellDef> Delete Equipment </th>
+                  <td mat-cell *matCellDef="let element; let i = index;">
+                   <!--Remove material Button-->
+                   <button mat-icon-button color="primary" (click)="updateEquipment(i,element)"><mat-icon>launch</mat-icon></button> 
+                   <button mat-icon-button color="warn" (click)="deleteEquipment(i,element)"><mat-icon>delete_outline</mat-icon></button>
+                  </td>
+                </ng-container>
+            
+                <ng-container matColumnDef="loading">
+                  <mat-footer-cell *matFooterCellDef colspan="6">
+                    Loading Data...
+                  </mat-footer-cell>
+                </ng-container>
+            
+                <tr mat-header-row *matHeaderRowDef="displayerColomnsEQ"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayerColomnsEQ;"></tr>
+                <mat-footer-row *matFooterDef="['Loading']" [ngClass]="{'hide':data!=null}"></mat-footer-row>
+              </table>
+            
+              <mat-paginator #paginator
+                  [length]="dataSource?.data.length"
+                  [pageIndex]="0"
+                  [pageSize]="50"
+                  [pageSizeOptions]="[25, 50, 100, 250]">
+              </mat-paginator>
+            
+            
+          
+          </div></mat-card>
+         
+      </mat-accordion>
     </mat-tab>
     <mat-tab label="Vehicle">
       
