@@ -1,8 +1,21 @@
 <mat-card class="card">
-    <h1 align="center">Add Equipments to Main Wareouse</h1>
+    <h1 align="center">Add Equipments to Main Warehouse</h1>
+
 
   
     <form [formGroup]="this.addEQGroup" (ngSubmit)="onSubmit()"> 
+      <mat-form-field>
+        <mat-label>Select Site Warehouse</mat-label>
+        <mat-select [(value)]="selectedDesignation" formControlName="site" required>
+          <mat-option>--</mat-option>
+          <mat-option *ngFor="let site of sites" [value]="site">
+            {{site.site_name}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="siteControl.hasError('required')">Please choose Designation</mat-error>
+        <mat-hint>{{siteControl.value?.sound}}</mat-hint>
+      </mat-form-field> <br><br>
+
         <mat-form-field class="example-full-width">
           <mat-label>Equipment ID</mat-label>
           <input matInput #message formControlName="eq_id" maxlength="3" placeholder="Ex. 123" name="eq_id" required> 
@@ -60,6 +73,8 @@
        </mat-form-field>
        <br>
       
-        <button type="submit" mat-raised-button color="primary">Add</button>
+        <button type="submit" mat-raised-button color="primary">Add</button>&nbsp;&nbsp;
+        <button (click)="onCancel()" mat-raised-button color="warn">Cancel</button>
+
       </form> 
 </mat-card>

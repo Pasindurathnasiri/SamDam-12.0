@@ -1,7 +1,7 @@
 <mat-card>
     <h1 align="center">Update Equipment Details</h1>
 
-    <form [formGroup]="this.equipmentForm" (ngSubmit)="onUpdate()"> 
+    <form [formGroup]="this.equipmentForm" > 
         <mat-form-field class="example-full-width">
           <mat-label>Equipment ID</mat-label>
           <input matInput #message formControlName="eq_id" maxlength="3" placeholder="Ex. 123" name="eq_id" required> 
@@ -12,8 +12,8 @@
         
         <mat-form-field class="eq-type">
             <mat-label>Type of Equipment</mat-label>
-            <mat-select [(value)]="selectedMat" formControlName="eq_type" required>
-              <mat-option >--</mat-option>
+            <mat-select [(value)]="selectedEQ" formControlName="eq_type" required>
+              <mat-option></mat-option>
               <mat-option [value]="eq_type" *ngFor="let eq_type of eq_types">
                 {{eq_type.eq_type}}
               </mat-option>
@@ -59,7 +59,7 @@
        </mat-form-field>
        <br>
       
-        <button type="submit" mat-raised-button color="primary">Update</button>&nbsp;&nbsp;
+        <button (click)="onUpdate()" mat-raised-button color="primary">Update</button>&nbsp;&nbsp;
         <button (click)="onCancel()" mat-raised-button color="warn">Cancel</button>
         
       </form>

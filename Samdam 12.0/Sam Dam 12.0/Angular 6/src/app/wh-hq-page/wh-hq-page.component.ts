@@ -15,6 +15,7 @@ import { TransferMaterialComponent} from '../wh-hq-page/transfer-material/transf
 import { AddEqHqComponent} from '../wh-hq-page/add-eq-hq/add-eq-hq.component';
 import { from } from 'rxjs';
 import { UpdateEquipmentComponent } from '../wh-hq-page/update-equipment/update-equipment.component'
+import { TransferEquipmentComponent } from '../wh-hq-page/transfer-equipment/transfer-equipment.component'
 @Component({
   selector: 'app-wh-hq-page',
   templateUrl: './wh-hq-page.component.html',
@@ -193,7 +194,7 @@ if(window.confirm('Are you sure you want to Delete the Equipment?')){
   const data = this.dataSourceEQ.data;
   data.splice((this.paginator.pageIndex * this.paginator.pageSize)+index,1)
   this.dataSourceEQ.data=data;
-  this.materialService.DeleteEquipment(e._id).subscribe()
+  this.materialService.DeleteEquipment(e.eq_id).subscribe()
 }
 }
 
@@ -210,6 +211,15 @@ onTransfer(){
   adddialogConfig.width="75%";
   adddialogConfig.height="100%";
   this.dialog.open(TransferMaterialComponent,adddialogConfig)
+}
+
+openTransfer(){
+  const adddialogConfig =new MatDialogConfig();
+  adddialogConfig.disableClose=false;
+  adddialogConfig.autoFocus=true;
+  adddialogConfig.width="75%";
+  adddialogConfig.height="100%";
+  this.dialog.open(TransferEquipmentComponent,adddialogConfig)
 }
 
 

@@ -81,7 +81,7 @@
 
           <ng-container matColumnDef="price">
             <th mat-header-cell *matHeaderCellDef mat-sort-header>Price per Unit</th>
-            <td mat-cell *matCellDef="let row">{{row.price_unit}}</td>
+            <td mat-cell *matCellDef="let row">{{row.price_unit | currency:'Rs.'}}</td>
           </ng-container>
       
           <ng-container matColumnDef="site">
@@ -132,7 +132,7 @@
               </mat-expansion-panel-header>
              <!-- from here table -->
              <button mat-button (click)="openDialog('Add',{})" mat-flat-button color="primary">Add</button>&nbsp;&nbsp;
-             <button class="remove-btn" (click)="onTransfer()" mat-raised-button color="primary"><mat-icon>transfer_within_a_station</mat-icon>&nbsp;Transit Material</button>&nbsp;&nbsp;&nbsp;
+             <button class="remove-btn" (click)="onTransfer()" mat-raised-button color="primary"><mat-icon>outbond</mat-icon>&nbsp;Transit Material</button>&nbsp;&nbsp;&nbsp;
              <button class="remove-btn" (click)="printTable()" mat-raised-button color="primary"><mat-icon>local_printshop</mat-icon>&nbsp;Print</button>
              <!-- Select site -->
             <form [formGroup]=this.forSelectMonth>
@@ -194,14 +194,15 @@
           <mat-icon >search</mat-icon>
           </button><br>
           
-          <div class="crud-btn">
-              <button  mat-raised-button (click)="onAddEQ()" color="primary"><mat-icon>library_add</mat-icon>&nbsp;Add</button>&nbsp;&nbsp;&nbsp;
-              <button class="remove-btn" (click)="printTableEQ()" mat-raised-button color="primary"><mat-icon>local_printshop</mat-icon>&nbsp;Print</button>
           
-          </div><br><br>
           <!--Employee Table-->
           <mat-card id="print_table">
-            
+            <h1 align="center">All Equipment</h1><br><br>
+            <div class="crud-btn">
+              <button  mat-raised-button (click)="onAddEQ()" color="primary"><mat-icon>library_add</mat-icon>&nbsp;Add</button>&nbsp;&nbsp;&nbsp;
+              <button class="remove-btn" (click)="printTableEQ()" mat-raised-button color="primary"><mat-icon>local_printshop</mat-icon>&nbsp;Print</button>&nbsp;&nbsp;&nbsp;
+              <button class="remove-btn" (click)="openTransfer()" mat-raised-button color="primary"><mat-icon>outbond</mat-icon>&nbsp;Transfer Equipment</button>          
+          </div><br><br>
           <div class="employee-tbl">
             <!-- <p *ngIf="AllEQData.length <= 0" class="no-data">There is no Material added yet!</p> -->
           
@@ -241,7 +242,7 @@
       
                 <ng-container matColumnDef="price_unit">
                   <th mat-header-cell *matHeaderCellDef mat-sort-header>Price per Unit</th>
-                  <td mat-cell *matCellDef="let row">{{row.price_unit}}</td>
+                  <td mat-cell *matCellDef="let row">{{row.price_unit | currency:'Rs.'}}</td>
                 </ng-container>
             
                 <ng-container matColumnDef="amount">
