@@ -90,6 +90,8 @@ import { TransferMaterialComponent } from './wh-hq-page/transfer-material/transf
 import { AddEqHqComponent } from './wh-hq-page/add-eq-hq/add-eq-hq.component';
 import { UpdateEquipmentComponent } from './wh-hq-page/update-equipment/update-equipment.component';
 import { TransferEquipmentComponent } from './wh-hq-page/transfer-equipment/transfer-equipment.component';
+import { AddVehicleComponent } from './wh-hq-page/add-vehicle/add-vehicle.component';
+import { UpdateVehicleComponent } from './wh-hq-page/update-vehicle/update-vehicle.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -134,7 +136,9 @@ import { TransferEquipmentComponent } from './wh-hq-page/transfer-equipment/tran
     TransferMaterialComponent,
     AddEqHqComponent,
     UpdateEquipmentComponent,
-    TransferEquipmentComponent
+    TransferEquipmentComponent,
+    AddVehicleComponent,
+    UpdateVehicleComponent
     
     
   

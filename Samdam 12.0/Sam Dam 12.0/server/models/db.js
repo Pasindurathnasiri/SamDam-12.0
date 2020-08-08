@@ -13,3 +13,4 @@ require('./date');
 require('./material');
 require('./materialdate');
 require('./equipment');
+require('./vehicle')

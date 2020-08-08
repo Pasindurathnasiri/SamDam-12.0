@@ -6,7 +6,9 @@ import { AddMaterialComponent} from '../add-material/add-material.component';
 import { MaterialService} from '../shared/material.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { Material} from '../shared/material.model';
-import { Eqipment } from '../shared/equipment.model'
+import { Vehicle } from '../shared/vehicle.model'
+import { Eqipment } from '../shared/equipment.model';
+import { VehicleService } from '../shared/vehicle.service';
 import {MatBottomSheet, MatBottomSheetRef} from '@angular/material/bottom-sheet';
 import {UpdateMaterialTypeComponent} from '../wh-hq-page/update-material-type/update-material-type.component'
 import {DialogBoxComponent} from '../dialog-box/dialog-box.component';
@@ -14,8 +16,10 @@ import { MatInfoDateDialogComponent } from '../wh-hq-page/mat-info-date-dialog/m
 import { TransferMaterialComponent} from '../wh-hq-page/transfer-material/transfer-material.component';
 import { AddEqHqComponent} from '../wh-hq-page/add-eq-hq/add-eq-hq.component';
 import { from } from 'rxjs';
-import { UpdateEquipmentComponent } from '../wh-hq-page/update-equipment/update-equipment.component'
-import { TransferEquipmentComponent } from '../wh-hq-page/transfer-equipment/transfer-equipment.component'
+import { UpdateEquipmentComponent } from '../wh-hq-page/update-equipment/update-equipment.component';
+import { TransferEquipmentComponent } from '../wh-hq-page/transfer-equipment/transfer-equipment.component';
+import { AddVehicleComponent } from '../wh-hq-page/add-vehicle/add-vehicle.component';
+import {UpdateVehicleComponent} from '../wh-hq-page/update-vehicle/update-vehicle.component'
 @Component({
   selector: 'app-wh-hq-page',
   templateUrl: './wh-hq-page.component.html',
@@ -25,19 +29,22 @@ export class WhHqPageComponent implements OnInit {
   AllMaterialData: any =[];
   AllEquipmentData: any =[];
   AllMaterialDatesData: any =[];
+  AllVehicleData: any =[];
   forSelectMonth:FormGroup;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   public dataSourceMatTypes: MatTableDataSource<Material>;
   public dataSourceMatDates: MatTableDataSource<Material>;
   public dataSourceEQ: MatTableDataSource<Eqipment>;
+  public dataSourceVH: MatTableDataSource<Vehicle>;
   
 
   displayedColumns: string [] = ['mat_id', 'name','unit','price','action'];
   displayerColomnsEQ: string [] = ['eq_id', 'eq_type','brand_name','price_unit','buyer','dom','amount','action'];
   displayedColumnsMat: string[]=[];
+  displayedColumnsVH: string[]=['reg_id','vh_type','brand','model','rate','site','driver','action'];
   
  
-  constructor(private dialog:MatDialog,private formBuilder: FormBuilder,private materialService:MaterialService,private _bottomSheet:MatBottomSheet,private _bottomSheetRef:MatBottomSheetRef) {
+  constructor(private dialog:MatDialog,private formBuilder: FormBuilder,private materialService:MaterialService,private _bottomSheet:MatBottomSheet,private _bottomSheetRef:MatBottomSheetRef,private vehicleService:VehicleService) {
     materialService.getAllMaterialTypes().subscribe(data=>{
      this.AllMaterialData = data;
      this.dataSourceMatTypes = new MatTableDataSource<Material>(this.AllMaterialData);
@@ -78,6 +85,16 @@ export class WhHqPageComponent implements OnInit {
       },0)
     });
 
+    //get all vehicle details
+    vehicleService.GetAllVehicles().subscribe(data=>{
+      this.AllVehicleData=data;
+      console.log(this.AllVehicleData);
+      this.dataSourceVH = new MatTableDataSource<Vehicle>(this.AllVehicleData);
+      setTimeout(()=>{
+        this.dataSourceVH.paginator = this.paginator;
+      },0)
+    });
+
    }
 
   ngOnInit(): void {
@@ -102,6 +119,16 @@ onAddEQ(){
   adddialogConfig.height="100%";
   this.dialog.open(AddEqHqComponent,adddialogConfig)
 }
+
+onAddVH(){
+  const adddialogConfig =new MatDialogConfig();
+  adddialogConfig.disableClose=false;
+  adddialogConfig.autoFocus=true;
+  adddialogConfig.width="75%";
+  adddialogConfig.height="100%";
+  this.dialog.open(AddVehicleComponent,adddialogConfig)
+}
+
 
 
 getMaterialBalance(column){
@@ -201,6 +228,11 @@ if(window.confirm('Are you sure you want to Delete the Equipment?')){
 //update equipment details
 updateEquipment(index :number,e){
   this._bottomSheet.open(UpdateEquipmentComponent,{panelClass:'custom-width',data:e})
+
+}
+
+updateVH(index :number,e){
+  this._bottomSheet.open(UpdateVehicleComponent,{panelClass:'custom-width',data:e})
 
 }
 

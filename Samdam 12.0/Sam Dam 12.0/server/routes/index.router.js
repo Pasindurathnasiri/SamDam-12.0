@@ -14,6 +14,7 @@ let AllDates = require('../models/date');
 let AllMaterialTypes = require('../models/material');
 let AllMaterialDates = require('../models/materialdate');
 let AllEquipments = require('../models/equipment');
+let AllVehicles = require('../models/vehicle')
 
 const ctrlEmployee = require ('../controllers/employee.controller');
 const ctrlSite = require ('../controllers/site.controller');
@@ -21,6 +22,7 @@ const ctrlDate = require ('../controllers/date.controller');
 const ctrlMaterial = require('../controllers/material.controller');
 const ctrlMaterialDate = require('../controllers/materialdates.controller');
 const ctrlEquipments = require('../controllers/equipment.controller');
+const ctrlVehicles = require('../controllers/vehicle.controller');
 
 const { result } = require('lodash');
 const date = require('../models/date');
@@ -34,6 +36,7 @@ router.post('/addAttendance',ctrlDate.addDate);
 router.post('/addMaterial',ctrlMaterial.addMaterial);
 router.post('/addMaterialDates',ctrlMaterialDate.addMaterialDates);
 router.post('/addEquipment',ctrlEquipments.addEquipment);
+router.post('/addVehicle',ctrlVehicles.addVehicle)
 
 //router.get('/GetAllEmployees',ctrlEmployee.GetAllEmployees);
 
@@ -84,6 +87,19 @@ router.route('/GetAllEquipments').get((req,res)=>{
         }
     })
 })
+
+//Get All Vehicles
+router.route('/GetAllVehicles').get((req,res)=>{
+    AllVehicles.find((error,data)=>{
+        if(error){
+            return next(error)
+        }else{
+            JSON.stringify(data);
+            res.json(data);
+        }
+    })
+})
+
 
 //Get all material dates for month
 router.route('/GetAllMaterialDatesmonth/:month').get((req,res)=>{
