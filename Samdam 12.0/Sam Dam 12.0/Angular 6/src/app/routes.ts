@@ -26,7 +26,10 @@ import {HrSelectedSiteAttendanceComponent} from './hr-selected-site-attendance/h
 import {HrSelectedSiteAdvanceComponent} from './hr-selected-site-advance/hr-selected-site-advance.component';
 import {WhHomeComponent} from './wh-home/wh-home.component';
 import {WhHqPageComponent} from './wh-hq-page/wh-hq-page.component';
-import {WhSitePageComponent} from './wh-site-page/wh-site-page.component'
+import {WhSitePageComponent} from './wh-site-page/wh-site-page.component';
+import {CashbookHqComponent} from './cashbook-hq/cashbook-hq.component';
+import {AccountingSiteHomeComponent} from './accounting-site-home/accounting-site-home.component';
+import {MonthlyPaymentsComponent} from './monthly-payments/monthly-payments.component';
 import { from } from 'rxjs';
 
 export const appRoutes: Routes = [
@@ -106,6 +109,15 @@ export const appRoutes: Routes = [
     },
     {
         path: 'WH-SiteHome',component:WhSitePageComponent,canActivate:[AuthGuard]
+    },
+    {
+        path: 'HQ-Cashbook',component:CashbookHqComponent,canActivate:[AuthGuard]
+    },
+    {
+        path: 'Accounting-Site-List',component:AccountingSiteHomeComponent,canActivate:[AuthGuard]
+    },
+    {
+        path: 'Monthly-Payment',component:MonthlyPaymentsComponent,canActivate:[AuthGuard]
     },
     {
         path: '', redirectTo: '/login', pathMatch: 'full'

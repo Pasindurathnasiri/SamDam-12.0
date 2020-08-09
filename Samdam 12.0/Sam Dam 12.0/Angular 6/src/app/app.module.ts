@@ -94,6 +94,9 @@ import { AddVehicleComponent } from './wh-hq-page/add-vehicle/add-vehicle.compon
 import { UpdateVehicleComponent } from './wh-hq-page/update-vehicle/update-vehicle.component';
 import { TranferVehicleComponent } from './wh-hq-page/tranfer-vehicle/tranfer-vehicle.component';
 import { RunningChartComponent } from './wh-hq-page/running-chart/running-chart.component';
+import { CashbookHqComponent } from './cashbook-hq/cashbook-hq.component';
+import { AccountingSiteHomeComponent } from './accounting-site-home/accounting-site-home.component';
+import { MonthlyPaymentsComponent } from './monthly-payments/monthly-payments.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -142,7 +145,10 @@ import { RunningChartComponent } from './wh-hq-page/running-chart/running-chart.
     AddVehicleComponent,
     UpdateVehicleComponent,
     TranferVehicleComponent,
-    RunningChartComponent
+    RunningChartComponent,
+    CashbookHqComponent,
+    AccountingSiteHomeComponent,
+    MonthlyPaymentsComponent
     
     
   
