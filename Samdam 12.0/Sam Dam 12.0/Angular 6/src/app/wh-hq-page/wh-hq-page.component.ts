@@ -20,7 +20,8 @@ import { UpdateEquipmentComponent } from '../wh-hq-page/update-equipment/update-
 import { TransferEquipmentComponent } from '../wh-hq-page/transfer-equipment/transfer-equipment.component';
 import { AddVehicleComponent } from '../wh-hq-page/add-vehicle/add-vehicle.component';
 import {UpdateVehicleComponent} from '../wh-hq-page/update-vehicle/update-vehicle.component';
-import {TranferVehicleComponent} from '../wh-hq-page/tranfer-vehicle/tranfer-vehicle.component'
+import {TranferVehicleComponent} from '../wh-hq-page/tranfer-vehicle/tranfer-vehicle.component';
+import {RunningChartComponent} from '../wh-hq-page/running-chart/running-chart.component';
 @Component({
   selector: 'app-wh-hq-page',
   templateUrl: './wh-hq-page.component.html',
@@ -195,6 +196,10 @@ infoDateDialog(e){
 }
 updateMaterialType(index:number,e){
 this._bottomSheet.open(UpdateMaterialTypeComponent,{panelClass:'custom-width',data:e})
+}
+
+openRunningChart(index:number,e){
+  this._bottomSheet.open(RunningChartComponent,{panelClass:'custom-width',data:e})
 }
 
 openDialog(action,obj) {

@@ -73,7 +73,6 @@ export class AttendanceCardComponent implements OnInit {
   
   var filterID = data.emp_id;
   idFilter=filterID;
-  //data ekata attendance eka assign wela thynne
   
   this.dateForm = this.formBuilder.group({
       datepicker:[Date],

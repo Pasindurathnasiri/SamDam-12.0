@@ -93,6 +93,7 @@ import { TransferEquipmentComponent } from './wh-hq-page/transfer-equipment/tran
 import { AddVehicleComponent } from './wh-hq-page/add-vehicle/add-vehicle.component';
 import { UpdateVehicleComponent } from './wh-hq-page/update-vehicle/update-vehicle.component';
 import { TranferVehicleComponent } from './wh-hq-page/tranfer-vehicle/tranfer-vehicle.component';
+import { RunningChartComponent } from './wh-hq-page/running-chart/running-chart.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -140,7 +141,8 @@ import { TranferVehicleComponent } from './wh-hq-page/tranfer-vehicle/tranfer-ve
     TransferEquipmentComponent,
     AddVehicleComponent,
     UpdateVehicleComponent,
-    TranferVehicleComponent
+    TranferVehicleComponent,
+    RunningChartComponent
     
     
   

@@ -14,7 +14,9 @@ let AllDates = require('../models/date');
 let AllMaterialTypes = require('../models/material');
 let AllMaterialDates = require('../models/materialdate');
 let AllEquipments = require('../models/equipment');
-let AllVehicles = require('../models/vehicle')
+let AllVehicles = require('../models/vehicle');
+let AllRunningCharts = require('../models/runningchart');
+
 
 const ctrlEmployee = require ('../controllers/employee.controller');
 const ctrlSite = require ('../controllers/site.controller');
@@ -23,6 +25,8 @@ const ctrlMaterial = require('../controllers/material.controller');
 const ctrlMaterialDate = require('../controllers/materialdates.controller');
 const ctrlEquipments = require('../controllers/equipment.controller');
 const ctrlVehicles = require('../controllers/vehicle.controller');
+const ctrlRunningCharts = require('../controllers/runningchart.controller');
+
 
 const { result } = require('lodash');
 const date = require('../models/date');
@@ -36,7 +40,8 @@ router.post('/addAttendance',ctrlDate.addDate);
 router.post('/addMaterial',ctrlMaterial.addMaterial);
 router.post('/addMaterialDates',ctrlMaterialDate.addMaterialDates);
 router.post('/addEquipment',ctrlEquipments.addEquipment);
-router.post('/addVehicle',ctrlVehicles.addVehicle)
+router.post('/addVehicle',ctrlVehicles.addVehicle);
+router.post('/addRunningChart',ctrlRunningCharts.addRunningChart);
 
 //router.get('/GetAllEmployees',ctrlEmployee.GetAllEmployees);
 
@@ -100,6 +105,17 @@ router.route('/GetAllVehicles').get((req,res)=>{
     })
 })
 
+//get all running Charts
+router.route('/GetAllRunningCharts').get((req,res)=>{
+    AllRunningCharts.find((error,data)=>{
+        if(error){
+            return next(error)
+        }else{
+            JSON.stringify(data);
+            res.json(data);
+        }
+    })
+})
 
 //Get all material dates for month
 router.route('/GetAllMaterialDatesmonth/:month').get((req,res)=>{
@@ -155,6 +171,20 @@ router.route('/delete-material-type/:mat_id').delete((req,res,next)=>{
             return next(error);
             
             
+        }else{
+            res.status(200).json({
+                msg: data
+            })
+            
+        }
+    })
+})
+
+//Delete Running chart record
+router.route('/delete-runningchart-rec/:id').delete((req,res,next)=>{
+    AllRunningCharts.findByIdAndDelete(req.params.id, (error,data)=>{
+        if(error){
+            return next(error);
         }else{
             res.status(200).json({
                 msg: data
