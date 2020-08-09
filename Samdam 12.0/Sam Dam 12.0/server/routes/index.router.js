@@ -120,7 +120,7 @@ router.route('/GetAllMaterialDatesmonth/:month').get((req,res)=>{
 
 
 
-//Delete Empployee
+//Delete EQUIPMENTS
 router.route('/delete-equipment/:emp_id').delete((req,res,next)=>{
     AllEquipments.findOneAndDelete(req.params.emp_id, (error,data)=>{
         if(error){
@@ -133,13 +133,12 @@ router.route('/delete-equipment/:emp_id').delete((req,res,next)=>{
     })
 })
 
-//Delete Equipment
+//Delete    emoployee
 router.route('/delete-employee/:emp_id').delete((req,res,next)=>{
     allEmployees.findOneAndDelete(req.params.emp_id, (error,data)=>{
         if(error){
             return next(error);
-            
-            
+
         }else{
             res.status(200).json({
                 msg: data
@@ -180,6 +179,20 @@ router.route('/delete-material-record/:id').delete((req,res,next)=>{
         }
     })
 })
+
+//Delete vehicle
+router.route('/delete-vehicle/:reg_id').delete((req,res,next)=>{
+    AllVehicles.findOneAndDelete(req.params.reg_id, (error,data)=>{
+        if(error){
+            return next(error);
+        }else{
+            res.status(200).json({
+                msg: data
+            })
+       }
+    })
+})
+
 
 //update equipments
 router.route('/update-equipment/:id').put((req,res,next)=>{
@@ -225,6 +238,19 @@ router.route('/read-employee/:id').get((req,res,next)=>{
     })
 })
 
+
+//Get Single Vehicle
+router.route('/get-vehicle/:id').get((req,res,next)=>{   
+    AllVehicles.findById(req.params.id, (error,data)=>{
+        if(error){
+            return next(error) 
+        }else{
+            res.json(data)
+            
+        }
+    })
+})
+
 //Get all site Employees :-)
 router.route('/read-site-employees/:site_id').get((req,res,next)=>{ 
     allEmployees.find( {'site._id':req.params.site_id},(error,data)=>{
@@ -249,6 +275,21 @@ router.route('/update-employee/:id').put((req,res,next)=>{
         }else{
             res.json(data)
             console.log('Employee successfully Updated..!')
+        }
+    }
+    )
+})
+
+//Update vehicle
+router.route('/update-vehicle/:id').put((req,res,next)=>{
+    AllVehicles.findByIdAndUpdate(req.params.id, {
+        $set:req.body
+    },(error,data) =>{
+        if(error){
+            return next(error) && console.log(error)
+        }else{
+            res.json(data)
+            console.log('Vehicle Details successfully Updated..!')
         }
     }
     )

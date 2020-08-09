@@ -19,7 +19,8 @@ import { from } from 'rxjs';
 import { UpdateEquipmentComponent } from '../wh-hq-page/update-equipment/update-equipment.component';
 import { TransferEquipmentComponent } from '../wh-hq-page/transfer-equipment/transfer-equipment.component';
 import { AddVehicleComponent } from '../wh-hq-page/add-vehicle/add-vehicle.component';
-import {UpdateVehicleComponent} from '../wh-hq-page/update-vehicle/update-vehicle.component'
+import {UpdateVehicleComponent} from '../wh-hq-page/update-vehicle/update-vehicle.component';
+import {TranferVehicleComponent} from '../wh-hq-page/tranfer-vehicle/tranfer-vehicle.component'
 @Component({
   selector: 'app-wh-hq-page',
   templateUrl: './wh-hq-page.component.html',
@@ -225,6 +226,16 @@ if(window.confirm('Are you sure you want to Delete the Equipment?')){
 }
 }
 
+//Delete vehicle
+deleteVH(index: number,e){
+  if(window.confirm('Are you sure you want to Remove this Vehicle From the Warehouse?')){
+    const data = this.dataSourceVH.data;
+    data.splice((this.paginator.pageIndex * this.paginator.pageSize)+index,1)
+    this.dataSourceVH.data=data;
+    this.vehicleService.deleteVehicle(e.reg_id).subscribe()
+  }
+}
+
 //update equipment details
 updateEquipment(index :number,e){
   this._bottomSheet.open(UpdateEquipmentComponent,{panelClass:'custom-width',data:e})
@@ -254,5 +265,13 @@ openTransfer(){
   this.dialog.open(TransferEquipmentComponent,adddialogConfig)
 }
 
+openVHTransfer(){
+  const adddialogConfig =new MatDialogConfig();
+  adddialogConfig.disableClose=false;
+  adddialogConfig.autoFocus=true;
+  adddialogConfig.width="75%";
+  adddialogConfig.height="100%";
+  this.dialog.open(TranferVehicleComponent,adddialogConfig)
+}
 
 }

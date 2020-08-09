@@ -92,6 +92,7 @@ import { UpdateEquipmentComponent } from './wh-hq-page/update-equipment/update-e
 import { TransferEquipmentComponent } from './wh-hq-page/transfer-equipment/transfer-equipment.component';
 import { AddVehicleComponent } from './wh-hq-page/add-vehicle/add-vehicle.component';
 import { UpdateVehicleComponent } from './wh-hq-page/update-vehicle/update-vehicle.component';
+import { TranferVehicleComponent } from './wh-hq-page/tranfer-vehicle/tranfer-vehicle.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -138,7 +139,8 @@ import { UpdateVehicleComponent } from './wh-hq-page/update-vehicle/update-vehic
     UpdateEquipmentComponent,
     TransferEquipmentComponent,
     AddVehicleComponent,
-    UpdateVehicleComponent
+    UpdateVehicleComponent,
+    TranferVehicleComponent
     
     
   

@@ -27,5 +27,48 @@ export class VehicleService {
   GetAllVehicles(){
     return this.http.get(`${this.endpoint_getAllVehicle}`);
   }
+
+  //update vehicle
+  updateVehicle(id,data):Observable<any>{
+
+    let API_URL = `${this.endpoint}/update-vehicle/${id}`;
+    return this.http.put(API_URL,data,{headers:this.headers})
+    .pipe(
+        catchError(this.errorMgmt)
+    )
+  }
+
+  //delete vehicle
+  deleteVehicle(id):Observable<any>{
+    var API_URL = `${this.endpoint}/delete-vehicle/${id}`;
+    return this.http.delete(API_URL)
+    .pipe(
+      catchError(this.errorMgmt)
+    )
+  }
+
+  getVehicle(id):Observable<any>{
+    var API_URL =`${this.endpoint}/get-vehicle/${id}`;
+    return this.http.get(API_URL,{headers:this.headers})
+    .pipe(
+      map((res:Response)=>{
+        return res || {}
+      }),
+      catchError(this.errorMgmt)
+    )
+  }
+
+  errorMgmt(error: HttpErrorResponse) {
+    let errorMessage = '';
+    if (error.error instanceof ErrorEvent) {
+      // Get client-side error
+      errorMessage = error.error.message;
+    } else {
+      // Get server-side error
+      errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
+    }
+    console.log(errorMessage);
+    return throwError(errorMessage);
+  }
 }
 
