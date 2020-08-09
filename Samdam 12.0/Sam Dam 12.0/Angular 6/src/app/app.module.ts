@@ -97,6 +97,8 @@ import { RunningChartComponent } from './wh-hq-page/running-chart/running-chart.
 import { CashbookHqComponent } from './cashbook-hq/cashbook-hq.component';
 import { AccountingSiteHomeComponent } from './accounting-site-home/accounting-site-home.component';
 import { MonthlyPaymentsComponent } from './monthly-payments/monthly-payments.component';
+import { AddTransactionComponent } from './add-transaction/add-transaction.component';
+import { UpdateCashbookComponent } from './cashbook-hq/update-cashbook/update-cashbook.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -148,7 +150,9 @@ import { MonthlyPaymentsComponent } from './monthly-payments/monthly-payments.co
     RunningChartComponent,
     CashbookHqComponent,
     AccountingSiteHomeComponent,
-    MonthlyPaymentsComponent
+    MonthlyPaymentsComponent,
+    AddTransactionComponent,
+    UpdateCashbookComponent
     
     
   

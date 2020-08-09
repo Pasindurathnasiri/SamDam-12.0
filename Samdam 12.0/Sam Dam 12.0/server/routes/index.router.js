@@ -15,11 +15,13 @@ let AllMaterialTypes = require('../models/material');
 let AllMaterialDates = require('../models/materialdate');
 let AllEquipments = require('../models/equipment');
 let AllVehicles = require('../models/vehicle');
+let AllTransactions = require('../models/transaction');
 let AllRunningCharts = require('../models/runningchart');
 
 
 const ctrlEmployee = require ('../controllers/employee.controller');
 const ctrlSite = require ('../controllers/site.controller');
+const ctrlTransaction = require('../controllers/transaction.controller');
 const ctrlDate = require ('../controllers/date.controller');
 const ctrlMaterial = require('../controllers/material.controller');
 const ctrlMaterialDate = require('../controllers/materialdates.controller');
@@ -42,6 +44,7 @@ router.post('/addMaterialDates',ctrlMaterialDate.addMaterialDates);
 router.post('/addEquipment',ctrlEquipments.addEquipment);
 router.post('/addVehicle',ctrlVehicles.addVehicle);
 router.post('/addRunningChart',ctrlRunningCharts.addRunningChart);
+router.post('/addTransaction',ctrlTransaction.addTransaction);
 
 //router.get('/GetAllEmployees',ctrlEmployee.GetAllEmployees);
 
@@ -72,6 +75,18 @@ router.route('/GetAllMaterialTypes').get((req,res)=>{
 //Get all Material Dates
 router.route('/GetAllMaterialDates').get((req,res)=>{
     AllMaterialDates.find((error,data)=>{
+        if(error){
+            return next(error)
+        }else{
+            JSON.stringify(data);
+            res.json(data);
+        }
+    })
+})
+
+//Get all transactions
+router.route('/GetAllTransactions').get((req,res)=>{
+    AllTransactions.find((error,data)=>{
         if(error){
             return next(error)
         }else{
@@ -194,6 +209,21 @@ router.route('/delete-runningchart-rec/:id').delete((req,res,next)=>{
     })
 })
 
+//delete transaction records
+router.route('/delete-transaction/:id').delete((req,res,next)=>{
+    AllTransactions.findByIdAndDelete(req.params.id, (error,data)=>{
+        if(error){
+            return next(error);
+        }else{
+            res.status(200).json({
+                msg: data
+            })
+            
+        }
+    })
+})
+
+
 //Delete material record
 router.route('/delete-material-record/:id').delete((req,res,next)=>{
     AllMaterialDates.findOneAndDelete(req.params.id, (error,data)=>{
@@ -251,6 +281,21 @@ router.route('/update-meterial-record/:id').put((req,res,next)=>{
         }else{
             res.json(data)
             console.log('Material Record successfully Updated..!')
+        }
+    }
+    )
+})
+
+//update transactions
+router.route('/update-transaction/:id').put((req,res,next)=>{
+    AllTransactions.findByIdAndUpdate(req.params.id, {
+        $set:req.body
+    },(error,data) =>{
+        if(error){
+            return next(error) && console.log(error)
+        }else{
+            res.json(data)
+            console.log('Transaction Record successfully Updated..!')
         }
     }
     )

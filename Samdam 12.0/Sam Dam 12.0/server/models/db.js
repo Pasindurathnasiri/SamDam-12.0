@@ -15,3 +15,4 @@ require('./materialdate');
 require('./equipment');
 require('./vehicle');
 require('./runningchart');
+require('./transaction');

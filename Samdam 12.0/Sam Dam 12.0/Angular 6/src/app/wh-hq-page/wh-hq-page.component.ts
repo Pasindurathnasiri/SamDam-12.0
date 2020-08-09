@@ -144,7 +144,8 @@ switch(column){
   case 'T_32':return (this.AllMaterialDatesData.map(t=>t.T_32_R).reduce((acc,value)=>acc+value,0))-(this.AllMaterialDatesData.map(t=>t.T_32).reduce((acc,value)=>acc+value,0));break;
   case 'ABC':return (this.AllMaterialDatesData.map(t=>t.ABC_R).reduce((acc,value)=>acc+value,0))-(this.AllMaterialDatesData.map(t=>t.ABC).reduce((acc,value)=>acc+value,0));break;
   case 'binding':return (this.AllMaterialDatesData.map(t=>t.binding_R).reduce((acc,value)=>acc+value,0))-(this.AllMaterialDatesData.map(t=>t.binding).reduce((acc,value)=>acc+value,0));break;
-  case 'metal_1h':return (this.AllMaterialDatesData.map(t=>t.metal_1h_R).reduce((acc,value)=>acc+value,0))-(this.AllMaterialDatesData.map(t=>t.metal_1h).reduce((acc,value)=>acc+value,0));break;  case 'cement':return (this.AllMaterialDatesData.map(t=>t.cement_R).reduce((acc,value)=>acc+value,0))-(this.AllMaterialDatesData.map(t=>t.cement).reduce((acc,value)=>acc+value,0));break;
+  case 'metal_1h':return (this.AllMaterialDatesData.map(t=>t.metal_1h_R).reduce((acc,value)=>acc+value,0))-(this.AllMaterialDatesData.map(t=>t.metal_1h).reduce((acc,value)=>acc+value,0));break; 
+  case 'cement':return (this.AllMaterialDatesData.map(t=>t.cement_R).reduce((acc,value)=>acc+value,0))-(this.AllMaterialDatesData.map(t=>t.cement).reduce((acc,value)=>acc+value,0));break;
   case 'cement':return (this.AllMaterialDatesData.map(t=>t.cement_R).reduce((acc,value)=>acc+value,0))-(this.AllMaterialDatesData.map(t=>t.cement).reduce((acc,value)=>acc+value,0));break;
   case 'metal_3q':return (this.AllMaterialDatesData.map(t=>t.metal_3q_R).reduce((acc,value)=>acc+value,0))-(this.AllMaterialDatesData.map(t=>t.metal_3q).reduce((acc,value)=>acc+value,0));break;
   case 'T_16':return (this.AllMaterialDatesData.map(t=>t.T_16_R).reduce((acc,value)=>acc+value,0))-(this.AllMaterialDatesData.map(t=>t.T_16).reduce((acc,value)=>acc+value,0));break;
