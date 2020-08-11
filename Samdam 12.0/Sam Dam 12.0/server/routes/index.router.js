@@ -30,6 +30,7 @@ const ctrlEquipments = require('../controllers/equipment.controller');
 const ctrlVehicles = require('../controllers/vehicle.controller');
 const ctrlRunningCharts = require('../controllers/runningchart.controller');
 const ctrlCHTransactions = require('../controllers/chtransaction.controller');
+const ctrlQSTasks = require('../controllers/qstask.controller');
 
 const { result } = require('lodash');
 const date = require('../models/date');
@@ -47,6 +48,7 @@ router.post('/addVehicle',ctrlVehicles.addVehicle);
 router.post('/addRunningChart',ctrlRunningCharts.addRunningChart);
 router.post('/addTransaction',ctrlTransaction.addTransaction);
 router.post('/addChequeTransaction',ctrlCHTransactions.addCHTransaction);
+router.post('/addQSTask',ctrlQSTasks.addQSTask);
 
 //router.get('/GetAllEmployees',ctrlEmployee.GetAllEmployees);
 
@@ -357,6 +359,17 @@ router.route('/read-employee/:id').get((req,res,next)=>{
     })
 })
 
+//Get Single Site details
+router.route('/read-site-details/:id').get((req,res,next)=>{   
+    AllSites.findById(req.params.id, (error,data)=>{
+        if(error){
+            return next(error) 
+        }else{
+            res.json(data)
+            
+        }
+    })
+})
 
 //Get Single Vehicle
 router.route('/get-vehicle/:id').get((req,res,next)=>{   

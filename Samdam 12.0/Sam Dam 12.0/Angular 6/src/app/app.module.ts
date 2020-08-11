@@ -101,6 +101,10 @@ import { AddTransactionComponent } from './add-transaction/add-transaction.compo
 import { UpdateCashbookComponent } from './cashbook-hq/update-cashbook/update-cashbook.component';
 import { AddChTransactionComponent } from './monthly-payments/add-ch-transaction/add-ch-transaction.component';
 import { UpdateChTransactionsComponent } from './monthly-payments/update-ch-transactions/update-ch-transactions.component';
+import { SelectedQsSiteComponent } from './qs-home/selected-qs-site/selected-qs-site.component';
+import { QsSiteCostsheetComponent } from './qs-home/qs-site-costsheet/qs-site-costsheet.component';
+import { AddSiteTaskComponent } from './qs-home/add-site-task/add-site-task.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -156,7 +160,10 @@ import { UpdateChTransactionsComponent } from './monthly-payments/update-ch-tran
     AddTransactionComponent,
     UpdateCashbookComponent,
     AddChTransactionComponent,
-    UpdateChTransactionsComponent
+    UpdateChTransactionsComponent,
+    SelectedQsSiteComponent,
+    QsSiteCostsheetComponent,
+    AddSiteTaskComponent
     
     
   

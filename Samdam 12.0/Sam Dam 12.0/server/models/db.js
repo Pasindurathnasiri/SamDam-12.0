@@ -17,3 +17,4 @@ require('./vehicle');
 require('./runningchart');
 require('./transaction');
 require('./chtransaction');
+require('./qstask');

@@ -30,6 +30,8 @@ import {WhSitePageComponent} from './wh-site-page/wh-site-page.component';
 import {CashbookHqComponent} from './cashbook-hq/cashbook-hq.component';
 import {AccountingSiteHomeComponent} from './accounting-site-home/accounting-site-home.component';
 import {MonthlyPaymentsComponent} from './monthly-payments/monthly-payments.component';
+import {SelectedQsSiteComponent} from './qs-home/selected-qs-site/selected-qs-site.component';
+import {QsSiteCostsheetComponent} from './qs-home/qs-site-costsheet/qs-site-costsheet.component'
 import { from } from 'rxjs';
 
 export const appRoutes: Routes = [
@@ -118,6 +120,12 @@ export const appRoutes: Routes = [
     },
     {
         path: 'Monthly-Payment',component:MonthlyPaymentsComponent,canActivate:[AuthGuard]
+    },
+    {
+        path: 'selected-qs-site-tasks/:id',component:SelectedQsSiteComponent,canActivate:[AuthGuard]
+    },
+    {
+        path: 'selected-qs-site-costsheet/:id',component:QsSiteCostsheetComponent,canActivate:[AuthGuard]
     },
     {
         path: '', redirectTo: '/login', pathMatch: 'full'

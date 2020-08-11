@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SiteService} from '../shared/site.service';
 
 @Component({
   selector: 'app-qs-home',
@@ -7,7 +8,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class QsHomeComponent implements OnInit {
 
-  constructor() { }
+  allSiteData: any = [];
+  constructor(private siteService:SiteService) {
+    this.siteService.GetAllSites().subscribe(data=>{
+      this.allSiteData=data;
+      setTimeout(()=>{
+
+      },0)
+      
+    })
+
+   }
 
   ngOnInit(): void {
   }
