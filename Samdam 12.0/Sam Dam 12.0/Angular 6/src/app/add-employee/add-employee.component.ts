@@ -24,6 +24,7 @@ export interface Designations {
 }
 
 
+
 @Component({
   selector: 'app-add-employee',
   templateUrl: './add-employee.component.html',
@@ -36,6 +37,7 @@ export class AddEmployeeComponent implements OnInit {
   serverErrorMessages: string;
   SiteArray: Sitess[] = [];
   AllSite: any = [];
+  AllEmployeeData: any = [];
   DesignationArray: Designations[] = [];
   animalControl = new FormControl('', Validators.required);
   selectFormControl = new FormControl('', Validators.required);
@@ -63,29 +65,12 @@ export class AddEmployeeComponent implements OnInit {
     
   ];
 
+  
  
   
   constructor(private formBuilder: FormBuilder,private employeeService:EmployeeService,private router: Router,private siteService:SiteService) { 
        
-    this.addGroup = this.formBuilder.group({
-       emp_id: [],
-       name_in: [],
-       name_full: [],
-       nic:[],
-       dob:[Date],
-       dor:[Date],
-       gender:[],
-       address_1:[],
-       address_2:[],
-       tp_no:[],
-       epf:[],
-       etf:[],
-       site: [],
-       designation:[],
-       day_pay:[],
-       ot_pay:[],
-       remarks:[]
-    });
+   
    /// Get Sites data & pass to mat select 
   this.siteService.GetAllSites().subscribe(data=>{
     this.AllSite=data;
@@ -96,6 +81,38 @@ export class AddEmployeeComponent implements OnInit {
     this.animals=this.AllSite;
     console.log(this.animals);
   })
+
+  this.employeeService.GetAllEmployees().subscribe(data=>{ 
+    this.AllEmployeeData=data;
+    setTimeout(()=>{
+      
+    },0)
+    
+  
+
+
+  })
+  var id=Date.now();
+  this.addGroup = this.formBuilder.group({
+    emp_id: ['E'+id],
+    name_in: [],
+    name_full: [],
+    nic:[],
+    dob:[Date],
+    dor:[Date],
+    gender:[],
+    address_1:[],
+    address_2:[],
+    tp_no:[],
+    epf:[],
+    etf:[],
+    site: [],
+    designation:[],
+    day_pay:[],
+    ot_pay:[],
+    remarks:[]
+ });
+  
   
   
   }

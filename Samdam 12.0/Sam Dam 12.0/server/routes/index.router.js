@@ -17,6 +17,7 @@ let AllEquipments = require('../models/equipment');
 let AllVehicles = require('../models/vehicle');
 let AllTransactions = require('../models/transaction');
 let AllRunningCharts = require('../models/runningchart');
+let AllCHTransactions = require('../models/chtransaction');
 
 
 const ctrlEmployee = require ('../controllers/employee.controller');
@@ -28,7 +29,7 @@ const ctrlMaterialDate = require('../controllers/materialdates.controller');
 const ctrlEquipments = require('../controllers/equipment.controller');
 const ctrlVehicles = require('../controllers/vehicle.controller');
 const ctrlRunningCharts = require('../controllers/runningchart.controller');
-
+const ctrlCHTransactions = require('../controllers/chtransaction.controller');
 
 const { result } = require('lodash');
 const date = require('../models/date');
@@ -45,6 +46,7 @@ router.post('/addEquipment',ctrlEquipments.addEquipment);
 router.post('/addVehicle',ctrlVehicles.addVehicle);
 router.post('/addRunningChart',ctrlRunningCharts.addRunningChart);
 router.post('/addTransaction',ctrlTransaction.addTransaction);
+router.post('/addChequeTransaction',ctrlCHTransactions.addCHTransaction);
 
 //router.get('/GetAllEmployees',ctrlEmployee.GetAllEmployees);
 
@@ -123,6 +125,18 @@ router.route('/GetAllVehicles').get((req,res)=>{
 //get all running Charts
 router.route('/GetAllRunningCharts').get((req,res)=>{
     AllRunningCharts.find((error,data)=>{
+        if(error){
+            return next(error)
+        }else{
+            JSON.stringify(data);
+            res.json(data);
+        }
+    })
+})
+
+//get all cheque transactions
+router.route('/GetAllChequeTransactions').get((req,res)=>{
+    AllCHTransactions.find((error,data)=>{
         if(error){
             return next(error)
         }else{
@@ -223,6 +237,21 @@ router.route('/delete-transaction/:id').delete((req,res,next)=>{
     })
 })
 
+//delete cheque transactions
+router.route('/delete-cheque-transaction/:id').delete((req,res,next)=>{
+    AllCHTransactions.findByIdAndDelete(req.params.id, (error,data)=>{
+        if(error){
+            return next(error);
+        }else{
+            res.status(200).json({
+                msg: data
+            })
+            
+        }
+    })
+})
+
+
 
 //Delete material record
 router.route('/delete-material-record/:id').delete((req,res,next)=>{
@@ -296,6 +325,21 @@ router.route('/update-transaction/:id').put((req,res,next)=>{
         }else{
             res.json(data)
             console.log('Transaction Record successfully Updated..!')
+        }
+    }
+    )
+})
+
+//update cheque transaction
+router.route('/update-cheque-transaction/:id').put((req,res,next)=>{
+    AllCHTransactions.findByIdAndUpdate(req.params.id, {
+        $set:req.body
+    },(error,data) =>{
+        if(error){
+            return next(error) && console.log(error)
+        }else{
+            res.json(data)
+            console.log('Cheque Transaction Record successfully Updated..!')
         }
     }
     )

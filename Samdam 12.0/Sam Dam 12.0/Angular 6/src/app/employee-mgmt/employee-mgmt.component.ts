@@ -63,9 +63,7 @@ constructor(private employeeApi:EmployeeService,private dialog:MatDialog){
     this.AllEmployeeData =data;    
     this.dataSource = new MatTableDataSource<Employee>(this.AllEmployeeData);
     
-    console.log(this.AllEmployeeData);//this come out
-    
-    setTimeout(() => {
+      setTimeout(() => {
       this.dataSource.paginator = this.paginator;
     }, 0);
     

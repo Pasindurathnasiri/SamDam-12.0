@@ -99,6 +99,8 @@ import { AccountingSiteHomeComponent } from './accounting-site-home/accounting-s
 import { MonthlyPaymentsComponent } from './monthly-payments/monthly-payments.component';
 import { AddTransactionComponent } from './add-transaction/add-transaction.component';
 import { UpdateCashbookComponent } from './cashbook-hq/update-cashbook/update-cashbook.component';
+import { AddChTransactionComponent } from './monthly-payments/add-ch-transaction/add-ch-transaction.component';
+import { UpdateChTransactionsComponent } from './monthly-payments/update-ch-transactions/update-ch-transactions.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -152,7 +154,9 @@ import { UpdateCashbookComponent } from './cashbook-hq/update-cashbook/update-ca
     AccountingSiteHomeComponent,
     MonthlyPaymentsComponent,
     AddTransactionComponent,
-    UpdateCashbookComponent
+    UpdateCashbookComponent,
+    AddChTransactionComponent,
+    UpdateChTransactionsComponent
     
     
   

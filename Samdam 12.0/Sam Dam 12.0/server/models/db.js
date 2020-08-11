@@ -16,3 +16,4 @@ require('./equipment');
 require('./vehicle');
 require('./runningchart');
 require('./transaction');
+require('./chtransaction');
