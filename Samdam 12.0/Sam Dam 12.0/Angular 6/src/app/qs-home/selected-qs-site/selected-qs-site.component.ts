@@ -2,9 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog,MatDialogConfig} from '@angular/material/dialog';
 import {MatBottomSheet, MatBottomSheetRef} from '@angular/material/bottom-sheet';
 import {SiteService} from '../../shared/site.service';
+import { MatTable,MatTableDataSource } from '@angular/material/table';
 import { Router,ActivatedRoute } from '@angular/router';
+import {QSTask} from '../../shared/qstask.model'
+import {QsService} from '../../shared/qs.service';
+import {UpdateSiteTaskComponent} from '../update-site-task/update-site-task.component';
 import {AddSiteTaskComponent} from '../add-site-task/add-site-task.component';
-import { da } from 'date-fns/locale';
+import { da, fi } from 'date-fns/locale';
 
 @Component({
   selector: 'app-selected-qs-site',
@@ -14,13 +18,26 @@ import { da } from 'date-fns/locale';
 export class SelectedQsSiteComponent implements OnInit {
   
   AllSiteData:any =[];
-  constructor(private dialog:MatDialog,private actRoute:ActivatedRoute,private _bottomSheet:MatBottomSheet,private _bottomSheetRef:MatBottomSheetRef,private siteService:SiteService) { 
+  AllQSTaskData:any =[];
+  FilteredQSData:any =[];
+
+  public dataSource: MatTableDataSource<QSTask>;
+  constructor(private dialog:MatDialog,private qsService:QsService,private actRoute:ActivatedRoute,private _bottomSheet:MatBottomSheet,private _bottomSheetRef:MatBottomSheetRef,private siteService:SiteService) { 
    var site_id = this.actRoute.snapshot.paramMap.get('id');
  
    this.siteService.getSiteDetails(site_id).subscribe(data=>{
      this.AllSiteData=data;
    })
 
+
+   //get tasks
+   this.qsService.getAllTasks().subscribe(data=>{
+     this.AllQSTaskData=data;
+     this.dataSource = new MatTableDataSource<QSTask>(this.AllQSTaskData);
+     this.dataSource.filter = site_id;
+     console.log(this.dataSource);
+    this.FilteredQSData=this.dataSource.filteredData;
+   })
 
   }
 
@@ -33,5 +50,12 @@ export class SelectedQsSiteComponent implements OnInit {
    
   }
 
+  editTask(e){
+    this._bottomSheet.open(UpdateSiteTaskComponent,{panelClass:'custom-width',data:e})
+  
+  }
+ 
+  deleteTask(e){
 
+  }
 }

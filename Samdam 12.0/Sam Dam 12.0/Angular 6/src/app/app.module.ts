@@ -104,6 +104,7 @@ import { UpdateChTransactionsComponent } from './monthly-payments/update-ch-tran
 import { SelectedQsSiteComponent } from './qs-home/selected-qs-site/selected-qs-site.component';
 import { QsSiteCostsheetComponent } from './qs-home/qs-site-costsheet/qs-site-costsheet.component';
 import { AddSiteTaskComponent } from './qs-home/add-site-task/add-site-task.component';
+import { UpdateSiteTaskComponent } from './qs-home/update-site-task/update-site-task.component';
 
 @NgModule({
   declarations: [
@@ -163,7 +164,8 @@ import { AddSiteTaskComponent } from './qs-home/add-site-task/add-site-task.comp
     UpdateChTransactionsComponent,
     SelectedQsSiteComponent,
     QsSiteCostsheetComponent,
-    AddSiteTaskComponent
+    AddSiteTaskComponent,
+    UpdateSiteTaskComponent
     
     
   

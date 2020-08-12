@@ -18,6 +18,7 @@ let AllVehicles = require('../models/vehicle');
 let AllTransactions = require('../models/transaction');
 let AllRunningCharts = require('../models/runningchart');
 let AllCHTransactions = require('../models/chtransaction');
+let AllQSTasks = require('../models/qstask');
 
 
 const ctrlEmployee = require ('../controllers/employee.controller');
@@ -148,6 +149,18 @@ router.route('/GetAllChequeTransactions').get((req,res)=>{
     })
 })
 
+//getAllTasks
+router.route('/GetAllTasks').get((req,res)=>{
+    AllQSTasks.find((error,data)=>{
+        if(error){
+            return next(error)
+        }else{
+            JSON.stringify(data);
+            res.json(data);
+        }
+    })
+})
+
 //Get all material dates for month
 router.route('/GetAllMaterialDatesmonth/:month').get((req,res)=>{
     AllMaterialDates.find((error,data)=>{
@@ -228,6 +241,20 @@ router.route('/delete-runningchart-rec/:id').delete((req,res,next)=>{
 //delete transaction records
 router.route('/delete-transaction/:id').delete((req,res,next)=>{
     AllTransactions.findByIdAndDelete(req.params.id, (error,data)=>{
+        if(error){
+            return next(error);
+        }else{
+            res.status(200).json({
+                msg: data
+            })
+            
+        }
+    })
+})
+
+//delete qs task
+router.route('/delete-qs-task/:id').delete((req,res,next)=>{
+    AllQSTasks.findByIdAndDelete(req.params.id, (error,data)=>{
         if(error){
             return next(error);
         }else{
@@ -359,6 +386,8 @@ router.route('/read-employee/:id').get((req,res,next)=>{
     })
 })
 
+
+
 //Get Single Site details
 router.route('/read-site-details/:id').get((req,res,next)=>{   
     AllSites.findById(req.params.id, (error,data)=>{
@@ -422,6 +451,21 @@ router.route('/update-vehicle/:id').put((req,res,next)=>{
         }else{
             res.json(data)
             console.log('Vehicle Details successfully Updated..!')
+        }
+    }
+    )
+})
+
+//update qs task
+router.route('/update-qs-task/:id').put((req,res,next)=>{
+    AllQSTasks.findByIdAndUpdate(req.params.id, {
+        $set:req.body
+    },(error,data) =>{
+        if(error){  
+            return next(error) && console.log(error)
+        }else{
+            res.json(data)
+            console.log('QS Task Details successfully Updated..!')
         }
     }
     )
