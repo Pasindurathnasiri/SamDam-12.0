@@ -18,3 +18,4 @@ require('./runningchart');
 require('./transaction');
 require('./chtransaction');
 require('./qstask');
+require('./dailywork');

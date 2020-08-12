@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient,HttpHeaders,HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError, from } from 'rxjs';
 import { environment } from '../../environments/environment';
-import {QSTask} from '../shared/qstask.model'
+import {QSTask} from '../shared/qstask.model';
+import {DailyWork} from '../shared/dailywork.model';
 import { catchError, map } from 'rxjs/operators';
 
 
@@ -13,6 +14,8 @@ export class QsService {
   headers = new HttpHeaders().set('Content-Type','application/json');
   endpoint: string = 'http://localhost:3000/api';
   endpoint_getAllTask: string = 'http://localhost:3000/api/GetAllTasks';
+  endpoint_getAllDW: string = 'http://localhost:3000/api/GetAllDailyworks';
+ 
   noAuthHeader = { headers:new HttpHeaders({'NoAuth':'True'})};
 
  
@@ -23,10 +26,21 @@ export class QsService {
     return this.http.post(environment.URI+'/addQSTask',qsTask,this.noAuthHeader);
   }
 
+  //add daily work record for site
+  addDailyRecord(dailywork:DailyWork){
+    return this.http.post(environment.URI+'/addDailyWork',dailywork,this.noAuthHeader);
+  }
+
   //get all tasks
   getAllTasks(){
     return this.http.get(`${this.endpoint_getAllTask}`);
   }
+
+  //get all daily works data
+  getAllDailyWorks(){
+    return this.http.get(`${this.endpoint_getAllDW}`);
+  }
+
  
   //get tasks by id --> dont using
   getAllTaskBySiteID(id):Observable<any>{
@@ -59,6 +73,14 @@ export class QsService {
     )
   }
   
+  //delete daily record
+  deleteDailyRecord(id):Observable<any>{
+    var API_URL=`${this.endpoint}/delete-daily-record/${id}`;
+    return this.http.delete(API_URL)
+    .pipe(
+      catchError(this.errorMgmt)
+    )
+  }
 
 //Error Handling
 errorMgmt(error: HttpErrorResponse) {

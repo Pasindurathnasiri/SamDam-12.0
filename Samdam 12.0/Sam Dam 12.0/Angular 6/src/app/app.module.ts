@@ -55,6 +55,8 @@ import {MatChipsModule} from '@angular/material/chips';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatBottomSheetModule} from '@angular/material/bottom-sheet';
 import  {MatCurrencyFormatModule} from 'mat-currency-format';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MatBottomSheetRef, MAT_BOTTOM_SHEET_DATA} from '@angular/material/bottom-sheet';
 
 
@@ -105,6 +107,7 @@ import { SelectedQsSiteComponent } from './qs-home/selected-qs-site/selected-qs-
 import { QsSiteCostsheetComponent } from './qs-home/qs-site-costsheet/qs-site-costsheet.component';
 import { AddSiteTaskComponent } from './qs-home/add-site-task/add-site-task.component';
 import { UpdateSiteTaskComponent } from './qs-home/update-site-task/update-site-task.component';
+import { DailyWorksComponent } from './qs-home/daily-works/daily-works.component';
 
 @NgModule({
   declarations: [
@@ -165,8 +168,9 @@ import { UpdateSiteTaskComponent } from './qs-home/update-site-task/update-site-
     SelectedQsSiteComponent,
     QsSiteCostsheetComponent,
     AddSiteTaskComponent,
-    UpdateSiteTaskComponent
-    
+    UpdateSiteTaskComponent,
+    DailyWorksComponent,
+  
     
   
   ],
@@ -199,7 +203,9 @@ import { UpdateSiteTaskComponent } from './qs-home/update-site-task/update-site-
     MatStepperModule,
     MatBottomSheetModule,
     MatDividerModule,
+    MatProgressSpinnerModule, 
     MatExpansionModule,
+    MatProgressBarModule,
     MatCurrencyFormatModule,
     CalendarModule.forRoot({ provide: DateAdapter, useFactory: adapterFactory })
    

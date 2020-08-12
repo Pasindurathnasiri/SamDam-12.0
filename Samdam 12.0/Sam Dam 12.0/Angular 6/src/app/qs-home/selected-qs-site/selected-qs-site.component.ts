@@ -9,6 +9,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import {QsService} from '../../shared/qs.service';
 import {UpdateSiteTaskComponent} from '../update-site-task/update-site-task.component';
 import {AddSiteTaskComponent} from '../add-site-task/add-site-task.component';
+import {DailyWorksComponent} from '../daily-works/daily-works.component';
 import { da, fi } from 'date-fns/locale';
 
 @Component({
@@ -19,6 +20,7 @@ import { da, fi } from 'date-fns/locale';
 export class SelectedQsSiteComponent implements OnInit {
   
   AllSiteData:any =[];
+  All
   AllQSTaskData:any =[];
   FilteredQSData:any =[];
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -42,6 +44,8 @@ export class SelectedQsSiteComponent implements OnInit {
 
   }
 
+
+
   ngOnInit(): void {
   }
 
@@ -56,13 +60,20 @@ export class SelectedQsSiteComponent implements OnInit {
   
   }
  
+  getProgress(e){
+    return parseInt(e.progress);
+  }
   deleteTask(e){
 
-if(window.confirm('Are you sure do you want to Remove this Task from this Site.?')){
+    if(window.confirm('Are you sure do you want to Remove this Task from this Site.?')){
       const data= this.dataSource.data;
       this.dataSource.data = data;
       this.qsService.deleteTask(e._id).subscribe()
       
     }location.reload();
+  }
+
+  openDialyRecord(e){
+    this._bottomSheet.open(DailyWorksComponent,{panelClass:'custom-width',data:e})
   }
 }

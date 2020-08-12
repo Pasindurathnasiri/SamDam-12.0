@@ -14,6 +14,7 @@ module.exports.addQSTask = (req,res,next)=>{
     qstasks.width = req.body.width;
     qstasks.height = req.body.height;
     qstasks.weight = req.body.weight;
+    qstasks.progress= req.body.progress;
     qstasks.save((err,doc)=>{
         if(!err)
         console.log(qstasks) && res.send(doc);

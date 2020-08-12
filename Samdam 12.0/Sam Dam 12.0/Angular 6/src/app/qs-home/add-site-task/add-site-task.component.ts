@@ -38,7 +38,8 @@ export class AddSiteTaskComponent implements OnInit {
       width:[],
       height:[],
       month:[],
-      weight:[]
+      weight:[],
+      progress:[0]
     })
     console.log(data.site_name)
   }

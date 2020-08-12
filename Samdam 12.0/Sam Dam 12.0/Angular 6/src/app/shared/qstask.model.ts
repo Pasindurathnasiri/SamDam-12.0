@@ -10,4 +10,5 @@ export class QSTask {
     height:number;
     month:string;
     weight:number;
+    progress:number
 }

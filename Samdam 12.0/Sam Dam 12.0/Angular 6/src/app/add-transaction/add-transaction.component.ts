@@ -108,4 +108,8 @@ export class AddTransactionComponent implements OnInit {
     
   }
 
+  onCancel(){
+    
+  }
+
 }

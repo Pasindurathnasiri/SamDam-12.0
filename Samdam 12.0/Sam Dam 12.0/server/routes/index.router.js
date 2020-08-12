@@ -19,6 +19,7 @@ let AllTransactions = require('../models/transaction');
 let AllRunningCharts = require('../models/runningchart');
 let AllCHTransactions = require('../models/chtransaction');
 let AllQSTasks = require('../models/qstask');
+let AllDailyWorks = require('../models/dailywork');
 
 
 const ctrlEmployee = require ('../controllers/employee.controller');
@@ -32,6 +33,7 @@ const ctrlVehicles = require('../controllers/vehicle.controller');
 const ctrlRunningCharts = require('../controllers/runningchart.controller');
 const ctrlCHTransactions = require('../controllers/chtransaction.controller');
 const ctrlQSTasks = require('../controllers/qstask.controller');
+const ctrlDailyWorks = require('../controllers/dailywork.controller');
 
 const { result } = require('lodash');
 const date = require('../models/date');
@@ -50,6 +52,7 @@ router.post('/addRunningChart',ctrlRunningCharts.addRunningChart);
 router.post('/addTransaction',ctrlTransaction.addTransaction);
 router.post('/addChequeTransaction',ctrlCHTransactions.addCHTransaction);
 router.post('/addQSTask',ctrlQSTasks.addQSTask);
+router.post('/addDailyWork',ctrlDailyWorks.addDailyWork);
 
 //router.get('/GetAllEmployees',ctrlEmployee.GetAllEmployees);
 
@@ -161,6 +164,18 @@ router.route('/GetAllTasks').get((req,res)=>{
     })
 })
 
+//getAll daily works
+router.route('/GetAllDailyworks').get((req,res)=>{
+    AllDailyWorks.find((error,data)=>{
+        if(error){
+            return next(error)
+        }else{
+            JSON.stringify(data);
+            res.json(data);
+        }
+    })
+})
+
 //Get all material dates for month
 router.route('/GetAllMaterialDatesmonth/:month').get((req,res)=>{
     AllMaterialDates.find((error,data)=>{
@@ -227,6 +242,20 @@ router.route('/delete-material-type/:mat_id').delete((req,res,next)=>{
 //Delete Running chart record
 router.route('/delete-runningchart-rec/:id').delete((req,res,next)=>{
     AllRunningCharts.findByIdAndDelete(req.params.id, (error,data)=>{
+        if(error){
+            return next(error);
+        }else{
+            res.status(200).json({
+                msg: data
+            })
+            
+        }
+    })
+})
+
+//delete daily record
+router.route('/delete-daily-record/:id').delete((req,res,next)=>{
+    AllDailyWorks.findByIdAndDelete(req.params.id, (error,data)=>{
         if(error){
             return next(error);
         }else{
