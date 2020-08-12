@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit ,ViewChild} from '@angular/core';
 import { MatDialog,MatDialogConfig} from '@angular/material/dialog';
 import {MatBottomSheet, MatBottomSheetRef} from '@angular/material/bottom-sheet';
 import {SiteService} from '../../shared/site.service';
 import { MatTable,MatTableDataSource } from '@angular/material/table';
 import { Router,ActivatedRoute } from '@angular/router';
-import {QSTask} from '../../shared/qstask.model'
+import {QSTask} from '../../shared/qstask.model';
+import { MatPaginator } from '@angular/material/paginator';
 import {QsService} from '../../shared/qs.service';
 import {UpdateSiteTaskComponent} from '../update-site-task/update-site-task.component';
 import {AddSiteTaskComponent} from '../add-site-task/add-site-task.component';
@@ -20,7 +21,7 @@ export class SelectedQsSiteComponent implements OnInit {
   AllSiteData:any =[];
   AllQSTaskData:any =[];
   FilteredQSData:any =[];
-
+  @ViewChild(MatPaginator) paginator: MatPaginator;
   public dataSource: MatTableDataSource<QSTask>;
   constructor(private dialog:MatDialog,private qsService:QsService,private actRoute:ActivatedRoute,private _bottomSheet:MatBottomSheet,private _bottomSheetRef:MatBottomSheetRef,private siteService:SiteService) { 
    var site_id = this.actRoute.snapshot.paramMap.get('id');
@@ -57,5 +58,11 @@ export class SelectedQsSiteComponent implements OnInit {
  
   deleteTask(e){
 
+if(window.confirm('Are you sure do you want to Remove this Task from this Site.?')){
+      const data= this.dataSource.data;
+      this.dataSource.data = data;
+      this.qsService.deleteTask(e._id).subscribe()
+      
+    }location.reload();
   }
 }
