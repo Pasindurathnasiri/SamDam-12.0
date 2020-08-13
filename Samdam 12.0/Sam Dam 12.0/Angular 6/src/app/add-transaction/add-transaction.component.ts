@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {AccountingService} from '../shared/accounting.service';
+import { MatDialogRef,MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { FormControl, FormBuilder, FormGroup ,Validators, NgForm } from '@angular/forms';
 import { SiteService } from '../shared/site.service';
 import { getMonth } from 'date-fns';
@@ -24,7 +25,7 @@ export class AddTransactionComponent implements OnInit {
   public addTransactionGroup:FormGroup;
   showSucessMessage: boolean;
    serverErrorMessages: string;
-  constructor(private formBuilder:FormBuilder,private accService:AccountingService,private siteService:SiteService) { 
+  constructor(private formBuilder:FormBuilder,private accService:AccountingService,private siteService:SiteService,public dialogRef: MatDialogRef<AddTransactionComponent>) { 
    this.addTransactionGroup= this.formBuilder.group({
      dor:[Date],
      site:[],
@@ -109,7 +110,7 @@ export class AddTransactionComponent implements OnInit {
   }
 
   onCancel(){
-    
+    this.dialogRef.close({event:'Cancel'});
   }
 
 }
