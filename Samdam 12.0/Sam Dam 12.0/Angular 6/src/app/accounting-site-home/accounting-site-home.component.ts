@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import { SiteService} from '../shared/site.service';
 @Component({
   selector: 'app-accounting-site-home',
   templateUrl: './accounting-site-home.component.html',
@@ -7,7 +7,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AccountingSiteHomeComponent implements OnInit {
 
-  constructor() { }
+  allSiteData: any = [];
+  constructor(private siteService:SiteService) {
+    this.siteService.GetAllSites().subscribe(data=>{
+      this.allSiteData=data;
+      setTimeout(()=>{
+
+      },0)
+      
+    })
+
+   }
 
   ngOnInit(): void {
   }

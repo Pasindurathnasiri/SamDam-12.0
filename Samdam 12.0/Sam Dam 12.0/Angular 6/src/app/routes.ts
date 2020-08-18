@@ -31,7 +31,8 @@ import {CashbookHqComponent} from './cashbook-hq/cashbook-hq.component';
 import {AccountingSiteHomeComponent} from './accounting-site-home/accounting-site-home.component';
 import {MonthlyPaymentsComponent} from './monthly-payments/monthly-payments.component';
 import {SelectedQsSiteComponent} from './qs-home/selected-qs-site/selected-qs-site.component';
-import {QsSiteCostsheetComponent} from './qs-home/qs-site-costsheet/qs-site-costsheet.component'
+import {QsSiteCostsheetComponent} from './qs-home/qs-site-costsheet/qs-site-costsheet.component';
+import {AccountingSiteCashbookComponent} from './accounting-site-home/accounting-site-cashbook/accounting-site-cashbook.component';
 import { from } from 'rxjs';
 
 export const appRoutes: Routes = [
@@ -126,6 +127,9 @@ export const appRoutes: Routes = [
     },
     {
         path: 'selected-qs-site-costsheet/:id',component:QsSiteCostsheetComponent,canActivate:[AuthGuard]
+    },
+    {
+        path: 'selected-acc-site-cb/:id',component:AccountingSiteCashbookComponent,canActivate:[AuthGuard]
     },
     {
         path: '', redirectTo: '/login', pathMatch: 'full'

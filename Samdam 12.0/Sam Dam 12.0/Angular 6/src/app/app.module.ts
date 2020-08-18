@@ -109,6 +109,7 @@ import { AddSiteTaskComponent } from './qs-home/add-site-task/add-site-task.comp
 import { UpdateSiteTaskComponent } from './qs-home/update-site-task/update-site-task.component';
 import { DailyWorksComponent } from './qs-home/daily-works/daily-works.component';
 import { UpdateBoqRecordComponent } from './qs-home/update-boq-record/update-boq-record.component';
+import { AccountingSiteCashbookComponent } from './accounting-site-home/accounting-site-cashbook/accounting-site-cashbook.component';
 
 @NgModule({
   declarations: [
@@ -172,6 +173,7 @@ import { UpdateBoqRecordComponent } from './qs-home/update-boq-record/update-boq
     UpdateSiteTaskComponent,
     DailyWorksComponent,
     UpdateBoqRecordComponent,
+    AccountingSiteCashbookComponent,
   
     
   
