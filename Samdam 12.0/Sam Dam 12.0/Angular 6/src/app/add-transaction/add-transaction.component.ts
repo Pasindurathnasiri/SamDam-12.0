@@ -92,7 +92,6 @@ export class AddTransactionComponent implements OnInit {
         break;
     }
     this.addTransactionGroup.value.month = strmonth;
-    this.addTransactionGroup.value.dor = c_date;
     this.addTransactionGroup.value.site_id = this.addTransactionGroup.value.site._id;
    // console.log(this.addTransactionGroup);
     this.accService.addTransaction(this.addTransactionGroup.value).subscribe(
