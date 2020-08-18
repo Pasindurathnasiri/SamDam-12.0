@@ -84,9 +84,9 @@ export class DailyWorksComponent implements OnInit {
     
   }
 
-  deductProgress(){
+  deductProgress(e){
     var planned_vol = this.AllTaskData.height*this.AllTaskData.length*this.AllTaskData.width;
-    var daywork_vol = this.dailyWorkForm.value.height*this.dailyWorkForm.value.length*this.dailyWorkForm.value.width;
+    var daywork_vol = e.height*e.length*e.width;
     var today_percent = (daywork_vol/planned_vol)*100;
     this.AllTaskData.progress = (this.AllTaskData.progress-today_percent);
     var task_id=this.AllTaskData._id;
@@ -96,7 +96,7 @@ export class DailyWorksComponent implements OnInit {
   }
 
   onRemoveRecord(index:number,e){
-    this.deductProgress();
+    this.deductProgress(e);
     if(window.confirm('Are you sure you want to Delete the Daily Measurement Record?')){
       const data = this.dataSourceDW.data;
       data.splice((this.paginator.pageIndex * this.paginator.pageSize)+index,1)

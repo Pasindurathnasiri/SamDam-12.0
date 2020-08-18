@@ -108,6 +108,7 @@ import { QsSiteCostsheetComponent } from './qs-home/qs-site-costsheet/qs-site-co
 import { AddSiteTaskComponent } from './qs-home/add-site-task/add-site-task.component';
 import { UpdateSiteTaskComponent } from './qs-home/update-site-task/update-site-task.component';
 import { DailyWorksComponent } from './qs-home/daily-works/daily-works.component';
+import { UpdateBoqRecordComponent } from './qs-home/update-boq-record/update-boq-record.component';
 
 @NgModule({
   declarations: [
@@ -170,6 +171,7 @@ import { DailyWorksComponent } from './qs-home/daily-works/daily-works.component
     AddSiteTaskComponent,
     UpdateSiteTaskComponent,
     DailyWorksComponent,
+    UpdateBoqRecordComponent,
   
     
   

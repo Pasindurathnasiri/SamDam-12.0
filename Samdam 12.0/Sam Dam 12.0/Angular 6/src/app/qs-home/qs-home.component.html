@@ -6,7 +6,7 @@
         <h4 mat-line>{{site.site_name}}</h4>
         <p mat-line class="demo-2"> {{site.place}} </p>
         <button mat-raised-button color="primary" [routerLink]="['/selected-qs-site-tasks',site._id]">Tasks</button>&nbsp;
-        <button mat-raised-button color="primary" [routerLink]="['/selected-qs-site-costsheet',site._id]">Cost Sheet</button>&nbsp;
+        <button mat-raised-button color="primary" [routerLink]="['/selected-qs-site-costsheet',site._id]">BOQ</button>&nbsp;
           
         <mat-divider [inset]="true" *ngIf="!last"></mat-divider>
      </mat-list-item>

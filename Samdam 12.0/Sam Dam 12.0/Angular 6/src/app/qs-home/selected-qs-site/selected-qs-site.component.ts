@@ -20,7 +20,7 @@ import { da, fi } from 'date-fns/locale';
 export class SelectedQsSiteComponent implements OnInit {
   
   AllSiteData:any =[];
-  All
+  
   AllQSTaskData:any =[];
   FilteredQSData:any =[];
   @ViewChild(MatPaginator) paginator: MatPaginator;

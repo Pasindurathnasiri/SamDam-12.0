@@ -20,6 +20,8 @@ let AllRunningCharts = require('../models/runningchart');
 let AllCHTransactions = require('../models/chtransaction');
 let AllQSTasks = require('../models/qstask');
 let AllDailyWorks = require('../models/dailywork');
+let AllBOQRecords = require('../models/boqrecord');
+
 
 
 const ctrlEmployee = require ('../controllers/employee.controller');
@@ -34,6 +36,7 @@ const ctrlRunningCharts = require('../controllers/runningchart.controller');
 const ctrlCHTransactions = require('../controllers/chtransaction.controller');
 const ctrlQSTasks = require('../controllers/qstask.controller');
 const ctrlDailyWorks = require('../controllers/dailywork.controller');
+const ctrlBOQRecords = require('../controllers/boqrecord.controller');
 
 const { result } = require('lodash');
 const date = require('../models/date');
@@ -53,6 +56,7 @@ router.post('/addTransaction',ctrlTransaction.addTransaction);
 router.post('/addChequeTransaction',ctrlCHTransactions.addCHTransaction);
 router.post('/addQSTask',ctrlQSTasks.addQSTask);
 router.post('/addDailyWork',ctrlDailyWorks.addDailyWork);
+router.post('/addBOQRec',ctrlBOQRecords.addBOQRecords);
 
 //router.get('/GetAllEmployees',ctrlEmployee.GetAllEmployees);
 
@@ -155,6 +159,18 @@ router.route('/GetAllChequeTransactions').get((req,res)=>{
 //getAllTasks
 router.route('/GetAllTasks').get((req,res)=>{
     AllQSTasks.find((error,data)=>{
+        if(error){
+            return next(error)
+        }else{
+            JSON.stringify(data);
+            res.json(data);
+        }
+    })
+})
+
+//Get all boq record
+router.route('/GetAllBOQRecs').get((req,res)=>{
+    AllBOQRecords.find((error,data)=>{
         if(error){
             return next(error)
         }else{
@@ -281,6 +297,19 @@ router.route('/delete-transaction/:id').delete((req,res,next)=>{
     })
 })
 
+//delete boq record
+router.route('/delete-boqrecord/:id').delete((req,res,next)=>{
+    AllBOQRecords.findByIdAndDelete(req.params.id, (error,data)=>{
+        if(error){
+            return next(error);
+        }else{
+            res.status(200).json({
+                msg: data
+            })
+            
+        }
+    })
+})
 //delete qs task
 router.route('/delete-qs-task/:id').delete((req,res,next)=>{
     AllQSTasks.findByIdAndDelete(req.params.id, (error,data)=>{
@@ -398,6 +427,21 @@ router.route('/update-cheque-transaction/:id').put((req,res,next)=>{
         }else{
             res.json(data)
             console.log('Cheque Transaction Record successfully Updated..!')
+        }
+    }
+    )
+})
+
+//update boq record
+router.route('/update-boq-record/:id').put((req,res,next)=>{
+    AllBOQRecords.findByIdAndUpdate(req.params.id, {
+        $set:req.body
+    },(error,data) =>{
+        if(error){
+            return next(error) && console.log(error)
+        }else{
+            res.json(data)
+            console.log('BOQ Record successfully Updated..!')
         }
     }
     )
