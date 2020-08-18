@@ -22,7 +22,7 @@
           <!-- Id Column -->
           <ng-container matColumnDef="date">
             <th mat-header-cell *matHeaderCellDef mat-sort-header>Date</th>
-            <td mat-cell *matCellDef="let row">{{row.dor}}</td>
+            <td mat-cell *matCellDef="let element; let i = index;">{{getDate(element)}}</td>
           </ng-container>
       
           <ng-container matColumnDef="tr_id">
@@ -63,7 +63,7 @@
     
           <ng-container matColumnDef="balance">
             <th mat-header-cell *matHeaderCellDef mat-sort-header>Balance</th>
-            <td mat-cell *matCellDef="let row">{{row._id}}</td>
+            <td mat-cell *matCellDef="let element; let i = index;">{{getBalance(i,element) | currency:'Rs.'}}</td>
           </ng-container>
 
           <ng-container matColumnDef="action">

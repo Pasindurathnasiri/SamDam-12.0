@@ -6,6 +6,7 @@ module.exports.addTransaction = (req,res,next)=>{
     transaction.dor = req.body.dor;
     transaction.tr_id = req.body.tr_id;
     transaction.site = req.body.site;
+    transaction.site_id= req.body.site_id;
     transaction.month = req.body.month;
     transaction.bank_credit = req.body.bank_credit;
     transaction.bank_debit = req.body.bank_debit;

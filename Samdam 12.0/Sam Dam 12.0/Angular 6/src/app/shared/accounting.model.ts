@@ -1,6 +1,7 @@
 export class Transaction {
     dor:string;
     site:string;
+    site_id:string;
     month:string;
     tr_id:string;
     description:string;

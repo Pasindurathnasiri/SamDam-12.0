@@ -40,15 +40,18 @@
                 <input matInput #message formControlName="bank_debit" maxlength="25"  name="bank_debit" >
            </mat-form-field> <br>
 
-            <mat-form-field class="cash_credit">
-            <mat-label>Cash Credit Amount</mat-label>
-            <input matInput #message formControlName="cash_credit" maxlength="25" placeholder="Canter" >
-            </mat-form-field> <br>
+           <mat-form-field class="cach_debit">
+            <mat-label>Cash Debit Amount</mat-label>
+            <input matInput #message formControlName="cash_debit" maxlength="25" placeholder="Canter" >
+            </mat-form-field> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
-            <mat-form-field class="cach_debit">
-                <mat-label>Cash Debit Amount</mat-label>
-                <input matInput #message formControlName="cash_debit" maxlength="25" placeholder="Canter" >
-                </mat-form-field> <br>
+          
+
+                <mat-form-field class="cash_credit">
+                  <mat-label>Cash Credit Amount</mat-label>
+                  <input matInput #message formControlName="cash_credit" maxlength="25" placeholder="Canter" >
+                  </mat-form-field>
+                  <br><br>
 
    
         <button (click)=onTransaction() mat-raised-button color="primary">Add</button>&nbsp;&nbsp;

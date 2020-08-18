@@ -4,6 +4,7 @@ import { MatDialogRef,MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { FormControl, FormBuilder, FormGroup ,Validators, NgForm } from '@angular/forms';
 import { SiteService } from '../shared/site.service';
 import { getMonth } from 'date-fns';
+import { add } from 'lodash';
 
 interface Site{
   _id:string;
@@ -29,6 +30,7 @@ export class AddTransactionComponent implements OnInit {
    this.addTransactionGroup= this.formBuilder.group({
      dor:[Date],
      site:[],
+     site_id:[],
      month:[],
      tr_id:[],
      description:[],
@@ -56,8 +58,6 @@ export class AddTransactionComponent implements OnInit {
   }
 
   onTransaction(){
-    this.addTransactionGroup.value.dor = new Date();
-    var c_date = this.addTransactionGroup.value.dor.toLocaleDateString();
     var intmonth = getMonth(this.addTransactionGroup.value.dor);
     var strmonth='';
     
@@ -93,6 +93,8 @@ export class AddTransactionComponent implements OnInit {
     }
     this.addTransactionGroup.value.month = strmonth;
     this.addTransactionGroup.value.dor = c_date;
+    this.addTransactionGroup.value.site_id = this.addTransactionGroup.value.site._id;
+   // console.log(this.addTransactionGroup);
     this.accService.addTransaction(this.addTransactionGroup.value).subscribe(
       res=>{
 
@@ -105,9 +107,12 @@ export class AddTransactionComponent implements OnInit {
       
         }
       }
-    );
+    );window.alert("Transaction Added Successfully..!");
+    this.onCancel();
+    location.reload();
     
   }
+
 
   onCancel(){
     this.dialogRef.close({event:'Cancel'});
