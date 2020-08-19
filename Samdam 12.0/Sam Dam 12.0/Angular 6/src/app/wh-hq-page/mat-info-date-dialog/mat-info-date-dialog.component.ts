@@ -56,7 +56,7 @@ export class MatInfoDateDialogComponent implements OnInit {
   AllMaterialData: any =[];
   materialForm : FormGroup;
   materialForm_R : FormGroup;
-  materialForm_B : FormGroup;
+  materialForm_Final : FormGroup;
   public materials: any[]=[{material:''}];
   public materials_R: any[]=[{material_R:''}];
   public materials_B: any[]=[{material_R:''}];
@@ -99,23 +99,36 @@ export class MatInfoDateDialogComponent implements OnInit {
       sand_R: [data.sand_R,[Validators.required]],
     });
 
-    //Material Balance form
-    this.materialForm_B =formBuilder.group({
+    this.materialForm_Final= formBuilder.group({
       _id:[data._id,[Validators.required]],
-      ABC_B:[data.ABC_B,[Validators.required]],
-      HBlock_4_B: [data.HBlock_4_B,[Validators.required]],
-      HBlock_6_B: [data.HBlock_6_B,[Validators.required]],
-      T_10_B: [data.T_10_B,[Validators.required]],
-      T_16_B: [data.T_16_B,[Validators.required]],
-      T_32_B: [data.T_32_B,[Validators.required]],
-      binding_B: [data.binding_B,[Validators.required]],
-      cement_B: [data.cement_B,[Validators.required]],
+      ABC:[data.ABC,[Validators.required]],
+      HBlock_4: [data.HBlock_4,[Validators.required]],
+      HBlock_6: [data.HBlock_6,[Validators.required]],
+      T_10: [data.T_10,[Validators.required]],
+      T_16: [data.T_16,[Validators.required]],
+      T_32: [data.T_32,[Validators.required]],
+      binding: [data.binding,[Validators.required]],
+      cement: [data.cement,[Validators.required]],
       dor: [data.Date,[Validators.required]],
-      metal_1_B: [data.metal_1_B,[Validators.required]],
-      metal_1h_B: [data.metal_1h_B,[Validators.required]],
-      metal_3q_B: [data.metal_3q_B,[Validators.required]],
-      sand_B: [data.sand_B,[Validators.required]],
-    });
+      metal_1: [data.metal_1,[Validators.required]],
+      metal_1h: [data.metal_1h,[Validators.required]],
+      metal_3q: [data.metal_3q,[Validators.required]],
+      sand: [data.sand,[Validators.required]],
+      ABC_R:[data.ABC_R,[Validators.required]],
+      HBlock_4_R: [data.HBlock_4_R,[Validators.required]],
+      HBlock_6_R: [data.HBlock_6_R,[Validators.required]],
+      T_10_R: [data.T_10_R,[Validators.required]],
+      T_16_R: [data.T_16_R,[Validators.required]],
+      T_32_R: [data.T_32_R,[Validators.required]],
+      binding_R: [data.binding_R,[Validators.required]],
+      cement_R: [data.cement_R,[Validators.required]],
+      metal_1_R: [data.metal_1_R,[Validators.required]],
+      metal_1h_R: [data.metal_1h_R,[Validators.required]],
+      metal_3q_R: [data.metal_3q_R,[Validators.required]],
+      sand_R: [data.sand_R,[Validators.required]],
+    })
+
+    
 
       //Gettng Material types
 
@@ -147,6 +160,7 @@ export class MatInfoDateDialogComponent implements OnInit {
 
   updateAdvanceForm(){
     this.materialForm = this.formBuilder.group({
+      _id:[],
       ABC:[''],
       HBlock_4: [''],
       HBlock_6: [''],
@@ -182,22 +196,22 @@ export class MatInfoDateDialogComponent implements OnInit {
   onDelete(){
     //console.log("delete");
     if(window.confirm("Are you sure do you want to delete this record?")){
-
-      this.materialService.DeleteRecord(this.materialForm.value._id).subscribe();
-      this._bottomSheetRef.dismiss();
-      location.reload();
-    }
-
+      console.log(this.materialForm_Final.value._id);
+     this.materialService.DeleteRecord(this.materialForm_Final.value._id).subscribe();
+   }
+       this._bottomSheetRef.dismiss();
+      // location.reload();
+   
    
   }
 
   onUpdateRecord(){
     //console.log("Update");
-    console.log(this.materialForm.value)
+    console.log(this.materialForm_Final.value)
     
-    var id = this.materialForm.value._id;
+    var id = this.materialForm_Final.value._id;
     if(window.confirm('Are you Sure you want to update this Record.?')){
-      this.materialService.updateMaterialRecord(id,this.materialForm.value).subscribe(res=>{
+      this.materialService.updateMaterialRecord(id,this.materialForm_Final.value).subscribe(res=>{
         this.onCancel();
       })
     
@@ -206,9 +220,9 @@ export class MatInfoDateDialogComponent implements OnInit {
   }
 
   onUpdateRecordRec(){
-    var id = this.materialForm.value._id;
+    var id = this.materialForm_Final.value._id;
     if(window.confirm('Are you Sure you want to update this Record.?')){
-      this.materialService.updateMaterialRecord(id,this.materialForm_R.value).subscribe(res=>{
+      this.materialService.updateMaterialRecord(id,this.materialForm_Final.value).subscribe(res=>{
         this.onCancel();
       })
      

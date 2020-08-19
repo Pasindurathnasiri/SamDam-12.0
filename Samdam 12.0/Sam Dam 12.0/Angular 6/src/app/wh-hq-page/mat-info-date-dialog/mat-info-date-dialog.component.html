@@ -5,7 +5,7 @@
     <mat-tab label="Material Receieved">
         <mat-accordion>
             <mat-card>
-                <form [formGroup]="this.materialForm_R">
+                <form [formGroup]="this.materialForm_Final">
                     <mat-form-field>
                         <mat-label>Date</mat-label>
                         <input matInput [matDatepicker]="dorpicker" formControlName="dor">
@@ -33,13 +33,8 @@
     <mat-tab label="Material Consumption">
         <mat-accordion>
             <mat-card>
-                <form [formGroup]="this.materialForm">
-                    <mat-form-field>
-                        <mat-label>Date</mat-label>
-                        <input matInput [matDatepicker]="dorpicker" formControlName="dor">
-                        <mat-datepicker-toggle matSuffix [for]="dorpicker"></mat-datepicker-toggle>
-                        <mat-datepicker #dorpicker></mat-datepicker>
-                      </mat-form-field><br><br>
+                <form [formGroup]="this.materialForm_Final">
+                    
                     <!-- Material Types -->
                     <section *ngFor="let material of materials; let i=index;">
                     <mat-form-field class="input-nic" >

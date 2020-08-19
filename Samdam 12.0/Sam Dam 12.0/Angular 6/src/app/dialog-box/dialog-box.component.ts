@@ -60,6 +60,7 @@ export class DialogBoxComponent implements OnInit {
     this.addMaterialDataForm= this.formBuilder.group({
       dor:[Date],
       site:['HQ'],
+      site_id:[],
       month:[],
       T_10:[],
       T_32:[],

@@ -68,6 +68,7 @@ export class WhHqPageComponent implements OnInit {
       this.AllMaterialDatesData=data;
       console.log(this.AllMaterialDatesData);
       this.dataSourceMatDates = new MatTableDataSource<Material>(this.AllMaterialDatesData);
+      this.dataSourceMatDates.filter = "HQ";
       setTimeout(() => {
         this.dataSourceMatDates.paginator = this.paginator;
       }, 0);
@@ -180,6 +181,11 @@ onMonthChange(){
  
 }
 
+getDate(e){
+  var dom = new Date(e.dom);
+  return dom.toLocaleDateString();
+}
+
 
 deleteMaterialType(index:number,e){
    if(window.confirm('Are you Sure Do you want to remove this Material type?')){
@@ -191,8 +197,7 @@ deleteMaterialType(index:number,e){
 }
 
 infoDateDialog(e){
-  //console.log(e.Date)
-  
+
  this._bottomSheet.open(MatInfoDateDialogComponent,{panelClass:'custom-width',data:e})
 }
 updateMaterialType(index:number,e){

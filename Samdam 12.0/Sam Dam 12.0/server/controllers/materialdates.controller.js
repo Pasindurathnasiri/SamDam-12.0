@@ -5,6 +5,7 @@ module.exports.addMaterialDates = (req,res,next)=>{
     var mat_dates = new MaterialDates();
     mat_dates.Date = req.body.dor;
     mat_dates.site = req.body.site;
+    mat_dates.site_id = req.body.site_id;
     mat_dates.month = req.body.month;
     mat_dates.T_10 = req.body.T_10;
     mat_dates.T_32 = req.body.T_32;

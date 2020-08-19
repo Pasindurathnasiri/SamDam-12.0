@@ -4,6 +4,7 @@ const Schema = mongoose.Schema;
 var MaterialDateSchema = new mongoose.Schema({
     Date:{type:String},
     site:{type:Array},
+    site_id:{type:String},
     month:{type:String},
     T_10:{type:Number},
     T_32:{type:Number},

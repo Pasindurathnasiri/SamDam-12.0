@@ -107,7 +107,7 @@
         </table>
       
         <mat-paginator #paginator
-            [length]="dataSource?.data.length"
+            [length]="dataSourceMatTypes?.data.length"
             [pageIndex]="0"
             [pageSize]="50"
             [pageSizeOptions]="[25, 50, 100, 250]">
@@ -255,7 +255,7 @@
           
                 <ng-container matColumnDef="dom">
                   <th mat-header-cell *matHeaderCellDef mat-sort-header>Date of Bought</th>
-                  <td mat-cell *matCellDef="let row">{{row.dom}}</td>
+                  <td mat-cell *matCellDef="let element; let i = index;">{{getDate(element)}}</td>
                 </ng-container>
 
                 <ng-container matColumnDef="action">
@@ -279,7 +279,7 @@
               </table>
             
               <mat-paginator #paginator
-                  [length]="dataSource?.data.length"
+                  [length]="dataSourceEQ?.data.length"
                   [pageIndex]="0"
                   [pageSize]="50"
                   [pageSizeOptions]="[25, 50, 100, 250]">
@@ -368,7 +368,7 @@
             </table>
           
             <mat-paginator #paginator
-                [length]="dataSource?.data.length"
+                [length]="dataSourceVH?.data.length"
                 [pageIndex]="0"
                 [pageSize]="50"
                 [pageSizeOptions]="[25, 50, 100, 250]">

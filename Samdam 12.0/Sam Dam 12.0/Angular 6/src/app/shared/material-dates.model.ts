@@ -1,6 +1,7 @@
 export class MaterialDates {
     dor:string;
     site:string;
+    site_id:string;
     month:string;
     T_10:number;
     T_32:number;

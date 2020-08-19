@@ -342,7 +342,7 @@ router.route('/delete-cheque-transaction/:id').delete((req,res,next)=>{
 
 //Delete material record
 router.route('/delete-material-record/:id').delete((req,res,next)=>{
-    AllMaterialDates.findOneAndDelete(req.params.id, (error,data)=>{
+    AllMaterialDates.findByIdAndDelete(req.params.id, (error,data)=>{
         if(error){
             return next(error);
             

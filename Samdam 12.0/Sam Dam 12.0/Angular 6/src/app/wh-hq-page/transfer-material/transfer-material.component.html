@@ -9,7 +9,7 @@
           </mat-option>
         </mat-select>
         <mat-error *ngIf="siteControl.hasError('required')">Please choose Designation</mat-error>
-        <mat-hint>{{siteControl.value?.sound}}</mat-hint>
+        
       </mat-form-field> <br><br>
     
     <mat-form-field>
@@ -25,7 +25,7 @@
         <input matInput name="material_{{i}}" formControlName="{{material_R}}" > 
     </mat-form-field><br><br>
     </section>
-    <button (click)="addMaterialData()"  mat-raised-button color="primary">Add</button>&nbsp;&nbsp;
+    <button (click)="addMaterialData()"  mat-raised-button color="primary">Tranfer Material</button>&nbsp;&nbsp;
     <button (click)="onCancel()" mat-raised-button color="warn">Cancel</button>
   
 </form>

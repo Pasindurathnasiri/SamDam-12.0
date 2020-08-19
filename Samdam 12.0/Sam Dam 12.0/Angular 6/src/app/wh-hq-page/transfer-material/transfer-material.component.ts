@@ -46,6 +46,7 @@ export class TransferMaterialComponent implements OnInit {
     this.transferMaterialForm = this._formBuilder.group({
       dor:[Date],
       site:[],
+      site_id:[],
       month:[],
       T_10:[],
       T_32:[],
@@ -137,8 +138,10 @@ export class TransferMaterialComponent implements OnInit {
         break;
     }
      // this.transfermaterial.value.month = strmonth;
-  console.log(this.transferMaterialForm.value);
+ 
   //add material dates
+  this.transferMaterialForm.value.site_id = this.transferMaterialForm.value.site._id;
+  console.log(this.transferMaterialForm.value);
   this.materialService.postMaterialDates(this.transferMaterialForm.value).subscribe(
     res=>{
      setTimeout(() => this.showSucessMessage=false , 4000);
