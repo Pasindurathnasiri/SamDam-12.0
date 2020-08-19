@@ -26,8 +26,9 @@ export class AddEqHqComponent implements OnInit {
   siteControl = new FormControl('',Validators.required);
   siteFormControl = new FormControl('', Validators.required);
   sites: Site [] = [];
-  showSucessMessage: boolean;
   AllSiteData:any=[];
+  showSucessMessage: boolean;
+  
   serverErrorMessages: string;
 eq_typeControl = new FormControl('',Validators.required);
 selectFormControl = new FormControl('',Validators.required);

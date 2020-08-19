@@ -20,3 +20,4 @@ require('./chtransaction');
 require('./qstask');
 require('./dailywork');
 require('./boqrecord');
+require('./eqrecord');

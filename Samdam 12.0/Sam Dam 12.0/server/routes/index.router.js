@@ -21,6 +21,7 @@ let AllCHTransactions = require('../models/chtransaction');
 let AllQSTasks = require('../models/qstask');
 let AllDailyWorks = require('../models/dailywork');
 let AllBOQRecords = require('../models/boqrecord');
+let AllEQRecords = require('../models/eqrecord');
 
 
 
@@ -37,6 +38,7 @@ const ctrlCHTransactions = require('../controllers/chtransaction.controller');
 const ctrlQSTasks = require('../controllers/qstask.controller');
 const ctrlDailyWorks = require('../controllers/dailywork.controller');
 const ctrlBOQRecords = require('../controllers/boqrecord.controller');
+const ctrlEQRecords = require('../controllers/eqrecord.controller');
 
 const { result } = require('lodash');
 const date = require('../models/date');
@@ -57,6 +59,7 @@ router.post('/addChequeTransaction',ctrlCHTransactions.addCHTransaction);
 router.post('/addQSTask',ctrlQSTasks.addQSTask);
 router.post('/addDailyWork',ctrlDailyWorks.addDailyWork);
 router.post('/addBOQRec',ctrlBOQRecords.addBOQRecords);
+router.post('/addEQRecord',ctrlEQRecords.addEQRecords);
 
 //router.get('/GetAllEmployees',ctrlEmployee.GetAllEmployees);
 
@@ -119,6 +122,19 @@ router.route('/GetAllEquipments').get((req,res)=>{
         }
     })
 })
+
+//Get all equipment records
+router.route('/GetAllEQRecords').get((req,res)=>{
+    AllEQRecords.find((error,data)=>{
+        if(error){
+            return next(error)
+        }else{
+            JSON.stringify(data);
+            res.json(data);
+        }
+    })
+})
+
 
 //Get All Vehicles
 router.route('/GetAllVehicles').get((req,res)=>{
@@ -212,8 +228,21 @@ router.route('/GetAllMaterialDatesmonth/:month').get((req,res)=>{
 
 
 //Delete EQUIPMENTS
-router.route('/delete-equipment/:emp_id').delete((req,res,next)=>{
-    AllEquipments.findOneAndDelete(req.params.emp_id, (error,data)=>{
+router.route('/delete-equipment/:id').delete((req,res,next)=>{
+    AllEquipments.findByIdAndDelete(req.params.id, (error,data)=>{
+        if(error){
+            return next(error);
+        }else{
+            res.status(200).json({
+                msg: data
+            })
+         }
+    })
+})
+
+//delete equipment record
+router.route('/delete-eq-record/:id').delete((req,res,next)=>{
+    AllEQRecords.findByIdAndDelete(req.params.id, (error,data)=>{
         if(error){
             return next(error);
         }else{
@@ -241,7 +270,7 @@ router.route('/delete-employee/:emp_id').delete((req,res,next)=>{
 
 //Delete material type
 router.route('/delete-material-type/:mat_id').delete((req,res,next)=>{
-    AllMaterialTypes.findOneAndDelete(req.params.mat_id, (error,data)=>{
+    AllMaterialTypes.findByIdAndDelete(req.params.mat_id, (error,data)=>{
         if(error){
             return next(error);
             
@@ -358,7 +387,7 @@ router.route('/delete-material-record/:id').delete((req,res,next)=>{
 
 //Delete vehicle
 router.route('/delete-vehicle/:reg_id').delete((req,res,next)=>{
-    AllVehicles.findOneAndDelete(req.params.reg_id, (error,data)=>{
+    AllVehicles.findByIdAndDelete(req.params.reg_id, (error,data)=>{
         if(error){
             return next(error);
         }else{
@@ -373,6 +402,21 @@ router.route('/delete-vehicle/:reg_id').delete((req,res,next)=>{
 //update equipments
 router.route('/update-equipment/:id').put((req,res,next)=>{
     AllEquipments.findByIdAndUpdate(req.params.id, {
+        $set:req.body
+    },(error,data) =>{
+        if(error){
+            return next(error) && console.log(error)
+        }else{
+            res.json(data)
+            console.log('Equipment Details successfully Updated..!')
+        }
+    }
+    )
+})
+
+//update equipment record
+router.route('/update-eq-record/:id').put((req,res,next)=>{
+    AllEQRecords.findByIdAndUpdate(req.params.id, {
         $set:req.body
     },(error,data) =>{
         if(error){

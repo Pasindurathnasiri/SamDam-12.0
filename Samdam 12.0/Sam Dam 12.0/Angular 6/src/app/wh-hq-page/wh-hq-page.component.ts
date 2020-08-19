@@ -6,7 +6,8 @@ import { AddMaterialComponent} from '../add-material/add-material.component';
 import { MaterialService} from '../shared/material.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { Material} from '../shared/material.model';
-import { Vehicle } from '../shared/vehicle.model'
+import { Vehicle } from '../shared/vehicle.model';
+import {EqipmentRecord} from '../shared/equipmentrecord.model';
 import { Eqipment } from '../shared/equipment.model';
 import { VehicleService } from '../shared/vehicle.service';
 import {MatBottomSheet, MatBottomSheetRef} from '@angular/material/bottom-sheet';
@@ -30,12 +31,14 @@ import {RunningChartComponent} from '../wh-hq-page/running-chart/running-chart.c
 export class WhHqPageComponent implements OnInit {
   AllMaterialData: any =[];
   AllEquipmentData: any =[];
+  AllEQRecordsData: any =[];
   AllMaterialDatesData: any =[];
   AllVehicleData: any =[];
   forSelectMonth:FormGroup;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   public dataSourceMatTypes: MatTableDataSource<Material>;
   public dataSourceMatDates: MatTableDataSource<Material>;
+  public dataSourceEQRecords: MatTableDataSource<EqipmentRecord>
   public dataSourceEQ: MatTableDataSource<Eqipment>;
   public dataSourceVH: MatTableDataSource<Vehicle>;
   
@@ -44,7 +47,7 @@ export class WhHqPageComponent implements OnInit {
   displayerColomnsEQ: string [] = ['eq_id', 'eq_type','brand_name','price_unit','buyer','dom','amount','action'];
   displayedColumnsMat: string[]=[];
   displayedColumnsVH: string[]=['reg_id','vh_type','brand','model','rate','site','driver','action'];
-  
+  displayerColomnsEQREC: string[] = ['dot','site','hoe','pan','Mason_Handtool','axe','ball_hammer','chisel','drill','grinders','Hacksaw_Metal','hammer','handsaw','safty_glass','safty_gloves','Safty_Helmet','Screwdrivers','Shovel','Spirit_Level','Tape_Measures','Wrench','action'];
  
   constructor(private dialog:MatDialog,private formBuilder: FormBuilder,private materialService:MaterialService,private _bottomSheet:MatBottomSheet,private _bottomSheetRef:MatBottomSheetRef,private vehicleService:VehicleService) {
     materialService.getAllMaterialTypes().subscribe(data=>{
@@ -97,6 +100,16 @@ export class WhHqPageComponent implements OnInit {
         this.dataSourceVH.paginator = this.paginator;
       },0)
     });
+
+    //get all eq records
+    materialService.getAllEQRecords().subscribe(data=>{
+     this.AllEQRecordsData=data;
+     console.log(this.AllEQRecordsData);
+     this.dataSourceEQRecords = new MatTableDataSource<EqipmentRecord>(this.AllEQRecordsData);
+     setTimeout(()=>{
+      this.dataSourceEQRecords.paginator = this.paginator;
+    },0)
+    })
 
    }
 
@@ -186,13 +199,18 @@ getDate(e){
   return dom.toLocaleDateString();
 }
 
+getEQRECDate(e){
+  var dot = new Date(e.dot);
+  return dot.toLocaleDateString();
+}
+
 
 deleteMaterialType(index:number,e){
    if(window.confirm('Are you Sure Do you want to remove this Material type?')){
      const data = this.dataSourceMatTypes.data;
      data.splice((this.paginator.pageIndex* this.paginator.pageSize)+index,1)
      this.dataSourceMatTypes.data=data;
-     this.materialService.DeleteMaterial(e.mat_id).subscribe();
+     this.materialService.DeleteMaterial(e._id).subscribe();
    }
 }
 
@@ -233,8 +251,18 @@ if(window.confirm('Are you sure you want to Delete the Equipment?')){
   const data = this.dataSourceEQ.data;
   data.splice((this.paginator.pageIndex * this.paginator.pageSize)+index,1)
   this.dataSourceEQ.data=data;
-  this.materialService.DeleteEquipment(e.eq_id).subscribe()
+  this.materialService.DeleteEquipment(e._id).subscribe()
 }
+}
+
+//Delete eq record
+deleteEQRec(index:number,e){
+  if(window.confirm('Are you sure you want to Delete this Equipment Transfer Record?')){
+    const data = this.dataSourceEQRecords.data;
+    data.splice((this.paginator.pageIndex * this.paginator.pageSize)+index,1)
+    this.dataSourceEQRecords.data=data;
+    this.materialService.DeleteEquipment(e._id).subscribe()
+  } 
 }
 
 //Delete vehicle
@@ -243,7 +271,7 @@ deleteVH(index: number,e){
     const data = this.dataSourceVH.data;
     data.splice((this.paginator.pageIndex * this.paginator.pageSize)+index,1)
     this.dataSourceVH.data=data;
-    this.vehicleService.deleteVehicle(e.reg_id).subscribe()
+    this.vehicleService.deleteVehicle(e._id).subscribe()
   }
 }
 

@@ -181,20 +181,16 @@
     </mat-tab>
     <mat-tab label="Equipment">
       <mat-accordion>
+        <mat-card>
         <mat-form-field class="input-name" appearance="fill">
           <mat-label>Search Here</mat-label>  
           <input matInput [(ngModel)]="searchKey" placeholder="Search" (keyup)="applyFilter()">
           <button mat-button matSuffix mat-icon-button aria-label="clear"*ngIf="searchKey" (click)="onSearchClear()"></button>
-          </mat-form-field>
-          <!--  Search button-->
+          </mat-form-field><br>
+            
           
-          <button mat-mini-fab color="primary"  aria-label="Example icon-button with a icon">
-          <mat-icon >search</mat-icon>
-          </button><br>
-          
-          
-          <!--Employee Table-->
-          <mat-card id="print_table">
+       
+         
             <h1 align="center">All Equipment</h1><br><br>
             <div class="crud-btn">
               <button  mat-raised-button (click)="onAddEQ()" color="primary"><mat-icon>library_add</mat-icon>&nbsp;Add</button>&nbsp;&nbsp;&nbsp;
@@ -234,7 +230,7 @@
             
                 
                 <ng-container matColumnDef="brand_name">
-                  <th mat-header-cell *matHeaderCellDef mat-sort-header>Unit</th>
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header>Brand</th>
                   <td mat-cell *matCellDef="let row">{{row.brand_name}}</td>
                 </ng-container>
       
@@ -284,10 +280,169 @@
                   [pageSize]="50"
                   [pageSizeOptions]="[25, 50, 100, 250]">
               </mat-paginator>
+            </div><br><br>
+
+        </mat-card><br><br>
+
+        <mat-card>
+           
+              <div class="eqrecbuttoms">
+                <h1 align="center">Transferred Equipments</h1>
+                <button class="remove-btn" (click)="printTableEQ()" mat-raised-button color="primary"><mat-icon>local_printshop</mat-icon>&nbsp;Print</button>&nbsp;&nbsp;&nbsp;
+                <mat-form-field class="input-name" appearance="fill">
+                <mat-label>Search Here</mat-label>  
+                <input matInput [(ngModel)]="searchKey" placeholder="Search" (keyup)="applyFilter()">
+                <button mat-button matSuffix mat-icon-button aria-label="clear"*ngIf="searchKey" (click)="onSearchClear()"></button>
+                </mat-form-field><br>
+              </div><br><br>
+             
             
             
-          
-          </div></mat-card>
+              <div class="mat-elevation-z8">
+                <table mat-table class="full-width-table" id="table" matSort aria-label="Elements" [dataSource]="dataSourceEQRecords">
+              
+             
+                  <!-- Id Column -->
+                
+                  <ng-container matColumnDef="site">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Site</th>
+                    <td mat-cell *matCellDef="let row">{{row.site[0].site_name}}</td>
+                  </ng-container>
+              
+                  
+                  <ng-container matColumnDef="hoe">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Hoe</th>
+                    <td mat-cell *matCellDef="let row">{{row.Hoe}}</td>
+                  </ng-container>
+        
+                  <ng-container matColumnDef="axe">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Axe</th>
+                    <td mat-cell *matCellDef="let row">{{row.Axe}}</td>
+                  </ng-container>
+              
+                  <ng-container matColumnDef="ball_hammer">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Ball Hammer</th>
+                    <td mat-cell *matCellDef="let row">{{row.Ball_Hammer}}</td>
+                  </ng-container>
+  
+                  <ng-container matColumnDef="chisel">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Chisel</th>
+                    <td mat-cell *matCellDef="let row">{{row.Chisel}}</td>
+                  </ng-container>
+            
+                  <ng-container matColumnDef="dot">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Date</th>
+                    <td mat-cell *matCellDef="let element; let i = index;">{{getEQRECDate(element)}}</td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="drill">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Drill</th>
+                    <td mat-cell *matCellDef="let row">{{row.Drill}}</td>
+                  </ng-container>
+  
+                  <ng-container matColumnDef="grinders">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Grinders</th>
+                    <td mat-cell *matCellDef="let row">{{row.Grinders}}</td>
+                  </ng-container>
+                  
+                  <ng-container matColumnDef="Hacksaw_Metal">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Hacksaw Metal</th>
+                    <td mat-cell *matCellDef="let row">{{row.Hacksaw_Metal}}</td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="hammer">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Hammer</th>
+                    <td mat-cell *matCellDef="let row">{{row.Hammer}}</td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="handsaw">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Handsaw</th>
+                    <td mat-cell *matCellDef="let row">{{row.Handsaw}}</td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="pan">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Pan</th>
+                    <td mat-cell *matCellDef="let row">{{row.Pan}}</td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="Mason_Handtool">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Mason Handtool</th>
+                    <td mat-cell *matCellDef="let row">{{row.Mason_Handtool}}</td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="safty_glass">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Safty Glass</th>
+                    <td mat-cell *matCellDef="let row">{{row.Safty_Glass}}</td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="safty_gloves">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Safty_Gloves</th>
+                    <td mat-cell *matCellDef="let row">{{row.Safty_Gloves}}</td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="Safty_Helmet">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Safty_Helmet</th>
+                    <td mat-cell *matCellDef="let row">{{row.Safty_Helmet}}</td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="Screwdrivers">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Screwdrivers</th>
+                    <td mat-cell *matCellDef="let row">{{row.Screwdrivers}}</td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="Shovel">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Shovel</th>
+                    <td mat-cell *matCellDef="let row">{{row.Shovel}}</td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="Spirit_Level">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Spirit Level</th>
+                    <td mat-cell *matCellDef="let row">{{row.Spirit_Level}}</td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="Tape_Measures">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Tape Measures</th>
+                    <td mat-cell *matCellDef="let row">{{row.Tape_Measures}}</td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="Wrench">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Wrench</th>
+                    <td mat-cell *matCellDef="let row">{{row.Wrench}}</td>
+                  </ng-container>
+
+
+                  <ng-container matColumnDef="action">
+                    <th mat-header-cell *matHeaderCellDef>Delete</th>
+                    <td mat-cell *matCellDef="let element; let i = index;">
+                     <!--Remove material Button-->
+                     <button mat-icon-button color="warn" (click)="deleteEQRec(i,element)"><mat-icon>delete_outline</mat-icon></button>
+                    </td>
+                  </ng-container>
+              
+                  <ng-container matColumnDef="loading">
+                    <mat-footer-cell *matFooterCellDef colspan="6">
+                      Loading Data...
+                    </mat-footer-cell>
+                  </ng-container>
+              
+                  <tr mat-header-row *matHeaderRowDef="displayerColomnsEQREC"></tr>
+                  <tr mat-row *matRowDef="let row; columns: displayerColomnsEQREC;"></tr>
+                  <mat-footer-row *matFooterDef="['Loading']" [ngClass]="{'hide':data!=null}"></mat-footer-row>
+                </table>
+              
+                <mat-paginator #paginator
+                    [length]="dataSourceEQRecords?.data.length"
+                    [pageIndex]="0"
+                    [pageSize]="50"
+                    [pageSizeOptions]="[25, 50, 100, 250]">
+                </mat-paginator>
+              
+              
+            
+            </div>
+          </mat-card>
+           <br>
+       
          
       </mat-accordion>
     </mat-tab>

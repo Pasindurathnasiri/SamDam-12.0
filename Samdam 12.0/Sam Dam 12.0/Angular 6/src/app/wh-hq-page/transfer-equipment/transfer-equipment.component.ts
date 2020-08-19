@@ -24,6 +24,9 @@ export class TransferEquipmentComponent implements OnInit {
   sites: Site [] = [];
   AllSiteDate:any=[];
   AllEQTypes:any=[];
+  showSucessMessage: boolean;
+  
+  serverErrorMessages: string;
   transferEQForm: FormGroup;
   public equipments: any[]=[{equipment:''}];
   public eqTypes: any[]=[];
@@ -36,6 +39,7 @@ export class TransferEquipmentComponent implements OnInit {
        },0)
        this.sites = this.AllSiteDate;
     })
+   //get all equipment data
 
    //Gettiing Material Types
    materialService.getAllEquipment().subscribe(dataEQ=>{
@@ -46,13 +50,14 @@ export class TransferEquipmentComponent implements OnInit {
       this.equipments[i]=this.AllEQTypes[i].eq_type[0].eq_type;  
       
     }
-    console.log(this.equipments);
+ //console.log(this.equipments);
    })
 
 //form control 
    this.transferEQForm= this._formBuilder.group({
     dot:[Date],
     site:[],
+    site_id:[],
     Hoe:[],
     Mason_Handtool:[],
     Pan:[],
@@ -85,13 +90,22 @@ export class TransferEquipmentComponent implements OnInit {
     this.dialogRef.close({event:'Cancel'});
    }
   
-  transferEQ(){//incomplete
-    this.eqTypes = this.transferEQForm.value;
-     
-     for(var i=0;i<21;i++){
-       
-     }
-     
-     
+  transferEQ(){
+   this.transferEQForm.value.site_id= this.transferEQForm.value.site._id;
+   console.log(this.transferEQForm);
+   this.materialService.addEquipmentRecord(this.transferEQForm.value).subscribe(
+     res=>{
+      setTimeout(()=> this.showSucessMessage=false ,4000);
+     },
+     err=>{
+      if(err){
+        console.log("Equipment record Adding Failed"+err);
+      }else{
+        this.serverErrorMessages = 'Something Went Wrong';
+      }
+    }
+   );
+   window.alert("New Equipment Record Added Successfully");
+    //location.reload();
   }
 }
