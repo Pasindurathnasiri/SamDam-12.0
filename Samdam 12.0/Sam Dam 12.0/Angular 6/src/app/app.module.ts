@@ -110,6 +110,7 @@ import { UpdateSiteTaskComponent } from './qs-home/update-site-task/update-site-
 import { DailyWorksComponent } from './qs-home/daily-works/daily-works.component';
 import { UpdateBoqRecordComponent } from './qs-home/update-boq-record/update-boq-record.component';
 import { AccountingSiteCashbookComponent } from './accounting-site-home/accounting-site-cashbook/accounting-site-cashbook.component';
+import { WhSiteManageComponent } from './wh-site-page/wh-site-manage/wh-site-manage.component';
 
 @NgModule({
   declarations: [
@@ -174,6 +175,7 @@ import { AccountingSiteCashbookComponent } from './accounting-site-home/accounti
     DailyWorksComponent,
     UpdateBoqRecordComponent,
     AccountingSiteCashbookComponent,
+    WhSiteManageComponent,
   
     
   

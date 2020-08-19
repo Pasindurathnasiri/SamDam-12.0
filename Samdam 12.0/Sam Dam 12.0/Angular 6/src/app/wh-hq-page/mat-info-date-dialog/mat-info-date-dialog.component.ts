@@ -64,40 +64,7 @@ export class MatInfoDateDialogComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder,private _bottomSheetRef: MatBottomSheetRef<MatInfoDateDialogComponent>,@Optional() @Inject(MAT_BOTTOM_SHEET_DATA) public data: MaterialData,private materialService:MaterialService) {
     //console.log(data);
-    this.materialForm = formBuilder.group({
-      _id:[data._id,[Validators.required]],
-      ABC:[data.ABC,[Validators.required]],
-      HBlock_4: [data.HBlock_4,[Validators.required]],
-      HBlock_6: [data.HBlock_6,[Validators.required]],
-      T_10: [data.T_10,[Validators.required]],
-      T_16: [data.T_16,[Validators.required]],
-      T_32: [data.T_32,[Validators.required]],
-      binding: [data.binding,[Validators.required]],
-      cement: [data.cement,[Validators.required]],
-      dor: [data.Date,[Validators.required]],
-      metal_1: [data.metal_1,[Validators.required]],
-      metal_1h: [data.metal_1h,[Validators.required]],
-      metal_3q: [data.metal_3q,[Validators.required]],
-      sand: [data.sand,[Validators.required]],
 
-    });
-
-    this.materialForm_R =formBuilder.group({
-      _id:[data._id,[Validators.required]],
-      ABC_R:[data.ABC_R,[Validators.required]],
-      HBlock_4_R: [data.HBlock_4_R,[Validators.required]],
-      HBlock_6_R: [data.HBlock_6_R,[Validators.required]],
-      T_10_R: [data.T_10_R,[Validators.required]],
-      T_16_R: [data.T_16_R,[Validators.required]],
-      T_32_R: [data.T_32_R,[Validators.required]],
-      binding_R: [data.binding_R,[Validators.required]],
-      cement_R: [data.cement_R,[Validators.required]],
-      dor: [data.Date,[Validators.required]],
-      metal_1_R: [data.metal_1_R,[Validators.required]],
-      metal_1h_R: [data.metal_1h_R,[Validators.required]],
-      metal_3q_R: [data.metal_3q_R,[Validators.required]],
-      sand_R: [data.sand_R,[Validators.required]],
-    });
 
     this.materialForm_Final= formBuilder.group({
       _id:[data._id,[Validators.required]],
