@@ -14,6 +14,7 @@ module.exports.addVehicle = (req,res,next) =>{
     vehicle.chassie_no = req.body.chassie_no;
     vehicle.eng_no = req.body.eng_no;
     vehicle.site = req.body.site;
+    vehicle.site_id = req.body.site_id;
     vehicle.fuel_type = req.body.fuel_type;
     vehicle.unit_rate = req.body.unit_rate;
     vehicle.driver = req.body.driver;

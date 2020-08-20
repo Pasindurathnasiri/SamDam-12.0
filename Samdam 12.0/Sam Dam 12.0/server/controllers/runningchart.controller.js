@@ -6,6 +6,7 @@ module.exports.addRunningChart = (req,res,next)=>{
     runningChart.date = req.body.date;
     runningChart.reg_id = req.body.reg_id;
     runningChart.site = req.body.site;
+    runningChart.site_id = req.body.site_id;
     runningChart.driver = req.body.driver;
     runningChart.month = req.body.month;
     runningChart.km_or_hr = req.body.km_or_hr;

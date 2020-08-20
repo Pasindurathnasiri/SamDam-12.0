@@ -12,6 +12,7 @@ interface Site{
   site_id:string;
   name: string;
   site: Array<Site>;
+  
 }
 
 @Component({
@@ -106,6 +107,7 @@ checkboxLabel(row?: Vehicle): string {
           chassie_no:[data.chassie_no,[Validators.required]],
           eng_no:[data.eng_no,[Validators.required]],
           site:[this.updateSiteForm.value.site,[Validators.required]],
+          site_id:[this.updateSiteForm.value.site._id,[Validators.required]],
           fuel_type:[data.fuel_type,[Validators.required]],
           unit_rate:[data.unit_rate,[Validators.required]],
           driver:[data.driver,[Validators.required]],
@@ -134,6 +136,7 @@ checkboxLabel(row?: Vehicle): string {
       chassie_no:[],
       eng_no:[],
       site:[],
+      site_id:[],
       fuel_type:[],
       unit_rate:[],
       driver:[]

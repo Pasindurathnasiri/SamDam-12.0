@@ -261,7 +261,7 @@ deleteEQRec(index:number,e){
     const data = this.dataSourceEQRecords.data;
     data.splice((this.paginator.pageIndex * this.paginator.pageSize)+index,1)
     this.dataSourceEQRecords.data=data;
-    this.materialService.DeleteEquipment(e._id).subscribe()
+    this.materialService.DeleteEQRec(e._id).subscribe()
   } 
 }
 

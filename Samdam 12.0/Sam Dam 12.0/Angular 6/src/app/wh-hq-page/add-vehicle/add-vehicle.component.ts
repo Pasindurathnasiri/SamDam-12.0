@@ -78,6 +78,7 @@ export class AddVehicleComponent implements OnInit {
      chassie_no:[],
      eng_no:[],
      site:[],
+     site_id:[],
      fuel_type:[],
      unit_rate:[],
      driver:[]
@@ -107,6 +108,7 @@ export class AddVehicleComponent implements OnInit {
   }
 
   onAddVehicle(){
+    this.addVHGroup.value.site_id = this.addVHGroup.value.site._id;
     this.vehicleService.AddVehicle(this.addVHGroup.value).subscribe(
       res=>{
         setTimeout(()=> this.showSucessMessage=false,4000);

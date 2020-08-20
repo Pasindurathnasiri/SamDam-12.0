@@ -24,6 +24,7 @@ import { AddVehicleComponent } from '../../wh-hq-page/add-vehicle/add-vehicle.co
 import {UpdateVehicleComponent} from '../../wh-hq-page/update-vehicle/update-vehicle.component';
 import {TranferVehicleComponent} from '../../wh-hq-page/tranfer-vehicle/tranfer-vehicle.component';
 import {RunningChartComponent} from '../../wh-hq-page/running-chart/running-chart.component';
+import {EqipmentRecord} from '../../shared/equipmentrecord.model';
 
 @Component({
   selector: 'app-wh-site-manage',
@@ -35,6 +36,7 @@ export class WhSiteManageComponent implements OnInit {
   AllMaterialData: any =[];
   AllEquipmentData: any =[];
   AllMaterialDatesData: any =[];
+  AllEQRecordsData: any =[];
   AllVehicleData: any =[];
   AllSiteData:any =[];
   forSelectMonth:FormGroup;
@@ -43,12 +45,15 @@ export class WhSiteManageComponent implements OnInit {
   public dataSourceMatDates: MatTableDataSource<Material>;
   public dataSourceEQ: MatTableDataSource<Eqipment>;
   public dataSourceVH: MatTableDataSource<Vehicle>;
+  public dataSourceEQRecords: MatTableDataSource<EqipmentRecord>
+ 
   
 
   displayedColumns: string [] = ['mat_id', 'name','unit','price','action'];
   displayerColomnsEQ: string [] = ['eq_id', 'eq_type','brand_name','price_unit','buyer','dom','amount','action'];
   displayedColumnsMat: string[]=[];
   displayedColumnsVH: string[]=['reg_id','vh_type','brand','model','rate','site','driver','action'];
+  displayerColomnsEQREC: string[] = ['dot','hoe','pan','Mason_Handtool','axe','ball_hammer','chisel','drill','grinders','Hacksaw_Metal','hammer','handsaw','safty_glass','safty_gloves','Safty_Helmet','Screwdrivers','Shovel','Spirit_Level','Tape_Measures','Wrench','action'];
  
 
   constructor(private dialog:MatDialog,private actRoute:ActivatedRoute,private formBuilder: FormBuilder,private materialService:MaterialService,private _bottomSheet:MatBottomSheet,private _bottomSheetRef:MatBottomSheetRef,private vehicleService:VehicleService,private siteService:SiteService) {
@@ -92,6 +97,17 @@ export class WhSiteManageComponent implements OnInit {
        
        select_month:[]
      })
+
+      //get all eq records
+    materialService.getAllEQRecords().subscribe(data=>{
+      this.AllEQRecordsData=data;
+      console.log(this.AllEQRecordsData);
+      this.dataSourceEQRecords = new MatTableDataSource<EqipmentRecord>(this.AllEQRecordsData);
+      this.dataSourceEQRecords.filter = site_id.trim().toString();
+      setTimeout(()=>{
+       this.dataSourceEQRecords.paginator = this.paginator;
+     },0)
+     })
     
      //Equipment Data Table 
      materialService.getAllEquipment().subscribe(data=>{
@@ -108,6 +124,8 @@ export class WhSiteManageComponent implements OnInit {
        this.AllVehicleData=data;
        console.log(this.AllVehicleData);
        this.dataSourceVH = new MatTableDataSource<Vehicle>(this.AllVehicleData);
+       this.dataSourceVH.filter = site_id.trim().toString();
+       
        setTimeout(()=>{
          this.dataSourceVH.paginator = this.paginator;
        },0)
@@ -136,6 +154,11 @@ export class WhSiteManageComponent implements OnInit {
     this.dialog.open(AddEqHqComponent,adddialogConfig)
   }
 
+  getEQRECDate(e){
+    var dot = new Date(e.dot);
+    return dot.toLocaleDateString();
+  }
+
   onAddVH(){
     const adddialogConfig =new MatDialogConfig();
     adddialogConfig.disableClose=false;
@@ -144,6 +167,17 @@ export class WhSiteManageComponent implements OnInit {
     adddialogConfig.height="100%";
     this.dialog.open(AddVehicleComponent,adddialogConfig)
   }
+
+  
+//Delete eq record
+deleteEQRec(index:number,e){
+  if(window.confirm('Are you sure you want to Delete this Equipment Transfer Record?')){
+    const data = this.dataSourceEQRecords.data;
+    data.splice((this.paginator.pageIndex * this.paginator.pageSize)+index,1)
+    this.dataSourceEQRecords.data=data;
+    this.materialService.DeleteEQRec(e._id).subscribe()
+  } 
+}
 
   getMaterialBalance(column){
 

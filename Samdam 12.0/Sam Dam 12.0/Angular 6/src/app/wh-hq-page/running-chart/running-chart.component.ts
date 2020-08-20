@@ -23,6 +23,7 @@ export interface VehicleData{
   chassie_no:string;
   eng_no:string;
   site:Array<any>;
+  site_id:string;
   fuel_type:Array<any>; 
   unit_rate:number;
   driver:Array<any>;
@@ -53,6 +54,7 @@ export class RunningChartComponent implements OnInit {
       date:[Date],
       reg_id:[data.reg_id],
       site:[data.site],
+      site_id:[data.site_id],
       driver:[data.driver],
       month:[],
       km_or_hr:[],

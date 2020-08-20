@@ -14,6 +14,7 @@ var vehicleSchema = new mongoose.Schema({
     chassie_no:{type:String},
     eng_no:{type:String},
     site:{type:Array},
+    site_id:{type:String},
     fuel_type:{type:Array},
     unit_rate:{type:Number},
     driver:{type:Array}
@@ -32,6 +33,7 @@ var getAllVehicleSchema = new mongoose.Schema({
     chassie_no:{type:String},
     eng_no:{type:String},
     site:{type:Array},
+    site_id:{type:String},
     fuel_type:{type:Array},
     unit_rate:{type:Number},
     driver:{type:Array}

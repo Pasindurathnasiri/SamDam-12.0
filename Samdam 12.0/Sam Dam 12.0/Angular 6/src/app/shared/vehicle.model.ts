@@ -11,6 +11,7 @@ export class Vehicle{
     chassie_no:string;
     eng_no:string;
     site:string;
+    site_id:string;
     fuel_type:string;
     unit_rate:number;
     driver:string;

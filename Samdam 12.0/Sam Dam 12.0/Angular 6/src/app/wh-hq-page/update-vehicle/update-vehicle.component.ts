@@ -18,6 +18,7 @@ export interface VehicleData{
      chassie_no:string;
      eng_no:string;
      site:Array<any>;
+     site_id:string;
      fuel_type:Array<any>;
      unit_rate:number;
      driver:Array<any>;
@@ -99,6 +100,7 @@ export class UpdateVehicleComponent implements OnInit {
       chassie_no:[data.chassie_no,[Validators.required]],
       eng_no:[data.eng_no,[Validators.required]],
       site:[data.site,[Validators.required]],
+      site_id:[data.site_id,[Validators.required]],
       fuel_type:[data.fuel_type,[Validators.required]],
       unit_rate:[data.unit_rate,[Validators.required]],
       driver:[data.driver,[Validators.required]],
