@@ -109,13 +109,15 @@ export class OngoingSitesComponent implements OnInit {
 
   getProcess(site){
     var process:number=0;
+    var no_of_tasks:number =0
     for(var i=0;i<this.allTaskData.length;i++){
       if(this.allTaskData[i].site_id== site._id){
         process = process+this.allTaskData[i].progress;
+        no_of_tasks = no_of_tasks+1
       }
     }
    
-    return parseInt(`${process}`);
+    return parseInt(`${process/no_of_tasks}`);
   }
 
 }
