@@ -3,7 +3,12 @@ import { SiteService} from '../shared/site.service';
 import { EmployeeService } from '../shared/employee.service';
 import { VehicleService } from '../shared/vehicle.service';
 import {MatBottomSheet, MatBottomSheetRef} from '@angular/material/bottom-sheet';
-import {UpdateSiteDetailsComponent} from './update-site-details/update-site-details.component'
+import {UpdateSiteDetailsComponent} from './update-site-details/update-site-details.component';
+import { QsService } from '../shared/qs.service';
+import {ThemePalette} from '@angular/material/core';
+import {ProgressSpinnerMode} from '@angular/material/progress-spinner';
+
+import { toNumber } from 'lodash';
 
 @Component({
   selector: 'app-ongoing-sites',
@@ -11,14 +16,19 @@ import {UpdateSiteDetailsComponent} from './update-site-details/update-site-deta
   styleUrls: ['./ongoing-sites.component.css']
 })
 export class OngoingSitesComponent implements OnInit {
-
+  //progress bar
+  color: ThemePalette = 'primary';
+  mode: ProgressSpinnerMode = 'determinate';
+  value = 50;
+  //
   allSiteData: any = [];
   allEmoployeeData: any = [];
+  allTaskData: any=[];
   allVehicleData: any = [];
-  constructor(private siteService:SiteService,private _bottomSheet:MatBottomSheet,private empService:EmployeeService,private VHService:VehicleService) {
+  constructor(private siteService:SiteService,private _bottomSheet:MatBottomSheet,private empService:EmployeeService,private VHService:VehicleService,private qsService:QsService) {
     this.siteService.GetAllSites().subscribe(data=>{
       this.allSiteData=data;
-      console.log(this.allSiteData);
+      
       setTimeout(()=>{
 
       },0)
@@ -35,6 +45,12 @@ export class OngoingSitesComponent implements OnInit {
     this.VHService.GetAllVehicles().subscribe(data=>{
        this.allVehicleData = data;
       
+    })
+
+    //qs task get
+    this.qsService.getAllTasks().subscribe(data=>{
+       this.allTaskData =data;
+       console.log(this.allTaskData);
     })
 
    }
@@ -89,6 +105,17 @@ export class OngoingSitesComponent implements OnInit {
     }
     window.alert("Transaction Record Deleted Succeccfully");
     location.reload();
+  }
+
+  getProcess(site){
+    var process:number=0;
+    for(var i=0;i<this.allTaskData.length;i++){
+      if(this.allTaskData[i].site_id== site._id){
+        process = process+this.allTaskData[i].progress;
+      }
+    }
+   
+    return parseInt(`${process}`);
   }
 
 }
