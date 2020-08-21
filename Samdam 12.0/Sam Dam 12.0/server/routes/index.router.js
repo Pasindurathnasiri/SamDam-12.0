@@ -298,6 +298,20 @@ router.route('/delete-runningchart-rec/:id').delete((req,res,next)=>{
     })
 })
 
+//delete site
+router.route('/delete-site/:id').delete((req,res,next)=>{
+    AllSites.findByIdAndDelete(req.params.id, (error,data)=>{
+        if(error){
+            return next(error);
+        }else{
+            res.status(200).json({
+                msg: data
+            })
+            
+        }
+    })
+})
+
 //delete daily record
 router.route('/delete-daily-record/:id').delete((req,res,next)=>{
     AllDailyWorks.findByIdAndDelete(req.params.id, (error,data)=>{
@@ -471,6 +485,21 @@ router.route('/update-cheque-transaction/:id').put((req,res,next)=>{
         }else{
             res.json(data)
             console.log('Cheque Transaction Record successfully Updated..!')
+        }
+    }
+    )
+})
+
+//update site details
+router.route('/update-site/:id').put((req,res,next)=>{
+    AllSites.findByIdAndUpdate(req.params.id, {
+        $set:req.body
+    },(error,data) =>{
+        if(error){
+            return next(error) && console.log(error)
+        }else{
+            res.json(data)
+            console.log('Site Details successfully Updated..!')
         }
     }
     )

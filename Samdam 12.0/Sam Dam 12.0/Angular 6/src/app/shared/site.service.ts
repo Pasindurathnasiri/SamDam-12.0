@@ -29,6 +29,26 @@ GetAllSites(){
   return this.http.get(`${this.endpoint}`);
 }
 
+//delete site 
+deleteSite(id):Observable<any>{
+  var API_URL = `${this.endpoint_2}/delete-site/${id}`;
+  return this.http.delete(API_URL)
+  .pipe(
+    catchError(this.errorMgmt)
+  )
+}
+
+//update site details
+updateSiteDetails(id,data):Observable<any>{
+  let API_URL = `${this.endpoint_2}/update-site/${id}`;
+  return this.http.put(API_URL,data,{headers:this.headers})
+  .pipe(
+    catchError(this.errorMgmt)
+  )
+}
+
+
+
 //get site details
 getSiteDetails(id):Observable<any>{
   let API_URL = `${this.endpoint_2}/read-site-details/${id}`;

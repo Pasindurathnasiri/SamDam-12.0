@@ -57,6 +57,7 @@ import {MatBottomSheetModule} from '@angular/material/bottom-sheet';
 import  {MatCurrencyFormatModule} from 'mat-currency-format';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
+import {GoogleChartsModule,GoogleChartComponent} from 'angular-google-charts'
 import {MatBottomSheetRef, MAT_BOTTOM_SHEET_DATA} from '@angular/material/bottom-sheet';
 
 
@@ -111,6 +112,9 @@ import { DailyWorksComponent } from './qs-home/daily-works/daily-works.component
 import { UpdateBoqRecordComponent } from './qs-home/update-boq-record/update-boq-record.component';
 import { AccountingSiteCashbookComponent } from './accounting-site-home/accounting-site-cashbook/accounting-site-cashbook.component';
 import { WhSiteManageComponent } from './wh-site-page/wh-site-manage/wh-site-manage.component';
+import { OngoingSitesComponent } from './ongoing-sites/ongoing-sites.component';
+import { EbMonthlyReportsComponent } from './eb-monthly-reports/eb-monthly-reports.component';
+import { UpdateSiteDetailsComponent } from './ongoing-sites/update-site-details/update-site-details.component';
 
 @NgModule({
   declarations: [
@@ -176,6 +180,10 @@ import { WhSiteManageComponent } from './wh-site-page/wh-site-manage/wh-site-man
     UpdateBoqRecordComponent,
     AccountingSiteCashbookComponent,
     WhSiteManageComponent,
+    OngoingSitesComponent,
+    EbMonthlyReportsComponent,
+    UpdateSiteDetailsComponent,
+   
   
     
   
@@ -213,6 +221,7 @@ import { WhSiteManageComponent } from './wh-site-page/wh-site-manage/wh-site-man
     MatExpansionModule,
     MatProgressBarModule,
     MatCurrencyFormatModule,
+    GoogleChartsModule,
     CalendarModule.forRoot({ provide: DateAdapter, useFactory: adapterFactory })
    
 
