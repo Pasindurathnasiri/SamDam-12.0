@@ -13,6 +13,18 @@
   .hidden{
     display: none;
   }
+
+  .vision{
+    background-blend-mode: lighten;
+    background-color: blue;
+    margin-top: 12%;
+}
+
+.mission{
+    margin-top: 12%;
+    background-blend-mode: lighten;
+    background-color: blue;
+}
   
   .sidenav .mat-toolbar {
     background: inherit;
