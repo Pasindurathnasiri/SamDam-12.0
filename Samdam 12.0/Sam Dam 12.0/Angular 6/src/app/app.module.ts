@@ -115,6 +115,7 @@ import { WhSiteManageComponent } from './wh-site-page/wh-site-manage/wh-site-man
 import { OngoingSitesComponent } from './ongoing-sites/ongoing-sites.component';
 import { EbMonthlyReportsComponent } from './eb-monthly-reports/eb-monthly-reports.component';
 import { UpdateSiteDetailsComponent } from './ongoing-sites/update-site-details/update-site-details.component';
+import { HelpComponent } from './help/help.component';
 
 @NgModule({
   declarations: [
@@ -183,6 +184,7 @@ import { UpdateSiteDetailsComponent } from './ongoing-sites/update-site-details/
     OngoingSitesComponent,
     EbMonthlyReportsComponent,
     UpdateSiteDetailsComponent,
+    HelpComponent,
    
   
     

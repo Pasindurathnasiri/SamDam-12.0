@@ -35,7 +35,8 @@ import {QsSiteCostsheetComponent} from './qs-home/qs-site-costsheet/qs-site-cost
 import {AccountingSiteCashbookComponent} from './accounting-site-home/accounting-site-cashbook/accounting-site-cashbook.component';
 import {WhSiteManageComponent} from './wh-site-page/wh-site-manage/wh-site-manage.component';
 import {OngoingSitesComponent} from './ongoing-sites/ongoing-sites.component';
-import {EbMonthlyReportsComponent} from './eb-monthly-reports/eb-monthly-reports.component'
+import {EbMonthlyReportsComponent} from './eb-monthly-reports/eb-monthly-reports.component';
+import {HelpComponent} from './help/help.component'
 import { from } from 'rxjs';
 
 export const appRoutes: Routes = [
@@ -142,6 +143,9 @@ export const appRoutes: Routes = [
     },
     {
         path: 'eb-monthly-reports',component:EbMonthlyReportsComponent,canActivate:[AuthGuard]
+    },
+    {
+        path: 'help',component:HelpComponent,canActivate:[AuthGuard]
     },
     {
         path: '', redirectTo: '/login', pathMatch: 'full'
