@@ -116,6 +116,9 @@ import { OngoingSitesComponent } from './ongoing-sites/ongoing-sites.component';
 import { EbMonthlyReportsComponent } from './eb-monthly-reports/eb-monthly-reports.component';
 import { UpdateSiteDetailsComponent } from './ongoing-sites/update-site-details/update-site-details.component';
 import { HelpComponent } from './help/help.component';
+import { HomePageComponent } from './home-page/home-page.component';
+import { HomeComponent } from './home/home.component';
+
 
 @NgModule({
   declarations: [
@@ -185,6 +188,8 @@ import { HelpComponent } from './help/help.component';
     EbMonthlyReportsComponent,
     UpdateSiteDetailsComponent,
     HelpComponent,
+    HomeComponent,
+    HomePageComponent,
    
   
     
@@ -224,6 +229,7 @@ import { HelpComponent } from './help/help.component';
     MatProgressBarModule,
     MatCurrencyFormatModule,
     GoogleChartsModule,
+    MatGridListModule,
     CalendarModule.forRoot({ provide: DateAdapter, useFactory: adapterFactory })
    
 
